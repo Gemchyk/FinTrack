@@ -1,0 +1,55 @@
+@use '../styles/variables' as *;
+
+.weekly-comparison {
+    width: 100%;
+    max-width: 730px;
+  background: $color-white;
+  border-radius: $radius;
+  padding: 20px;
+  box-shadow: $box-shadow;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+      color: $color-black;
+    }
+  }
+
+  &__legend {
+    display: flex;
+    gap: 20px;
+
+    .legend-item {
+      position: relative;
+      padding-left: 20px;
+      font-size: 14px;
+      color: $color-black;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 8px;
+        border-radius: 2px;
+      }
+
+      &.this-week::before {
+        background-color: $color-primary;
+      }
+
+      &.last-week::before {
+        background-color: $color-gray;
+      }
+    }
+  }
+}
