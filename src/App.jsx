@@ -1,11 +1,13 @@
 import './App.css'
-import WeeklyComparison from './components/WeeklyComparison'
+import WeeklyComparison from './components/WeeklyComparison';
+import TotalBalance from './components/TotalBalance/TotalBalance';
 
 function App() {
 
   return (
     <>
-      <WeeklyComparison />
+        <TotalBalance />
+      {/* <WeeklyComparison /> */}
     </>
   )
 }
