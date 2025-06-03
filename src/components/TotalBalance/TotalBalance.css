@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+
+.wrapper{
+    max-width: 27.5%;
+    max-height: 272px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-start;
+
+}
+
+.main{
+    border-radius: 8px;
+    padding: 0 24px;
+    width: 352px;
+    height: 232px;
+    box-shadow: 0 20px 25px 0 rgba(76, 103, 100, 0.1);
+    background: #FFF;
+}
+
+.main-header{
+    width: 98%;
+    max-width: 392px;
+    height: 64px;
+    border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.main-title{
+    font-family: Inter, sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 145%;
+    text-transform: capitalize;
+    color: black;
+}
+
+.main-sec-title{
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 143%;
+    text-transform: capitalize;
+    color: gray;
+}
+
+
+/*----------------Credit Card Preview-------------*/
+
+
+.card-preview{
+    margin-top: 12px;
+    border-radius: 4px;
+    width: 88.6%;
+    height: 64px;
+    background-color: #299d92;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.card-preview-info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card-preview-info h3{
+    margin: 0;
+}
+
+.card-preview-info h4{
+    margin: 0;
+}
+
+.card-preview-info-title{
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    text-transform: capitalize;
+    color: #FFF;
+}
+
+.card-preview-addinfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.card-preview-addinfo img{
+    position: relative;
+    top: 16px;
+}
+
+.card-preview-linkDiv{
+    display: flex;
+    padding: 4px;
+    align-items: flex-start;
+    gap: 8px;
+    border-radius: 20px;
+    background: white;
+}
+
+.card-preview-moneyDiv{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
