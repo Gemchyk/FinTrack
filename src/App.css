@@ -1,8 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+
+.title{
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 145%;
+  color: gray;
+  
+}
+
+
+.header{
+  border-bottom: 1px solid var(--gray-06);
+  padding: 0px 0px 12px 0px;
+  width: 304px;
+  height: 44px;
+}
+
 #root {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-family: Inter, sans-serif;
 }
 
 .logo {
