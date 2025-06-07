@@ -1,15 +1,21 @@
 import './App.css'
 import WeeklyComparison from './components/WeeklyComparison';
 import TotalBalance from './components/TotalBalance/TotalBalance';
+import UpcomingBillList from './components/UpcomingBills/UpcomingBillList';
 import ExpensesGoalsByCategory from './components/ExpensesGoals/ExpensesGoalsByCategory';
+
 
 function App() {
 
   return (
     <>
-        <TotalBalance />
-        {/* <WeeklyComparison /> */}
-        {/* <ExpensesGoalsByCategory /> */}
+
+    <div className='header'>
+      <TotalBalance />
+      <UpcomingBillList />     
+    </div>
+      
+      {/* <WeeklyComparison /> */}
     </>
   )
 }
