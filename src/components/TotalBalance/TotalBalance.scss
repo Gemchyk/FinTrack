@@ -3,7 +3,8 @@
 
 
 .wrapper{
-    max-width: 27.5%;
+    width: 27.5%;
+    max-width: 352px;
     max-height: 272px;
     display: flex;
     flex-direction: column;
@@ -97,10 +98,7 @@
     gap: 12px;
 }
 
-.card-preview-addinfo img{
-    position: relative;
-    top: 16px;
-}
+
 
 .card-preview-linkDiv{
     display: flex;
