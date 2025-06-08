@@ -1,0 +1,21 @@
+.container {
+    width: 352px;
+    height: 542px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.navigation a {
+    font-weight: 400;
+    font-size: 16px;
+    color: #525256;
+    padding-right: 10px;
+}
+
+.span {
+    font-weight: 400;
+    font-size: 16px;
+    color: #299D91;
+    border-bottom: 2px solid #299D91;
+    padding-right: 10px;
+}

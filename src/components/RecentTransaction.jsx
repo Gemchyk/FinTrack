@@ -1,8 +1,8 @@
-import './RecentTransaction.css';
+import "./RecentTransaction.css";
 
 function RecentTransaction() {
     return (
-        <div>
+        <div className="container">
             <header>
             <nav className="navigation">
                 <a href="#"><span className="span">All</span></a>
@@ -11,9 +11,9 @@ function RecentTransaction() {
             </nav>
             </header>
             <main>
-                <div className="conatiner">
+                <div>
                     <div className="main-block">
-                        <img src="img/joystick.svg" alt="Joystick" />
+                        <img src="app/src/components/gamepad-2" alt="Joystick" />
                     </div>
                     <div className="main-text">
                         <h3>GTR 5</h3>
