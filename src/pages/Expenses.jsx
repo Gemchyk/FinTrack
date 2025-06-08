@@ -1,7 +1,11 @@
+import ExpensesGoalsByCategory from '../components/ExpensesGoals/ExpensesGoalsByCategory';
+
+
+
 function Expenses () {
     return (
         <>
-        <div>Expenses</div>
+            <ExpensesGoalsByCategory />
         </>
     )
 }
