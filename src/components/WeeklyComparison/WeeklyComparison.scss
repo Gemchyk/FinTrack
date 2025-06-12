@@ -1,12 +1,11 @@
 @use '../../styles/variables' as *;
 
 .weekly-comparison {
-    width: 100%;
-    max-width: 730px;
-  background: $color-white;
-  border-radius: $radius;
-  padding: 20px;
-  box-shadow: $box-shadow;
+    max-width: 770px;
+    background: $color-white;
+    border-radius: $radius;
+    padding: 16px 24px 40px 24px;
+    box-shadow: $box-shadow;
 
   &__header {
     display: flex;

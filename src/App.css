@@ -12,17 +12,16 @@
 
 
 .header{
-  border-bottom: 1px solid var(--gray-06);
-  padding: 0px 0px 12px 0px;
-  width: 304px;
-  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
 }
 
 #root {
-  width: 100%;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  /* text-align: center; */
   font-family: Inter, sans-serif;
 }
 
