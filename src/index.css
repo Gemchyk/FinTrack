@@ -1,5 +1,11 @@
 
 
+.Zaglushka{         /*todo: Delete Zaglushka*/
+  width: 400px;
+  height: 582px;
+  background-color: grey;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -7,7 +13,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #E8E8E8;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

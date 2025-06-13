@@ -1,9 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import './App.css'
 import WeeklyComparison from './components/WeeklyComparison';
-import TotalBalance from './components/TotalBalance/TotalBalance';
-import UpcomingBillList from './components/UpcomingBills/UpcomingBillList';
-import ExpensesGoalsByCategory from './components/ExpensesGoals/ExpensesGoalsByCategory';
+
 
 import Goal from './components/Goals/Goal';
 import SideNavBar from './components/SideNavBar/SideNavBar';
@@ -20,13 +18,6 @@ function App() {
 
   return (
     <>
-
-    <div className='header'>
-         <TotalBalance /> 
-         <Goal />
-         <UpcomingBillList /> 
-    </div>
-
      <Router>
       <SideNavBar />
       <div className="main-content" style={{ marginLeft: '220px', padding: '20px' }}>
@@ -42,11 +33,6 @@ function App() {
         </Routes>
       </div>
     </Router>
-
-     
-
-
-
     </>
   )
 }
