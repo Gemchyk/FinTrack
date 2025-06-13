@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 function SideNavBar() {
     return (
       <nav className="sidebar">
-        <h2>MyFinance</h2>
+        <h2 className="logo">MyFinance</h2>
         <Link to="/">🏠 Home</Link>
         <Link to="/Overview">📊 Overview</Link>
         <Link to="/Balances">💰 Balances</Link>
