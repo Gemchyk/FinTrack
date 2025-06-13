@@ -21,11 +21,11 @@ function App() {
   return (
     <>
 
-    /*<div className='header'>
+    <div className='header'>
          <TotalBalance /> 
          <Goal />
          <UpcomingBillList /> 
-    </div> */
+    </div>
 
      <Router>
       <SideNavBar />
