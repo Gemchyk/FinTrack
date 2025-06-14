@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import './App.css'
-import WeeklyComparison from './components/WeeklyComparison';
+import WeeklyComparison from './components/WeeklyComparison/WeeklyComparison';
 
 
 import Goal from './components/Goals/Goal';
