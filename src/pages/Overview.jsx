@@ -2,7 +2,7 @@ import React from "react"
 import TotalBalance from "../components/TotalBalance/TotalBalance"
 import UpcomingBillList from "../components/UpcomingBills/UpcomingBillList"
 import Goal from "../components/Goals/Goal"
-import WeeklyComparison from "../components/WeeklyComparison"
+import WeeklyComparison from "../components/WeeklyComparison/WeeklyComparison"
 import './Overview.scss';
 
 function Overview () {
