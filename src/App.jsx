@@ -18,9 +18,6 @@ function App() {
 
   return (
     <>
-
-     
-
      <Router>
       <SideNavBar />
       <div className="main-content" style={{ marginLeft: '220px', padding: '20px' }}>
@@ -36,13 +33,6 @@ function App() {
         </Routes>
       </div>
     </Router>
-
-
-
-     
-
-
-
     </>
   )
 }
