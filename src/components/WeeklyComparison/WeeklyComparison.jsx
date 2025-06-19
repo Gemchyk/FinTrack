@@ -51,7 +51,7 @@ const WeeklyComparison = () => {
             <ReferenceLine y={240000} stroke="#888888" alwaysShow ifOverflow="extendDomain"/>
 
             <Bar dataKey="lastWeek" fill="#ccc" name="Last Week" radius={[5, 5, 0, 0]}/>
-            <Bar dataKey="thisWeek" fill="#00C49F" name="This Week" radius={[5, 5, 0, 0]}/>
+            <Bar dataKey="thisWeek" fill="#299D91" name="This Week" radius={[5, 5, 0, 0]}/>
           </BarChart>
         </ResponsiveContainer>
       </div>
