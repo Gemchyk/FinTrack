@@ -1,0 +1,138 @@
+.wrapper-balances {
+    width: 1104px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    .balances {
+      margin-bottom: 120px;
+      margin-top: -145px;
+      margin-right: auto;
+      font-weight: 400;
+      font-size: 22px;
+      color: #878787;
+    }
+  
+    .credit-card {
+      width: 352px;
+      height: 288px;
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 24px;
+      gap: 16px;
+  
+      &-header {
+        width: 100%;
+        height: 44px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #807e7e;
+  
+        .credit-card-text {
+          font-weight: bold;
+          height: 24px;
+          width: 90px;
+          font-size: 16px;
+          color: #878787;
+        }
+  
+        .master-card {
+          display: flex;
+          justify-content: space-between;
+          height: 32px;
+          width: 123px;
+  
+          &-text {
+            height: 32px;
+            width: 71px;
+            font-weight: 500;
+            font-size: 12px;
+            color: #666666;
+            margin-top: 4px;
+          }
+  
+          .icon {
+            width: 48px;
+            height: 32px;
+            display: block;         
+            object-fit: contain;
+          }
+        }
+      }
+  
+      .account-number {
+        height: 52px;
+  
+        .card-num {
+          font-weight: 600;
+          font-size: 20px;
+          color: #191919;
+        }
+  
+        .acc-num {
+          font-weight: 400;
+          font-size: 14px;
+          color: #9f9f9f;
+        }
+      }
+  
+      .total-amount {
+        .total-sum {
+          font-weight: 600;
+          font-size: 20px;
+          color: #191919;
+        }
+  
+        .total-amount-text {
+          font-weight: 400;
+          font-size: 14px;
+          color: #9f9f9f;
+        }
+      }
+  
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 24px;
+      }
+    }
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .modal {
+      background: white;
+      color: #191919;
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      min-width: 300px;
+      margin-right: -215px;
+      margin-top: 20px;
+  
+      input {
+        width: 90%;
+        padding: 8px;
+        margin: 10px 0;
+        font-size: 16px;
+      }
+  
+      .modal-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+  
