@@ -1,0 +1,47 @@
+.categories {
+  padding: 1.5rem;
+  background-color: #f9fafb;
+
+  &__title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  &__item {
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  &__card {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: #ccc;
+  }
+
+  &__name {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  &__total {
+    font-size: 1rem;
+    color: #666;
+  }
+}

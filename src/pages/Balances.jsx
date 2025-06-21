@@ -39,49 +39,52 @@ function Balances() {
 
   return (
     <>
-      <div className='wrapper-balances'>
-        <div className='balances'>My Balance</div>
-        <div className='credit-card'>
-          <div className='credit-card-header'>
-            <div className='credit-card-text'>Credit Card</div>
-            <div className='master-card'>
-              <div className='master-card-text'>Master Card</div>
-              <div className='icon'><img src={cardLogo} alt="Card logo" /></div>
+      <div className={styles['wrapper-balances']}>
+      <div className={styles['balances']}>My Balance</div>
+      <div className={styles['credit-card']}>
+        <div className={styles['credit-card-header']}>
+          <div className={styles['credit-card-text']}>Credit Card</div>
+          <div className={styles['master-card']}>
+            <div className={styles['master-card-text']}>Master Card</div>
+            <div className={styles['icon']}>
+              <img src={cardLogo} alt="Card logo" />
             </div>
           </div>
-          <div className='account-number'>
-            <div className='card-num'>3388 4556  8860 8***</div>
-            <div className='acc-num'>Account Number</div>
-          </div>
-          <div className='total-amount'>
-            <div className='total-sum'>${sum}</div>
-            <div className='total-amount-text'>Total Amount</div>
-          </div>
-          <div className='buttons'>
-            <button onClick={() => openModal('remove')}>Remove</button>
-            <button onClick={() => openModal('add')}>Add</button>
+        </div>
+        <div className={styles['account-number']}>
+          <div className={styles['card-num']}>3388 4556  8860 8***</div>
+          <div className={styles['acc-num']}>Account Number</div>
+        </div>
+        <div className={styles['total-amount']}>
+          <div className={styles['total-sum']}>${sum}</div>
+          <div className={styles['total-amount-text']}>Total Amount</div>
+        </div>
+        <div className={styles['buttons']}>
+          <button onClick={() => openModal('remove')}>Remove</button>
+          <button onClick={() => openModal('add')}>Add</button>
+        </div>
+      </div>
+    </div>
+
+    {showModal && 
+      <div className={styles['modal-overlay']} onClick={handleClose}>
+        <div className={styles['modal']} onClick={e => e.stopPropagation()}>
+          <h3>{modalType === 'add' ? 'Add Amount' : 'Remove Amount'}</h3>
+          <input
+            name="test"
+            type="number"
+            min="0"
+            value={inputValue}
+            onChange={e => setInputValue(e.target.value)}
+            placeholder="Enter amount"
+          />
+          <div className={styles['modal-buttons']}>
+            <button onClick={handleConfirm}>Confirm</button>
+            <button onClick={handleClose}>Cancel</button>
           </div>
         </div>
       </div>
-
-      {showModal && (
-        <div className="modal-overlay" onClick={handleClose}>
-          <div className="modal" onClick={e => e.stopPropagation()}>
-            <h3>{modalType === 'add' ? 'Add Amount' : 'Remove Amount'}</h3>
-            <input
-              type="number"
-              min="0"
-              value={inputValue}
-              onChange={e => setInputValue(e.target.value)}
-              placeholder="Enter amount"
-            />
-            <div className="modal-buttons">
-              <button onClick={handleConfirm}>Confirm</button>
-              <button onClick={handleClose}>Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
+    }
     </>
   );
 }

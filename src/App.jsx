@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import './App.css'
-import WeeklyComparison from './components/WeeklyComparison';
+import WeeklyComparison from './components/WeeklyComparison/WeeklyComparison';
 
 
 import Goal from './components/Goals/Goal';
@@ -13,6 +13,7 @@ import Bills from './pages/Bills'
 import Expenses from './pages/Expenses'
 import Goals from './pages/Goals'
 import Settings from './pages/Settings'
+import LoginPage from './pages/LoginPage';
 
 function App() {
 
@@ -20,9 +21,9 @@ function App() {
     <>
      <Router>
       <SideNavBar />
-      <div className="main-content" style={{ marginLeft: '220px', padding: '20px' }}>
+      <div style={{ marginLeft: '220px', padding: '20px' }}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<LoginPage />} />
           <Route path="/Overview" element={<Overview />} />
           <Route path="/Balances" element={<Balances />} />
           <Route path="/Transactions" element={<Transactions />} />
@@ -33,6 +34,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+
     </>
   )
 }

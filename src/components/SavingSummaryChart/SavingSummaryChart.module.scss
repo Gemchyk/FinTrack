@@ -1,0 +1,59 @@
+.chartContainer {
+    width: 728px;
+    height: 278px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px 20px;
+
+    .chartHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    
+        .title {
+            color: black;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .dateDropdown {
+            color: #9F9F9F;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    
+        .indicators {
+            display: flex;
+            gap: 24px;
+
+            color: #525256;
+            font-size: 12px;
+            font-weight: 500;
+
+            div {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                span {
+                    width: 16px;
+                    height: 8px;
+                    border-radius: 2px;
+                }
+
+                .thisMonth {
+                    background-color: #299D91;
+                }
+
+                .lastMonth {
+                    background-color: #E8E8E8;
+                }
+            }
+        }
+    }
+}
+
+
+

@@ -1,5 +1,13 @@
 
 
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+  }
+  
+
 .flex{
     display: flex;
     justify-content: space-between;
