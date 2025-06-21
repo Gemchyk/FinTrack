@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Balances.module.scss';
+import './Balances.scss';
 import cardLogo from '../components/TotalBalance/imgs/cardLogo.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAmount, removeAmount } from '../features/balance/balanceSlice';
