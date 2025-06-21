@@ -1,5 +1,6 @@
 import styles from "./ExpensesGoalsByCategory.module.scss";
 import AdjustEditBtn from "/src/assets/icons/AdjustEditBtn.svg?react";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function CategoryCard({
   category,

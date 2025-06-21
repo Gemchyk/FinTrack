@@ -1,3 +1,5 @@
+import SavingSummaryChart from "../components/SavingSummaryChart/SavingSummaryChart"
+
 function Home () {
     return (
         <>

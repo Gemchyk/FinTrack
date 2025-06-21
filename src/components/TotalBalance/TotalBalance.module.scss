@@ -1,6 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+.totalBalanceTitle{
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 145%;
+    color: gray;
+    
+}  
 
+.balanceAmount{
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+    color: #FFF;
+}
 
 .wrapper{
     width: 27.5%;
@@ -17,7 +35,7 @@
     border-radius: 8px;
     padding: 0 24px;
     width: 352px;
-    height: 232px;
+    height: 280px;
     box-shadow: 0 20px 25px 0 rgba(76, 103, 100, 0.1);
     background: #FFF;
 }

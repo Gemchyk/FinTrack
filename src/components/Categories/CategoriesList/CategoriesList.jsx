@@ -52,14 +52,14 @@ const handleEdit = (categoryId, expense) => {
                 {activeCategoryId === cat.id && (
                   <ul className={styles.expenseList}>
                     {cat.expenses.map((exp) => (
-  <li key={exp.id}>
-    {exp.title} — {exp.amount}₴ ({exp.date})
-    <button onClick={() => handleEdit(cat.id, exp)}>Редагувати</button>
-    <button onClick={() => dispatch(removeExpense({ categoryId: cat.id, expenseId: exp.id }))}>
-      Видалити
-    </button>
-  </li>
-))}
+                    <li key={exp.id}>
+                      {exp.title} — {exp.amount}₴ ({exp.date})
+                      <button onClick={() => handleEdit(cat.id, exp)}>Редагувати</button>
+                      <button onClick={() => dispatch(removeExpense({ categoryId: cat.id, expenseId: exp.id }))}>
+                        Видалити
+                      </button>
+                    </li>
+                    ))}
                     <button
                       type="button"
                       onClick={() => setShowModalForCategory(cat.id)}
