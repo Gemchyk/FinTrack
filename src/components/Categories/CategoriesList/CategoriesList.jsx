@@ -1,9 +1,8 @@
-import { useSelector } from "react-redux";
 import styles from "./CategoriesList.module.scss";
 import { useState } from "react";
 import AddExpenseModal from "./AddExpenseModal";
-import { useDispatch } from "react-redux";
-import { removeExpense } from "../categoriesSlice"
+import { useDispatch,  useSelector  } from "react-redux";
+import { removeExpenseWithStats } from "../categoriesSlice";
 
 
 const CategoriesList = () => {
@@ -54,9 +53,9 @@ const handleEdit = (categoryId, expense) => {
                     {cat.expenses.map((exp) => (
                     <li key={exp.id}>
                       {exp.title} — {exp.amount}₴ ({exp.date})
-                      <button onClick={() => handleEdit(cat.id, exp)}>Редагувати</button>
-                      <button onClick={() => dispatch(removeExpense({ categoryId: cat.id, expenseId: exp.id }))}>
-                        Видалити
+                      <button onClick={() => handleEdit(cat.id, exp)}>Edit</button>
+                      <button onClick={() => {dispatch(removeExpenseWithStats({categoryId: cat.id, expenseId: exp.id, date: exp.date, amount: exp.amount}))}}>
+                        Remove
                       </button>
                     </li>
                     ))}

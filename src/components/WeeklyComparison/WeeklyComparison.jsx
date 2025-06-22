@@ -10,18 +10,14 @@ import {
   ReferenceLine
 } from "recharts";
 import "./WeeklyComparison.scss";
+import { useDispatch,  useSelector  } from "react-redux";
 
-const data = [
-  { day: "Sun", thisWeek: 240000, lastWeek: 200000 },
-  { day: "Mon", thisWeek: 100000, lastWeek: 120000 },
-  { day: "Tue", thisWeek: 80000, lastWeek: 90000 },
-  { day: "Wed", thisWeek: 120000, lastWeek: 110000 },
-  { day: "Thu", thisWeek: 130000, lastWeek: 100000 },
-  { day: "Fri", thisWeek: 220000, lastWeek: 210000 },
-  { day: "Sat", thisWeek: 150000, lastWeek: 170000 },
-];
+
+
 
 const WeeklyComparison = () => {
+
+  const data = useSelector(state => state.weeklyComparison.data);
   
   return (
     <>

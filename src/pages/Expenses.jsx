@@ -6,7 +6,7 @@ import ExpensesGoalsByCategory from '../components/ExpensesGoals/ExpensesGoalsBy
 function Expenses () {
     return (
         <>
-            <ExpensesGoalsByCategory />
+            <CategoriesList />
         </>
     )
 }

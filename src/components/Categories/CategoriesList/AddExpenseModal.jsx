@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import { editExpense, addExpense } from "../categoriesSlice"
+import { addExpenseToTable } from '../../WeeklyComparison/weeklyComprasionSlice';
 
 const validationSchema = yup.object().shape({
   title: yup.string().required("Обов'язково"),
@@ -12,6 +13,7 @@ const validationSchema = yup.object().shape({
 
 const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
   const dispatch = useDispatch();
+
 
 const initialValues = {
   title: editingExpense?.title || '',
@@ -28,6 +30,7 @@ const initialValues = {
       }));
     } else {
       dispatch(addExpense({ categoryId, ...values }));
+      dispatch(addExpenseToTable(values));
     }
     onClose();
   };
