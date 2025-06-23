@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { removeExpenseFromTable } from "../WeeklyComparison/weeklyComprasionSlice";
+import { removeExpenseFromTable, editExpenseInTable } from "../WeeklyComparison/weeklyComprasionSlice";
 
 const initialState = [
   {
@@ -63,6 +63,24 @@ export const removeExpenseWithStats = createAsyncThunk(
     dispatch(removeExpenseFromTable({ date, amount }));
   }
 )
+
+export const editExpenseWithStats = createAsyncThunk(
+  "categories/editExpenseWithStats",
+  async ({ categoryId, expenseId, updatedData, oldData }, { dispatch }) => {
+    dispatch(editExpense({
+      categoryId,
+      expenseId,
+      updatedData,
+    }));
+    dispatch(editExpenseInTable({
+      categoryId, 
+      expenseId,
+      updatedData,
+      oldData,
+    }));
+  }
+)
+
 
 const categoriesSlice = createSlice({
   name: 'categories',

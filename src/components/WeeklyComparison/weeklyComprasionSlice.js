@@ -31,16 +31,33 @@ const weeklyComprasionSlice = createSlice({
             }});
         },
         removeExpenseFromTable: (state, action) => {
-            console.log(action.payload);
             const month = action.payload.date.slice(5, 7);
             state.data.map(i => {
                 if(i.id == month){
                     i.thisWeek -= action.payload.amount;
             }});
+        },
+        editExpenseInTable: (state, action) => {
+            const payload = action.payload;
+            const oldMonth = payload.oldData.date.slice(5, 7);
+            const newMonth = payload.updatedData.date.slice(5,7);
+            const difference = payload.updatedData.amount - payload.oldData.amount;
+            state.data.map(i => {
+                if(i.id == oldMonth && i.id == newMonth){
+                    i.thisWeek += difference;
+                }else{
+                    if(i.id == oldMonth){
+                        i.thisWeek -= action.payload.oldData.amount;
+                    }
+                    if(i.id == newMonth){
+                        difference > 0 ? i.thisWeek += difference : i.thisWeek -= difference;
+                    }
+                }
+            });
         }
     }
 });
 
 
-export const {addExpenseToTable, removeExpenseFromTable} = weeklyComprasionSlice.actions;
+export const {addExpenseToTable, removeExpenseFromTable, editExpenseInTable} = weeklyComprasionSlice.actions;
 export default weeklyComprasionSlice.reducer;

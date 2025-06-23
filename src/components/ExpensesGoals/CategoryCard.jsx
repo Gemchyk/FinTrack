@@ -48,7 +48,7 @@ export default function CategoryCard({
                   Редагувати
                 </button>
                 <button
-                  onClick={() => onDelete(exp.id)}
+                  onClick={() => onDelete(exp)}
                   className={styles.btnSmall}
                 >
                   Видалити
