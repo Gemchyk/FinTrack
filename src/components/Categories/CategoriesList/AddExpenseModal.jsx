@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-
 import { useSelector, useDispatch } from "react-redux";
-import { editExpense, addExpense } from "../categoriesSlice";
 import { removeAmount } from "../../../features/balance/balanceSlice";
 import { addExpenseToTable } from "../../WeeklyComparison/weeklyComprasionSlice";
-
 import "./AddExpenseModal.scss";
+import { editExpense, addExpense, editExpenseWithStats } from "../categoriesSlice"
+import { addExpenseToTable, editExpenseInTable } from '../../WeeklyComparison/weeklyComprasionSlice';
+
 
 const validationSchema = yup.object().shape({
   title: yup.string().required("Обов'язково"),
@@ -25,30 +25,32 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
     amount: editingExpense?.amount || "",
     date: editingExpense?.date || "",
   };
+  
 
   const handleSubmit = (values) => {
-    const amount = Number(values.amount);
+  const amount = Number(values.amount);
 
-    if (editingExpense) {
-      dispatch(
-        editExpense({
-          categoryId,
-          expenseId: editingExpense.id,
-          updatedData: values,
-        })
-      );
-      onClose();
-      return;
-    }
-    if (amount > balance) {
-      setError("❌ Недостатньо коштів на балансі");
-      return;
-    }
-    dispatch(addExpense({ categoryId, ...values }));
-    dispatch(addExpenseToTable(values));
-    dispatch(removeAmount(amount));
+  if (editingExpense) {
+    dispatch(editExpenseWithStats({
+      categoryId,
+      expenseId: editingExpense.id,
+      updatedData: values,
+      oldData: initialValues,
+    }));
     onClose();
-  };
+    return;
+  }
+
+  if (amount > balance) {
+    setError("❌ Недостатньо коштів на балансі");
+    return;
+  }
+  
+  dispatch(addExpense({ categoryId, ...values }));
+  dispatch(addExpenseToTable(values));
+  dispatch(removeAmount(amount));
+  onClose();
+};
 
   if (!show) return null;
 
@@ -92,11 +94,12 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
                 className="text-danger"
               />
             </div>
+
             {error && <div className="text-danger mb-2">{error}</div>}
             <div className="modal-buttons">
-              <button type="submit">Додати</button>
+              <button type="submit">Ok</button>
               <button type="button" onClick={onClose}>
-                Скасувати
+                Cansel
               </button>
             </div>
           </Form>
