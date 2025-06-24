@@ -6,6 +6,7 @@ function Expenses () {
     return (
         <>  
             <ExpensesGoalsByCategory />
+            
         </>
     )
 }
