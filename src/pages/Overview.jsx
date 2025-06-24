@@ -4,6 +4,7 @@ import UpcomingBillList from "../components/UpcomingBills/UpcomingBillList"
 import Goal from "../components/Goals/Goal"
 import WeeklyComparison from "../components/WeeklyComparison/WeeklyComparison"
 import styles from './Overview.module.scss';
+import TransactionsList from "../components/Transactions/TransactionsList"
 
 function Overview () {
     return (
@@ -16,9 +17,8 @@ function Overview () {
 
             <div className={styles['flex']}>
             <div>
-                <h1 className={styles['title']}>Recent Transaction</h1>
-                <div className={styles['Zaglushka']}>
-            </div>
+                <h1 className='title'>Recent Transaction</h1>
+                <TransactionsList />
             </div>
             <WeeklyComparison />
             </div>
