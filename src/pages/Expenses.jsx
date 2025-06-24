@@ -8,6 +8,7 @@ function Expenses () {
         <>
             <Balances />
             <ExpensesGoalsByCategory />
+            
         </>
     )
 }

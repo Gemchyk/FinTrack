@@ -6,7 +6,6 @@ import { removeAmount } from "../../../features/balance/balanceSlice";
 import { addExpenseToTable } from "../../WeeklyComparison/weeklyComprasionSlice";
 import "./AddExpenseModal.scss";
 import { editExpense, addExpense, editExpenseWithStats } from "../categoriesSlice"
-import { addExpenseToTable, editExpenseInTable } from '../../WeeklyComparison/weeklyComprasionSlice';
 
 
 const validationSchema = yup.object().shape({
