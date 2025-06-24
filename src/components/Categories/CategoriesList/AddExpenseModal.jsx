@@ -2,8 +2,8 @@ import { Modal, Button } from 'react-bootstrap';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import { editExpense, addExpense } from "../categoriesSlice"
-import { addExpenseToTable } from '../../WeeklyComparison/weeklyComprasionSlice';
+import { editExpense, addExpense, editExpenseWithStats } from "../categoriesSlice"
+import { addExpenseToTable, editExpenseInTable } from '../../WeeklyComparison/weeklyComprasionSlice';
 
 const validationSchema = yup.object().shape({
   title: yup.string().required("Обов'язково"),
@@ -23,11 +23,12 @@ const initialValues = {
 
    const handleSubmit = (values) => {
     if (editingExpense) {
-      dispatch(editExpense({
-        categoryId,
-        expenseId: editingExpense.id,
-        updatedData: values,
-      }));
+        dispatch(editExpenseWithStats({
+          categoryId, 
+          expenseId: editingExpense.id, 
+          updatedData: values, 
+          oldData: initialValues
+        }));
     } else {
       dispatch(addExpense({ categoryId, ...values }));
       dispatch(addExpenseToTable(values));
@@ -67,10 +68,10 @@ const initialValues = {
 
             <div className="d-flex justify-content-end">
               <Button variant="secondary" onClick={onClose} className="me-2">
-                Скасувати
+                Cancel
               </Button>
               <Button type="submit" variant="primary">
-                Додати
+                Ok
               </Button>
             </div>
           </Form>
