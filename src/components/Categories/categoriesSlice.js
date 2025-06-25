@@ -1,4 +1,5 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
+import { removeExpenseFromTable, editExpenseInTable } from "../WeeklyComparison/weeklyComprasionSlice";
 
 const initialState = [
   {
@@ -58,6 +59,34 @@ const initialState = [
     ],
   },
 ];
+
+
+export const removeExpenseWithStats = createAsyncThunk(
+  "categories/removeExpenseWithStats",
+  async ({ categoryId, expenseId, date, amount }, { dispatch }) => {
+    console.log("buba")
+    dispatch(removeExpense({ categoryId, expenseId }));
+    dispatch(removeExpenseFromTable({ date, amount }));
+  }
+)
+
+export const editExpenseWithStats = createAsyncThunk(
+  "categories/editExpenseWithStats",
+  async ({ categoryId, expenseId, updatedData, oldData }, { dispatch }) => {
+    dispatch(editExpense({
+      categoryId,
+      expenseId,
+      updatedData,
+    }));
+    dispatch(editExpenseInTable({
+      categoryId, 
+      expenseId,
+      updatedData,
+      oldData,
+    }));
+  }
+)
+
 
 const categoriesSlice = createSlice({
   name: 'categories',

@@ -12,7 +12,11 @@ const balanceSlice = createSlice({
       state.sum += action.payload;
     },
     removeAmount: (state, action) => {
-      state.sum = Math.max(0, state.sum - action.payload);
+      if (action.payload <= state.sum) {
+        state.sum -= action.payload;
+      } else {
+        alert('❌ Недостаточно средств для снятия');
+      }
     },
   },
 });

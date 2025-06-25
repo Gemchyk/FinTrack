@@ -3,7 +3,7 @@ import CategoryCard from "./CategoryCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import AddExpenseModal from "../Categories/CategoriesList/AddExpenseModal";
-import { removeExpense } from "../Categories/categoriesSlice";
+import { removeExpenseWithStats } from "../Categories/categoriesSlice";
 
 import IconHousing from "/src/assets/icons/IconHousing.svg?react";
 import IconFood from "/src/assets/icons/IconFood.svg?react";
@@ -11,6 +11,9 @@ import IconTransportation from "/src/assets/icons/IconTransportation.svg?react";
 import IconEntertainment from "/src/assets/icons/IconEntertainment.svg?react";
 import IconShopping from "/src/assets/icons/IconShopping.svg?react";
 import IconOthers from "/src/assets/icons/IconOthers.svg?react";
+
+import { addExpense } from "../Categories/categoriesSlice"; 
+import { addExpenseToTable } from "../WeeklyComparison/weeklyComprasionSlice";
 
 const iconMap = {
   Housing: <IconHousing />,
@@ -42,11 +45,13 @@ export default function ExpensesGoalsByCategory() {
     setActiveCategoryId((prev) => (prev === id ? null : id));
   };
 
-  const handleDelete = (categoryId, expenseId) => {
-    dispatch(removeExpense({ categoryId, expenseId }));
+  const handleDelete = (categoryId, exp) => {
+    dispatch(removeExpenseWithStats({categoryId, expenseId: exp.id, date: exp.date, amount: exp.amount}))
+    // dispatch(removeExpense({ categoryId, expenseId }));
   };
 
   const handleEdit = (categoryId, expense) => {
+    console.log(expense);
     setEditingExpense({ categoryId, ...expense });
     setShowModalForCategory(categoryId);
   };
@@ -80,7 +85,7 @@ export default function ExpensesGoalsByCategory() {
               onAdd={() => handleAddNew(category.id)}
               onDetailsToggle={() => handleToggleDetails(category.id)}
               onEdit={(exp) => handleEdit(category.id, exp)}
-              onDelete={(expId) => handleDelete(category.id, expId)}
+              onDelete={(exp) => handleDelete(category.id, exp)}
             />
           );
         })}
