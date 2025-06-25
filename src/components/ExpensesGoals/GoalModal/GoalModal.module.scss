@@ -26,7 +26,6 @@
 
         label {
             color: #525256;
-            margin-bottom: 8px;
             font-size: 16px;
             font-weight: 600;
         }
@@ -34,9 +33,13 @@
         input {
             width: 100%;
             padding: 10px;
+            margin-top: 8px;
             margin-bottom: 32px;
             border: 1px solid #D1D1D1;
             border-radius: 8px;
+            background-color: transparent;
+            color: #525256;
+            font-size: 16px;
         }
     }
 
@@ -56,6 +59,10 @@
             border-radius: 4px;
             background: #299d91;
             color: white;
+
+            &:hover {
+                opacity: 0.9;
+            }
         }
 
         button:first-child {
