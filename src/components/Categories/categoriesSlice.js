@@ -6,6 +6,7 @@ const initialState = [
     id: "groceries",
     name: "Продукти",
     iconName: "Food",
+    goalAmount: 3000,
     expenses: [
       { id: "1", title: "АТБ", amount: 1200, date: "2025-06-01" },
       { id: "2", title: "РОСТ", amount: 800, date: "2025-06-03" },
@@ -15,6 +16,7 @@ const initialState = [
     id: "fun",
     name: "Розваги",
     iconName: "Entertainment",
+    goalAmount: 2500,
     expenses: [
       { id: "3", title: "Кіно", amount: 600, date: "2025-06-02" },
       { id: "4", title: "Спорт", amount: 600, date: "2025-06-02" },
@@ -24,6 +26,7 @@ const initialState = [
     id: "transport",
     name: "Транспорт",
     iconName: "Transport",
+    goalAmount: 1000,
     expenses: [
       { id: "5", title: "Метро", amount: 100, date: "2025-06-04" },
     ],
@@ -32,6 +35,7 @@ const initialState = [
     id: "shopping",
     name: "Шопінг",
     iconName: "Shopping",
+    goalAmount: 2000,
     expenses: [
       { id: "6", title: "H&M", amount: 900, date: "2025-06-05" },
     ],
@@ -40,6 +44,7 @@ const initialState = [
     id: "health",
     name: "Здоров'я",
     iconName: "Health",
+    goalAmount: 1500,
     expenses: [
       { id: "7", title: "Аптека", amount: 300, date: "2025-06-06" },
     ],
@@ -48,6 +53,7 @@ const initialState = [
     id: "other",
     name: "Інше",
     iconName: "Other",
+    goalAmount: null,
     expenses: [
       { id: "8", title: "Подарунок", amount: 500, date: "2025-06-07" },
     ],
@@ -112,9 +118,15 @@ const categoriesSlice = createSlice({
         }
       }
     },
-    
+    setGoal: (state, action) => {
+      const { categoryId, goalAmount } = action.payload;
+      const category = state.find(cat => cat.id === categoryId);
+      if (category) {
+        category.goalAmount = goalAmount;
+      }
+    }
   },
 });
 
-export const { addExpense, removeExpense, editExpense } = categoriesSlice.actions;
+export const { addExpense, removeExpense, editExpense, setGoal } = categoriesSlice.actions;
 export default categoriesSlice.reducer;

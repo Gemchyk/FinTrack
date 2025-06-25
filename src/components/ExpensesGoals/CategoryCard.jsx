@@ -1,6 +1,7 @@
 import styles from "./ExpensesGoalsByCategory.module.scss";
 import AdjustEditBtn from "/src/assets/icons/AdjustEditBtn.svg?react";
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
+import GoalModal from "./GoalModal/GoalModal";
 
 export default function CategoryCard({
   category,
@@ -11,7 +12,15 @@ export default function CategoryCard({
   onEdit,
   onDelete,
 }) {
-  const { title, icon, amount } = category;
+  const { title, icon, amount, goalAmount } = category;
+
+  const percentOfGoal = goalAmount ? Math.min((amount / goalAmount) * 100, 100) : 0;
+  const isOverGoal = goalAmount && amount > goalAmount;
+  const [showGoalModal, setShowGoalModal] = useState(false);
+
+  const handleGoalClick = () => {
+    setShowGoalModal(true);
+  };
 
   return (
     <div className={`${styles.card} ${isDetailsOpen ? styles.expanded : ""}`}>
@@ -35,6 +44,40 @@ export default function CategoryCard({
           Details
         </button>
       </div>
+
+      <div className={styles.goalSection}>
+        <div className={styles.progressWrapper}>
+          {goalAmount && (
+            <div
+              className={styles.progressBar}
+              style={{
+                width: `${percentOfGoal}%`,
+                backgroundColor: isOverGoal ? "#FF5A5F" : "#299D91",
+              }}
+            />
+          )}
+        </div>
+
+        <div className={styles.goalDisplay}>
+          {goalAmount !== null ? (
+            <button className={styles.goalBtn} onClick={handleGoalClick}>
+              {goalAmount}₴
+            </button>
+          ) : (
+            <button className={styles.goalBtn} onClick={handleGoalClick}>
+              Set goal
+            </button>
+          )}
+        </div>
+      </div>
+
+      {showGoalModal && (
+        <GoalModal
+          categoryId={category.id}
+          initialGoal={goalAmount}
+          onClose={() => setShowGoalModal(false)}
+        />
+      )}
 
       {isDetailsOpen && (
         <div className={styles.dropdown}>
