@@ -1,0 +1,66 @@
+.modalContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+
+    .modal {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        width: 400px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        h2 {
+            color: #878787;
+        }
+
+        label {
+            color: #525256;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 32px;
+            border: 1px solid #D1D1D1;
+            border-radius: 8px;
+        }
+    }
+
+    .error {
+        color: red;
+        font-size: 16px;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            background: #299d91;
+            color: white;
+        }
+
+        button:first-child {
+            background: #ccc;
+            color: black;
+        }
+    }
+}

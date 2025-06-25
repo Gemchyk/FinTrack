@@ -66,6 +66,7 @@ export default function ExpensesGoalsByCategory() {
           const enrichedCategory = {
             ...category,
             amount: total,
+            goal: category.goalAmount ?? null,
             icon: iconMap[category.iconName] || <IconOthers />,
             title: titleMap[category.iconName] || category.name,
           };
