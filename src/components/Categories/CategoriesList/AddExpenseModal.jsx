@@ -8,13 +8,6 @@ import "./AddExpenseModal.scss";
 import {addExpense, editExpenseWithStats } from "../categoriesSlice"
 import { addTransaction } from "../../Transactions/transactionsSlice";
 
-import IconHousing from "/src/assets/icons/IconHousing.svg?react";
-import IconFood from "/src/assets/icons/IconFood.svg?react";
-import IconTransportation from "/src/assets/icons/IconTransportation.svg?react";
-import IconEntertainment from "/src/assets/icons/IconEntertainment.svg?react";
-import IconShopping from "/src/assets/icons/IconShopping.svg?react";
-import IconOthers from "/src/assets/icons/IconOthers.svg?react";
-
 
 const validationSchema = yup.object().shape({
   title: yup.string().required("Обов'язково"),
