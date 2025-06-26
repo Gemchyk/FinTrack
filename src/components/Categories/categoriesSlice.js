@@ -130,3 +130,8 @@ const categoriesSlice = createSlice({
 
 export const { addExpense, removeExpense, editExpense, setGoal } = categoriesSlice.actions;
 export default categoriesSlice.reducer;
+
+
+
+
+

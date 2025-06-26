@@ -2,18 +2,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
     data: [
-        { id: '01', day: "Sun", thisWeek: 200000, lastWeek: 200000,},
-        { id: '02', day: "Mon", thisWeek: 100000, lastWeek: 120000 },
-        { id: '03', day: "Tue", thisWeek: 80000, lastWeek: 90000 },
-        { id: '04', day: "Wed", thisWeek: 10000, lastWeek: 110000 },
-        { id: '05', day: "Thu", thisWeek: 130000, lastWeek: 100000 },
-        { id: '06', day: "Fri", thisWeek: 220000, lastWeek: 210000 },
-        { id: '07', day: "Sat", thisWeek: 150000, lastWeek: 170000 },
-        { id: '08', day: "Sat", thisWeek: 150000, lastWeek: 17000 },
-        { id: '09', day: "Sat", thisWeek: 150000, lastWeek: 170000 },
-        { id: '10', day: "Sat", thisWeek: 15000, lastWeek: 170000 },
-        { id: '11', day: "Sat", thisWeek: 150000, lastWeek: 100000 },
-        { id: '12', day: "Sat", thisWeek: 150000, lastWeek: 150000 },
+        { id: '01', day: "Jan", thisWeek: 10000,},
+        { id: '02', day: "Feb", thisWeek: 12000 },
+        { id: '03', day: "Mar", thisWeek: 13000},
+        { id: '04', day: "Apr", thisWeek: 10000 },
+        { id: '05', day: "May", thisWeek: 8000 },
+        { id: '06', day: "Jun", thisWeek: 10000 },
+        { id: '07', day: "Jul", thisWeek: 10000 },
+        { id: '08', day: "Aug", thisWeek: 6000},
+        { id: '09', day: "Sep", thisWeek: 9000 },
+        { id: '10', day: "Oct", thisWeek: 1000 },
+        { id: '11', day: "Nov", thisWeek: 10000 },
+        { id: '12', day: "Dec", thisWeek: 8500 },
       ]
 }
 
@@ -61,3 +61,5 @@ const weeklyComprasionSlice = createSlice({
 
 export const {addExpenseToTable, removeExpenseFromTable, editExpenseInTable} = weeklyComprasionSlice.actions;
 export default weeklyComprasionSlice.reducer;
+
+

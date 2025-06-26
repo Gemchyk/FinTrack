@@ -5,7 +5,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeAmount } from "../../../features/balance/balanceSlice";
 import { addExpenseToTable } from "../../WeeklyComparison/weeklyComprasionSlice";
 import "./AddExpenseModal.scss";
-import { editExpense, addExpense, editExpenseWithStats } from "../categoriesSlice"
+import {addExpense, editExpenseWithStats } from "../categoriesSlice"
+import { addTransaction } from "../../Transactions/transactionsSlice";
+
+import IconHousing from "/src/assets/icons/IconHousing.svg?react";
+import IconFood from "/src/assets/icons/IconFood.svg?react";
+import IconTransportation from "/src/assets/icons/IconTransportation.svg?react";
+import IconEntertainment from "/src/assets/icons/IconEntertainment.svg?react";
+import IconShopping from "/src/assets/icons/IconShopping.svg?react";
+import IconOthers from "/src/assets/icons/IconOthers.svg?react";
 
 
 const validationSchema = yup.object().shape({
@@ -13,6 +21,16 @@ const validationSchema = yup.object().shape({
   amount: yup.number().positive("Має бути > 0").required("Обов'язково"),
   date: yup.date().required("Оберіть дату"),
 });
+
+const iconMap = {
+  housing: "/src/assets/icons/IconHousing.svg?react",
+  groceries: "/src/assets/icons/IconFood.svg?react",
+  transport: "/src/assets/icons/IconTransportation.svg?react",
+  fun: "/src/assets/icons/IconEntertainment.svg?react",
+  shopping: "/src/assets/icons/IconShopping.svg?react",
+  health: "/src/assets/icons/IconOthers.svg?react",
+  other: "/src/assets/icons/IconOthers.svg?react",
+};
 
 const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
   const dispatch = useDispatch();
@@ -28,6 +46,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
 
   const handleSubmit = (values) => {
   const amount = Number(values.amount);
+  console.log(values);
 
   if (editingExpense) {
     dispatch(editExpenseWithStats({
@@ -41,10 +60,11 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
   }
 
   if (amount > balance) {
-    setError("❌ Недостатньо коштів на балансі");
+    setError("❌ Not enough money on balance");
     return;
   }
   
+  dispatch(addTransaction({categoryId, image: iconMap[categoryId] || "other", ...values}))
   dispatch(addExpense({ categoryId, ...values }));
   dispatch(addExpenseToTable(values));
   dispatch(removeAmount(amount));
@@ -56,7 +76,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <h3>{editingExpense ? "Редагувати витрату" : "Нова витрата"}</h3>
+        <h3>{editingExpense ? "Edit Expense" : "New Expense"}</h3>
 
         <Formik
           initialValues={initialValues}
@@ -65,7 +85,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
         >
           <Form>
             <div className="form-group">
-              <label>Назва</label>
+              <label>Name</label>
               <Field name="title" className="form-control" />
               <ErrorMessage
                 name="title"
@@ -75,7 +95,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
             </div>
 
             <div className="form-group">
-              <label>Сума</label>
+              <label>Amount</label>
               <Field name="amount" type="number" className="form-control" />
               <ErrorMessage
                 name="amount"
@@ -85,7 +105,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
             </div>
 
             <div className="form-group">
-              <label>Дата</label>
+              <label>Date</label>
               <Field name="date" type="date" className="form-control" />
               <ErrorMessage
                 name="date"
@@ -98,7 +118,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
             <div className="modal-buttons">
               <button type="submit">Ok</button>
               <button type="button" onClick={onClose}>
-                Cansel
+                Cancel
               </button>
             </div>
           </Form>
