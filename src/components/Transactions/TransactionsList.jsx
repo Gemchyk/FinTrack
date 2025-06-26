@@ -1,60 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./Transactions.scss";
 import Transaction from "./Transaction";
+import IconHousing from "/src/assets/icons/IconHousing.svg?react";
+import { filterByAmount, filterByDate, filterByName } from './transactionsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 
-const transactions = [
-    {
-      image: "/images/gamepage.svg",
-      alt: "Joystick",
-      title: "GTR 5",
-      subtitle: "Gadget & Gear",
-      price: "$160.00",
-      date: "17 May 2023",
-    },
-    {
-      image: "/images/bag.svg",
-      alt: "Bag",
-      title: "Polo Shirt",
-      subtitle: "XL fashions",
-      price: "$20.00",
-      date: "17 May 2023",
-    },
-    {
-      image: "/images/house.svg",
-      alt: "House",
-      title: "Biriyani",
-      subtitle: "Hajir Biriyani",
-      price: "$10.00",
-      date: "17 May 2023",
-    },
-    {
-      image: "/images/taxi.svg",
-      alt: "Taxi",
-      title: "Taxi Fare",
-      subtitle: "Uber",
-      price: "$12.00",
-      date: "17 May 2023",
-    },
-    {
-      image: "/images/bag2.svg",
-      alt: "Bag2",
-      title: "Keyboard",
-      subtitle: "Gadget & Gear",
-      price: "$22.00",
-      date: "17 May 2023",
-    },
-  ];
 
 
 const TransactionsList = () => {
-    
+
+    const store = useSelector(state => state.transactions.data);
+    const dispatch = useDispatch();
+
+    const [isDateFilter, setIsDateFilter] = useState(true);
+    const [isAmountFilter, setIsAmountFilter] = useState(false);
+    const [isNameFilter, setIsNameFilter] = useState(false);
+
+
+    const handleDateClick = () => {
+      setIsAmountFilter(false);
+      setIsNameFilter(false);
+      setIsDateFilter(true);
+      dispatch(filterByDate());
+    }
+    const handleAmountClick = () => {
+      setIsAmountFilter(true);
+      setIsNameFilter(false);
+      setIsDateFilter(false);
+      dispatch(filterByAmount())
+    }
+    const handleNameClick = () => {
+      setIsAmountFilter(false);
+      setIsNameFilter(true);
+      setIsDateFilter(false);
+      dispatch(filterByName())
+    }
+
     
       return (
         <div className="container">
+          <nav className="navigation">
+              <a onClick={handleDateClick} className={isDateFilter ? "span" : ""}>Date</a>
+              <a onClick={handleAmountClick} className={isAmountFilter ? "span" : ""}>Amount</a>
+              <a onClick={handleNameClick} className={isNameFilter ? "span" : ""}>Name</a>
+          </nav>
           <main>
-            {transactions.map((tx, index) => (
-              <Transaction key={index} {...tx} />
+            {store.map((tx, index) => (
+              <Transaction key={index} item={tx} />
             ))}
           </main>
         </div>

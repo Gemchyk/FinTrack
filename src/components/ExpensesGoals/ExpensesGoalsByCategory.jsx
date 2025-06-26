@@ -12,8 +12,6 @@ import IconEntertainment from "/src/assets/icons/IconEntertainment.svg?react";
 import IconShopping from "/src/assets/icons/IconShopping.svg?react";
 import IconOthers from "/src/assets/icons/IconOthers.svg?react";
 
-import { addExpense } from "../Categories/categoriesSlice"; 
-import { addExpenseToTable } from "../WeeklyComparison/weeklyComprasionSlice";
 
 const iconMap = {
   Housing: <IconHousing />,
@@ -25,12 +23,12 @@ const iconMap = {
 };
 
 const titleMap = {
-  Housing: "Житло",
-  Food: "Їжа",
-  Transport: "Транспорт",
-  Entertainment: "Розваги",
-  Shopping: "Покупки",
-  Others: "Інше",
+  Housing: "Housing",
+  Food: "Food",
+  Transport: "Transport",
+  Entertainment: "Entertainment",
+  Shopping: "Shopping",
+  Others: "Others",
 };
 
 export default function ExpensesGoalsByCategory() {
