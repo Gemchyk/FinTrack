@@ -1,14 +1,15 @@
-import React, { PureComponent } from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { PieChart, Pie, Cell } from 'recharts';
 
 const data = [
-  { name: 'Group A', value: 19000 },
-  { name: 'Group B', value: 20000 },
-  { name: 'Group C', value: 50000 },
-  { name: 'Group D', value: 15000 },
+  { name: 'shopping', value: 0, color: '#0088FE' },
+  { name: 'fun', value: 0, color: '#00C49F' },
+  { name: 'groceries', value: 0, color: '#FFBB28' },
+  { name: 'other', value: 0, color: '#FF8042' },
+  { name: 'health', value: 0, color: '#12b403'},
+  { name: 'transport', value: 0, color: '#ff4747'}
 ];
-
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
@@ -29,27 +30,55 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
-export default class Example extends PureComponent {
-  render() {
-    return (
-      <ResponsiveContainer width={150} height={130}>
-        <PieChart>
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={renderCustomizedLabel}
-            outerRadius={60}
-            fill="#8884d8"
-            dataKey="value"
-          >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
-    );
-  }
-}
+const GoalsChart = () => {
+  const store = useSelector((state) => state.categories);
+  
+  data.map((i) => {
+    const storeIndex = store[store.findIndex((j) => j.id == i.name)];
+    console.log(storeIndex);
+    const indexExpenses = storeIndex.expenses;
+    console.log(indexExpenses);
+      i.value += indexExpenses.reduce((sum, el) => sum += el.amount, 0);
+    });
+  console.log(data);
+  return (
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ marginRight: '20px' }}>
+        {data.map((entry, index) => (
+          <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: 8, color: 'black' }}>
+            <div
+              style={{
+                width: 12,
+                height: 12,
+                backgroundColor: entry.color,
+                marginRight: 8,
+                borderRadius: 2,
+              }}
+            />
+            <span style={{ fontSize: 14 }}>{entry.name}</span>
+          </div>
+        ))}
+      </div>
+
+      <PieChart width={200} height={170}>
+        <Pie
+          data={data}
+          cx="50%"
+          cy="50%"
+          labelLine={false}
+          label={renderCustomizedLabel}
+          outerRadius={80}
+          fill="#8884d8"
+          dataKey="value"
+          animationDuration={700}
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.color} />
+          ))}
+        </Pie>
+      </PieChart>
+    </div>
+  );
+};
+
+export default GoalsChart;

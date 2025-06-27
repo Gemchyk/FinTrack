@@ -64,7 +64,6 @@ const initialState = [
 export const removeExpenseWithStats = createAsyncThunk(
   "categories/removeExpenseWithStats",
   async ({ categoryId, expenseId, date, amount }, { dispatch }) => {
-    console.log("buba")
     dispatch(removeExpense({ categoryId, expenseId }));
     dispatch(removeExpenseFromTable({ date, amount }));
   }

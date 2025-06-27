@@ -49,11 +49,10 @@ const transactionsSlice = createSlice({
     initialState,
     reducers: {
         addTransaction: (state, action) => {
-          console.log(action.payload);
-          state.data.push(action.payload);
+          state.data.unshift(action.payload);
         },
         filterByDate: (state) => {
-            state.data = state.data.sort((a, b) => new Date(a.date) - new Date(b.date));
+            state.data = state.data.sort((a, b) => new Date(b.date) - new Date(a.date));
         },
         filterByAmount: (state) => {
             state.data = state.data.sort((a, b) => a.amount - b.amount);
