@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useSelector, useDispatch } from "react-redux";
-import { removeAmount } from "../../../features/balance/balanceSlice";
+import { removeBalance } from "../../../features/balance/balanceSlice";
 import { addExpenseToTable } from "../../WeeklyComparison/weeklyComprasionSlice";
 import "./AddExpenseModal.scss";
 import {addExpense, editExpenseWithStats } from "../categoriesSlice"
@@ -60,7 +60,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
   dispatch(addTransaction({categoryId, image: iconMap[categoryId] || "other", ...values}))
   dispatch(addExpense({ categoryId, ...values }));
   dispatch(addExpenseToTable(values));
-  dispatch(removeAmount(amount));
+  dispatch(removeBalance(amount));
   onClose();
 };
 
