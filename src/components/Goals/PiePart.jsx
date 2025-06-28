@@ -31,16 +31,15 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 };
 
 const GoalsChart = () => {
-  const store = useSelector((state) => state.categories);
-  
+  const store = useSelector((state) => state.categories);  
   data.map((i) => {
     const storeIndex = store[store.findIndex((j) => j.id == i.name)];
     console.log(storeIndex);
     const indexExpenses = storeIndex.expenses;
     console.log(indexExpenses);
-      i.value += indexExpenses.reduce((sum, el) => sum += el.amount, 0);
+      i.value = indexExpenses.reduce((sum, el) => sum += el.amount, 0);
     });
-  console.log(data);
+
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <div style={{ marginRight: '20px' }}>
@@ -70,7 +69,7 @@ const GoalsChart = () => {
           outerRadius={80}
           fill="#8884d8"
           dataKey="value"
-          animationDuration={700}
+          animationDuration={0}
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />

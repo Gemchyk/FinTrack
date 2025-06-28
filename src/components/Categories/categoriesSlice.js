@@ -4,59 +4,65 @@ import { removeExpenseFromTable, editExpenseInTable } from "../WeeklyComparison/
 const initialState = [
   {
     id: "groceries",
-    name: "Продукти",
+    name: "Food",
     iconName: "Food",
     goalAmount: 3000,
     expenses: [
       { id: "1", title: "АТБ", amount: 1200, date: "2025-06-01" },
       { id: "2", title: "РОСТ", amount: 800, date: "2025-06-03" },
     ],
+    isShownOnPage: true,
   },
   {
     id: "fun",
-    name: "Розваги",
+    name: "Fun",
     iconName: "Entertainment",
     goalAmount: 2500,
     expenses: [
       { id: "3", title: "Кіно", amount: 600, date: "2025-06-02" },
       { id: "4", title: "Спорт", amount: 600, date: "2025-06-02" },
     ],
+    isShownOnPage: true,
   },
   {
     id: "transport",
-    name: "Транспорт",
+    name: "Transport",
     iconName: "Transport",
     goalAmount: 1000,
     expenses: [
       { id: "5", title: "Метро", amount: 100, date: "2025-06-04" },
     ],
+    isShownOnPage: true,
   },
   {
     id: "shopping",
-    name: "Шопінг",
+    name: "Shopping",
     iconName: "Shopping",
     goalAmount: 2000,
     expenses: [
       { id: "6", title: "H&M", amount: 900, date: "2025-06-05" },
     ],
+    isShownOnPage: true,
   },
   {
     id: "health",
-    name: "Здоров'я",
+    name: "Health",
     iconName: "Health",
     goalAmount: 1500,
     expenses: [
       { id: "7", title: "Аптека", amount: 300, date: "2025-06-06" },
     ],
+    isShownOnPage: true,
   },
   {
     id: "other",
-    name: "Інше",
+    name: "Foot",
     iconName: "Other",
     goalAmount: null,
     expenses: [
       { id: "8", title: "Подарунок", amount: 500, date: "2025-06-07" },
     ],
+    isShownOnPage: true,
   },
 ];
 
@@ -91,6 +97,16 @@ const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
+    searchCategories: (state, action) => {
+      state.map(item => {
+        if(item.name.includes(action.payload)){
+          item.isShownOnPage = true;
+        }else{
+          item.isShownOnPage = false;
+        }
+      })
+      console.log(action.payload);
+    },
     addExpense: (state, action) => {
       const { categoryId, title, amount, date } = action.payload;
       const category = state.find(cat => cat.id === categoryId);
@@ -127,7 +143,7 @@ const categoriesSlice = createSlice({
   },
 });
 
-export const { addExpense, removeExpense, editExpense, setGoal } = categoriesSlice.actions;
+export const { searchCategories, addExpense, removeExpense, editExpense, setGoal } = categoriesSlice.actions;
 export default categoriesSlice.reducer;
 
 

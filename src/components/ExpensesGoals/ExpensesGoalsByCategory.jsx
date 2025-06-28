@@ -45,11 +45,9 @@ export default function ExpensesGoalsByCategory() {
 
   const handleDelete = (categoryId, exp) => {
     dispatch(removeExpenseWithStats({categoryId, expenseId: exp.id, date: exp.date, amount: exp.amount}))
-    // dispatch(removeExpense({ categoryId, expenseId }));
   };
 
   const handleEdit = (categoryId, expense) => {
-    console.log(expense);
     setEditingExpense({ categoryId, ...expense });
     setShowModalForCategory(categoryId);
   };

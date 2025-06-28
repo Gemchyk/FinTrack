@@ -22,8 +22,11 @@ export default function CategoryCard({
     setShowGoalModal(true);
   };
 
-  return (
-    <div className={`${styles.card} ${isDetailsOpen ? styles.expanded : ""}`}>
+  if(!category.isShownOnPage){
+    return;
+  }else{
+      return (
+        <div className={`${styles.card} ${isDetailsOpen ? styles.expanded : ""}`}>
       <div className={styles.topRow}>
         <span className={styles.icon}>{icon}</span>
 
@@ -70,7 +73,6 @@ export default function CategoryCard({
           )}
         </div>
       </div>
-
       {showGoalModal && (
         <GoalModal
           categoryId={category.id}
@@ -102,5 +104,7 @@ export default function CategoryCard({
         </div>
       )}
     </div>
-  );
+    );
+    }
+      
 }
