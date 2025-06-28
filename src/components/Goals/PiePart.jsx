@@ -5,13 +5,14 @@ import { useTranslation } from 'react-i18next';
 
 
 const data = [
-  { name: 'shopping', value: 0, color: '#0088FE' },
+  { name: 'shopping', value: 0, color: '#1E2A38' },
   { name: 'fun', value: 0, color: '#00C49F' },
-  { name: 'groceries', value: 0, color: '#FFBB28' },
-  { name: 'other', value: 0, color: '#FF8042' },
-  { name: 'health', value: 0, color: '#12b403'},
-  { name: 'transport', value: 0, color: '#ff4747'}
+  { name: 'groceries', value: 0, color: '#4A5A6A' },
+  { name: 'other', value: 0, color: '#738FA7'},
+  { name: 'health', value: 0, color: '#BFA2DB'},
+  { name: 'transport', value: 0, color: '#3EDBB3'}
 ];
+
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
@@ -55,7 +56,7 @@ const GoalsChart = () => {
                 borderRadius: 2,
               }}
             />
-            <span style={{ fontSize: 14 }}>{entry.name}</span>
+            <span style={{ fontSize: 14 }}>{t(`categories.${entry.name}`)}</span>
           </div>
         ))}
       </div>

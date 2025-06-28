@@ -51,5 +51,19 @@
     "Enter your login": "Введіть Ваш логін",
     "Login": "Логін",
     "Login-btn": "Увійти",
-    "Password": "Пароль"
+    "Password": "Пароль",
+    "Total Balance": "Загальний баланс",
+    "This month": "Цього місяця",
+    "New Expense": "Нова витрата",
+    "Edit Expense": "Редагувати витрату",
+    "Cancel": "Скасувати",
+    "Ok": "ОК",
+    "categories": {
+      "shopping": "Покупки",
+      "fun": "Розваги",
+      "groceries": "Продукти",
+      "other": "Інше",
+      "health": "Здоров'я",
+      "transport": "Транспорт"
+    }
   }

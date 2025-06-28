@@ -7,6 +7,7 @@ import { addExpenseToTable } from "../../WeeklyComparison/weeklyComprasionSlice"
 import "./AddExpenseModal.scss";
 import {addExpense, editExpenseWithStats } from "../categoriesSlice"
 import { addTransaction } from "../../Transactions/transactionsSlice";
+import { useTranslation } from "react-i18next";
 
 
 const validationSchema = yup.object().shape({
@@ -29,6 +30,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
   const dispatch = useDispatch();
   const balance = useSelector((state) => state.balance.sum);
   const [error, setError] = useState("");
+  const {t} = useTranslation();
 
   const initialValues = {
     title: editingExpense?.title || "",
@@ -69,7 +71,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <h3>{editingExpense ? "Edit Expense" : "New Expense"}</h3>
+        <h3>{editingExpense ? t("Edit Expense") : t("New Expense")}</h3>
 
         <Formik
           initialValues={initialValues}
@@ -78,7 +80,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
         >
           <Form>
             <div className="form-group">
-              <label>Name</label>
+              <label>{t("Name")}</label>
               <Field name="title" className="form-control" />
               <ErrorMessage
                 name="title"
@@ -88,7 +90,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
             </div>
 
             <div className="form-group">
-              <label>Amount</label>
+              <label>{t("Amount")}</label>
               <Field name="amount" type="number" className="form-control" />
               <ErrorMessage
                 name="amount"
@@ -98,7 +100,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
             </div>
 
             <div className="form-group">
-              <label>Date</label>
+              <label>{t("Date")}</label>
               <Field name="date" type="date" className="form-control" />
               <ErrorMessage
                 name="date"
@@ -109,9 +111,9 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
 
             {error && <div className="text-danger mb-2">{error}</div>}
             <div className="modal-buttons">
-              <button type="submit">Ok</button>
+              <button type="submit">{t("Ok")}</button>
               <button type="button" onClick={onClose}>
-                Cancel
+                {t("Cancel")}
               </button>
             </div>
           </Form>

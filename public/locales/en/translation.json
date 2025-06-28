@@ -51,5 +51,19 @@
     "Enter your login": "Enter your login",
     "Login": "Login",
     "Login-btn": "Login",
-    "Password": "Password"
+    "Password": "Password",
+    "Total Balance": "Total Balance",
+    "This month": "This month",
+    "New Expense": "New Expense",
+    "Edit Expense": "Edit Expense",
+    "Cancel": "Cancel",
+    "Ok": "Ok",
+    "categories": {
+      "shopping": "Shopping",
+      "fun": "Fun",
+      "groceries": "Groceries",
+      "other": "Other",
+      "health": "Health",
+      "transport": "Transport"
+    }
   }
