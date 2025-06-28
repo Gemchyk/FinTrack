@@ -56,7 +56,7 @@ const initialState = [
   },
   {
     id: "other",
-    name: "Foot",
+    name: "Other",
     iconName: "Other",
     goalAmount: null,
     expenses: [
@@ -105,7 +105,6 @@ const categoriesSlice = createSlice({
           item.isShownOnPage = false;
         }
       })
-      console.log(action.payload);
     },
     addExpense: (state, action) => {
       const { categoryId, title, amount, date } = action.payload;

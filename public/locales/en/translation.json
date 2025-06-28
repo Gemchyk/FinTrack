@@ -1,0 +1,55 @@
+{
+    "Home": "Home",
+    "Overview": "Overview",
+    "Balances": "Balances",
+    "Transactions": "Transactions",
+    "Bills": "Bills",
+    "Expenses": "Expenses",
+    "Goals": "Goals",
+    "Settings": "Settings",
+    "Spendings": "Spendings", 
+  
+    "All Accounts": "All Accounts",
+    "Account Type": "Account Type",
+    "Credit Card": "Credit Card",
+  
+    "Categories Spendings 2025": "Categories Spendings 2025",
+  
+    "Recent Transaction": "Recent Transaction",
+    "Statistics": "Statistics",
+    "Monthly Comparison": "Monthly Comparison",
+  
+    "Date": "Date",
+    "Amount": "Amount",
+    "Name": "Name",
+  
+    "Figma - Monthly": "Figma - Monthly",
+    "Last Charge": "Last Charge",
+    "Adobe - Yearly": "Adobe - Yearly",
+  
+    "Search": "Search",
+    "Clear": "Clear",
+    "Expenses by category": "Expenses by category",
+  
+    "Remove": "Remove",
+    "Add": "Add",
+    "Edit": "Edit",
+    "Account Number": "Account Number",
+    "Total Amount": "Total Amount",
+
+  
+    "Adjust": "Adjust",
+    "Details": "Details",
+    "Set goal": "Set goal",
+  
+    "Food": "Food",
+    "Entertainment": "Entertainment",
+    "Transport": "Transport",
+    "Shopping": "Shopping",
+    "Health": "Health",
+    "Other": "Other",
+    "Enter your login": "Enter your login",
+    "Login": "Login",
+    "Login-btn": "Login",
+    "Password": "Password"
+  }

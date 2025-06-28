@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { PieChart, Pie, Cell } from 'recharts';
+import { useTranslation } from 'react-i18next';
+
 
 const data = [
   { name: 'shopping', value: 0, color: '#0088FE' },
@@ -31,12 +33,11 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 };
 
 const GoalsChart = () => {
+  const {t} = useTranslation();
   const store = useSelector((state) => state.categories);  
   data.map((i) => {
     const storeIndex = store[store.findIndex((j) => j.id == i.name)];
-    console.log(storeIndex);
     const indexExpenses = storeIndex.expenses;
-    console.log(indexExpenses);
       i.value = indexExpenses.reduce((sum, el) => sum += el.amount, 0);
     });
 
