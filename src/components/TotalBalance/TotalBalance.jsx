@@ -1,11 +1,35 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import cardLogo from './imgs/cardLogo.png';
 import styles from './TotalBalance.module.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { fetchBalance } from '../../features/balance/balanceSlice';
 
 function TotalBalance() {
 
-    const store = useSelector(state => state.balance.sum);
+    
+    const dispatch = useDispatch();
+
+    const [store, setStore] = useState();
+
+    useEffect(() => {
+        // fetch('http://localhost:5050/balance').then(res => {
+        //     if(!res.ok){
+        //         throw new Error("Fetch failed");
+        //     }
+        //     return res.json();
+        // }).then(data => {
+        //     setStore(data.sum);
+        // });
+
+        dispatch(fetchBalance())
+        .unwrap()
+        .then(data => {
+        setStore(data);
+        })
+        .catch(err => {
+        console.error('Ошибка при получении баланса:', err);
+        });
+      }, [dispatch]);
     return (
         <>
             <div>
