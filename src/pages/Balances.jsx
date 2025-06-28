@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Balances.scss';
 import cardLogo from '../components/TotalBalance/imgs/cardLogo.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { addAmount, removeAmount } from '../features/balance/balanceSlice';
+import { fetchBalance, addBalance, removeBalance } from '../features/balance/balanceSlice';
 
 function Balances() {
-  const sum = useSelector(state => state.balance.sum);
   const dispatch = useDispatch();
+  const sum = useSelector(state => state.balance.sum);
+  const status = useSelector(state => state.balance.status);
+  const error = useSelector(state => state.balance.error);
 
+  const [inputValue, setInputValue] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(null); // 'add' | 'remove'
-  const [inputValue, setInputValue] = useState('');
+
+  useEffect(() => {
+    dispatch(fetchBalance());
+  }, [dispatch]);
 
   const openModal = (type) => {
     setModalType(type);
+    setInputValue('');
     setShowModal(true);
   };
 
@@ -21,14 +28,14 @@ function Balances() {
     const value = parseFloat(inputValue);
     if (!isNaN(value) && value > 0) {
       if (modalType === 'add') {
-        dispatch(addAmount(value));
+        dispatch(addBalance(value));
       } else if (modalType === 'remove') {
-        dispatch(removeAmount(value));
+        dispatch(removeBalance(value));
       }
     }
-    setInputValue('');
     setShowModal(false);
     setModalType(null);
+    setInputValue('');
   };
 
   const handleClose = () => {
@@ -52,12 +59,18 @@ function Balances() {
             </div>
           </div>
           <div className="account-number">
-            <div className="card-num">3388 4556  8860 8***</div>
+            <div className="card-num">3388 4556 8860 8***</div>
             <div className="acc-num">Account Number</div>
           </div>
           <div className="total-amount">
-            <div className="total-sum">${sum}</div>
+            {status === 'loading' ? (
+              <div className="total-sum">Loading...</div>
+            ) : (
+              <div className="total-sum">${sum}</div>
+            )}
             <div className="total-amount-text">Total Amount</div>
+            {/* {error && <div className="error">Ошибка: {error}</div>} */}
+            {error && <div className="text-danger">{error}</div>}
           </div>
           <div className="buttons">
             <button onClick={() => openModal('remove')}>Remove</button>
@@ -66,12 +79,11 @@ function Balances() {
         </div>
       </div>
 
-      {showModal && 
+      {showModal && (
         <div className="modal-overlay" onClick={handleClose}>
           <div className="modal" onClick={e => e.stopPropagation()}>
             <h3>{modalType === 'add' ? 'Add Amount' : 'Remove Amount'}</h3>
             <input
-              name="test"
               type="number"
               min="0"
               value={inputValue}
@@ -84,7 +96,7 @@ function Balances() {
             </div>
           </div>
         </div>
-      }
+      )}
     </>
   );
 }
