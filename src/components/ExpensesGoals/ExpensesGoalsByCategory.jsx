@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import AddExpenseModal from "../Categories/CategoriesList/AddExpenseModal";
 import { removeExpenseWithStats } from "../Categories/categoriesSlice";
+import { useTranslation } from "react-i18next";
 
 import IconHousing from "/src/assets/icons/IconHousing.svg?react";
 import IconFood from "/src/assets/icons/IconFood.svg?react";
@@ -34,7 +35,7 @@ const titleMap = {
 export default function ExpensesGoalsByCategory() {
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   const [activeCategoryId, setActiveCategoryId] = useState(null);
   const [showModalForCategory, setShowModalForCategory] = useState(null);
   const [editingExpense, setEditingExpense] = useState(null);
@@ -59,7 +60,7 @@ export default function ExpensesGoalsByCategory() {
 
   return (
     <div className={styles.expensesGoals}>
-      <h2>Витрати за категоріями</h2>
+      <h2>{t("Expenses by category")}</h2>
       <div className={styles.cardsGrid}>
         {categories.map((category) => {
           const total = category.expenses.reduce((sum, e) => sum + e.amount, 0);

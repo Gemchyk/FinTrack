@@ -3,12 +3,14 @@ import { useState } from 'react';
 import './SearchForm.scss'
 import { useDispatch } from 'react-redux';
 import { searchCategories } from '../Categories/categoriesSlice';
+import { useTranslation } from 'react-i18next';
 
 const SearchForm = () => {
 
     const dispatch = useDispatch();
 
     const [inputValue, setInputValue] = useState("");
+    const {t} = useTranslation();
 
     const handleClear = () => {
         setInputValue("");
@@ -23,15 +25,15 @@ const SearchForm = () => {
 
     return (
         <>
-        <div className='searchInput'>
-            <input
-                name="search"
-                type="text"
-                value={inputValue}
-                onChange={e => handleChange(e)}
-                placeholder="Search"
-                />
-            <button onClick={handleClear}>Clear</button>  
+       <div className='searchInput'>
+        <input
+            name="search"
+            type="text"
+            value={inputValue}
+            onChange={e => handleChange(e)}
+            placeholder={t("Search")}
+        />
+        <button onClick={handleClear}>{t("Clear")}</button>
         </div>
             
         </>

@@ -17,10 +17,9 @@ function Overview () {
 
             <div className={styles['flex']}>
             <div>
-                <h1 className='title'>Recent Transaction</h1>
                 <TransactionsList />
             </div>
-            <WeeklyComparison />
+                <WeeklyComparison />
             </div>
         </>
     )

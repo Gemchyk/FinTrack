@@ -1,28 +1,57 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import cardLogo from './imgs/cardLogo.png';
 import styles from './TotalBalance.module.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { fetchBalance } from '../../features/balance/balanceSlice';
+import { useTranslation } from 'react-i18next';
 
 function TotalBalance() {
 
-    const store = useSelector(state => state.balance.sum);
+    
+    const dispatch = useDispatch();
+
+    const [store, setStore] = useState();
+    const {t} = useTranslation();
+
+    useEffect(() => {
+        // fetch('http://localhost:5050/balance').then(res => {
+        //     if(!res.ok){
+        //         throw new Error("Fetch failed");
+        //     }
+        //     return res.json();
+        // }).then(data => {
+        //     setStore(data.sum);
+        // });
+
+        dispatch(fetchBalance())
+        .unwrap()
+        .then(data => {
+        setStore(data);
+        })
+        .catch(err => {
+        console.error('Balance error:', err);
+        });
+      }, [dispatch]);
     return (
         <>
             <div>
-                <h1 className={styles['totalBalanceTitle']}>Total Balance</h1>
+                <h1 className={styles['totalBalanceTitle']}>{t("Total Balance")}</h1>
+
                 <div className={styles['main']}>
                     <div className={styles['main-header']}>
                     <h1 className={styles['main-title']}>${store}</h1>
-                    <h4 className={styles['main-sec-title']}>All Acounts</h4>
+                    <h4 className={styles['main-sec-title']}>{t("All Accounts")}</h4>
                     </div>
+
                     <div className={styles['card-preview']}>
                     <div className={styles['card-preview-info']}>
-                        <h4 className={styles['main-sec-title']}>Account Type</h4>
-                        <h3 className={styles['card-preview-info-title']}>Credit Card</h3>
+                        <h4 className={styles['main-sec-title']}>{t("Account Type")}</h4>
+                        <h3 className={styles['card-preview-info-title']}>{t("Credit Card")}</h3>
                         <h4 className={styles['main-sec-title']}>**** **** **** 2598</h4>
                     </div>
+
                     <div className={styles['card-preview-addinfo']}>
-                        <img src={cardLogo} alt="Buba" />
+                        <img src={cardLogo} alt="Card logo" />
                         <div className={styles['card-preview-moneyDiv']}>
                         <h3 className={styles['balanceAmount']}>${store}</h3>
                         <div className={styles['card-preview-linkDiv']}>

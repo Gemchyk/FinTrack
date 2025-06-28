@@ -1,5 +1,5 @@
 import styles from "./CategoriesList.module.scss";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import AddExpenseModal from "./AddExpenseModal";
 import { useDispatch,  useSelector  } from "react-redux";
 import { removeExpenseWithStats } from "../categoriesSlice";
@@ -11,6 +11,7 @@ const CategoriesList = () => {
   const [editingExpense, setEditingExpense] = useState(null);
   const [showModalForCategory, setShowModalForCategory] = useState(null);
   const dispatch = useDispatch();
+  const {t} = useTranslation();
 
 const handleEdit = (categoryId, expense) => {
   setEditingExpense({ categoryId, ...expense });
@@ -27,46 +28,59 @@ const handleEdit = (categoryId, expense) => {
 
   return (
     <div className={styles.categories}>
-      <h2 className={styles.categories__title}>Категорії розтрат</h2>
-      <ul className={styles.categories__list}>
-        {categories.map((cat) => {
-          const total = cat.expenses.reduce((sum, e) => sum + e.amount, 0);
-          return (
-            <li className={styles.categories__item} key={cat.id}>
-              <div className={styles.categories__card}>
-                <div className={styles.categories__name}>{cat.name}</div>
-                <div className={styles.categories__total}>{total}₴</div>
+  <h2 className={styles.categories__title}>{t("Expenses by category")}</h2>
+  <ul className={styles.categories__list}>
+    {categories.map((cat) => {
+      const total = cat.expenses.reduce((sum, e) => sum + e.amount, 0);
+      return (
+        <li className={styles.categories__item} key={cat.id}>
+          <div className={styles.categories__card}>
+            <div className={styles.categories__name}>{cat.name}</div>
+            <div className={styles.categories__total}>{total}₴</div>
+            <button
+              type="button"
+              onClick={() => setShowModalForCategory(cat.id)}
+            >
+              {t("Add Expense")}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleToggleCategory(cat.id)}
+            >
+              {t("Details")}
+            </button>
+            {activeCategoryId === cat.id && (
+              <ul className={styles.expenseList}>
+                {cat.expenses.map((exp) => (
+                  <li key={exp.id}>
+                    {exp.title} — {exp.amount}₴ ({exp.date})
+                    <button onClick={() => handleEdit(cat.id, exp)}>
+                      {t("Edit")}
+                    </button>
+                    <button
+                      onClick={() =>
+                        dispatch(
+                          removeExpenseWithStats({
+                            categoryId: cat.id,
+                            expenseId: exp.id,
+                            date: exp.date,
+                            amount: exp.amount,
+                          })
+                        )
+                      }
+                    >
+                      {t("Remove")}
+                    </button>
+                  </li>
+                ))}
                 <button
                   type="button"
                   onClick={() => setShowModalForCategory(cat.id)}
                 >
-                  Додати витрату
+                  {t("Add Expense")}
                 </button>
-                <button
-                  type="button"
-                  onClick={() => handleToggleCategory(cat.id)}
-                >
-                  Детальніше
-                </button>
-                {activeCategoryId === cat.id && (
-                  <ul className={styles.expenseList}>
-                    {cat.expenses.map((exp) => (
-                    <li key={exp.id}>
-                      {exp.title} — {exp.amount}₴ ({exp.date})
-                      <button onClick={() => handleEdit(cat.id, exp)}>Edit</button>
-                      <button onClick={() => {dispatch(removeExpenseWithStats({categoryId: cat.id, expenseId: exp.id, date: exp.date, amount: exp.amount}))}}>
-                        Remove
-                      </button>
-                    </li>
-                    ))}
-                    <button
-                      type="button"
-                      onClick={() => setShowModalForCategory(cat.id)}
-                    >
-                      Додати витрату
-                    </button>
-                  </ul>
-                )}
+              </ul>
+            )}
                 {showModalForCategory && (
   <AddExpenseModal
     show={true}

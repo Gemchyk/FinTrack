@@ -4,6 +4,7 @@ import Transaction from "./Transaction";
 import IconHousing from "/src/assets/icons/IconHousing.svg?react";
 import { filterByAmount, filterByDate, filterByName } from './transactionsSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -12,6 +13,7 @@ const TransactionsList = () => {
 
     const store = useSelector(state => state.transactions.data);
     const dispatch = useDispatch();
+    const {t} = useTranslation();
 
     const [isDateFilter, setIsDateFilter] = useState(true);
     const [isAmountFilter, setIsAmountFilter] = useState(false);
@@ -39,18 +41,28 @@ const TransactionsList = () => {
 
     
       return (
-        <div className="container">
-          <nav className="navigation">
-              <a onClick={handleDateClick} className={isDateFilter ? "span" : ""}>Date</a>
-              <a onClick={handleAmountClick} className={isAmountFilter ? "span" : ""}>Amount</a>
-              <a onClick={handleNameClick} className={isNameFilter ? "span" : ""}>Name</a>
-          </nav>
-          <main>
-            {store.map((tx, index) => (
-              <Transaction key={index} item={tx} />
-            ))}
-          </main>
-        </div>
+        <>
+          <h1 className='title'>{t("Recent Transaction")}</h1>
+          <div className="container">
+            <nav className="navigation">
+              <a onClick={handleDateClick} className={isDateFilter ? "span" : ""}>
+                {t("Date")}
+              </a>
+              <a onClick={handleAmountClick} className={isAmountFilter ? "span" : ""}>
+                {t("Amount")}
+              </a>
+              <a onClick={handleNameClick} className={isNameFilter ? "span" : ""}>
+                {t("Name")}
+              </a>
+            </nav>
+            <main>
+              {store.map((tx, index) => (
+                <Transaction key={index} item={tx} />
+              ))}
+            </main>
+          </div>
+        </>
+        
       );
 };
 
