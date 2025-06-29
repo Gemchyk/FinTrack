@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeBalance } from "../../../features/balance/balanceSlice";
 import { addExpenseToTable } from "../../WeeklyComparison/weeklyComprasionSlice";
 import "./AddExpenseModal.scss";
-import {addExpense, editExpenseWithStats } from "../categoriesSlice"
+import {addExpense, addExpenseWithStats, editExpenseWithStats } from "../categoriesSlice"
 import { addTransaction } from "../../Transactions/transactionsSlice";
 import { useTranslation } from "react-i18next";
 
@@ -58,10 +58,10 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
     setError("❌ Not enough money on balance");
     return;
   }
-  
-  dispatch(addTransaction({categoryId, image: iconMap[categoryId] || "other", ...values}))
-  dispatch(addExpense({ categoryId, ...values }));
-  dispatch(addExpenseToTable(values));
+
+  // dispatch(addTransaction({categoryId, image: iconMap[categoryId] || "other", ...values}))
+  dispatch(addExpenseWithStats({ categoryId, image: iconMap[categoryId] || "other",  ...values }));
+  // dispatch(addExpenseToTable(values));
   dispatch(removeBalance(amount));
   onClose();
 };

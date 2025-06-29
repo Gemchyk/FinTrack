@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice} from "@reduxjs/toolkit";
 
 
 
@@ -49,7 +49,22 @@ const transactionsSlice = createSlice({
     initialState,
     reducers: {
         addTransaction: (state, action) => {
+          console.log(action.payload);
           state.data.unshift(action.payload);
+        },
+        removeTransaction: (state, action) => {
+          state.data = state.data.filter(item => item.id != action.payload.expenseId);
+        },
+        editTransaction: (state, action) => {
+          console.log(action.payload.updatedData);
+          state.data = state.data.map(item => {
+            if(item.id == action.payload.expenseId){
+              console.log({ ...item, ...action.payload.updatedData });
+              return { ...item, ...action.payload.updatedData };
+            }else{
+              return item;
+            }
+          });
         },
         filterByDate: (state) => {
             state.data = state.data.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -65,5 +80,5 @@ const transactionsSlice = createSlice({
 
 
 
-export const {addTransaction, filterByDate, filterByAmount, filterByName} = transactionsSlice.actions;
+export const {addTransaction, removeTransaction, editTransaction, filterByDate, filterByAmount, filterByName} = transactionsSlice.actions;
 export default transactionsSlice.reducer;

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { removeExpenseFromTable, editExpenseInTable } from "../WeeklyComparison/weeklyComprasionSlice";
+import { addExpenseToTable, removeExpenseFromTable, editExpenseInTable } from "../WeeklyComparison/weeklyComprasionSlice";
+import { addTransaction, removeTransaction, editTransaction } from "../Transactions/transactionsSlice";
 
 const initialState = [
   {
@@ -67,11 +68,25 @@ const initialState = [
 ];
 
 
+
+export const addExpenseWithStats = createAsyncThunk(
+  "categories/addExpenseWithStats",
+  async ({  categoryId, image, title, amount, date }, { dispatch }) => {
+    const id = nanoid();
+    dispatch(addExpense({ id, categoryId, title, amount, date }));
+    dispatch(addExpenseToTable({ date, amount }));
+    dispatch(addTransaction({ id, categoryId, image, title, amount, date}));
+  }
+)
+
+
+
 export const removeExpenseWithStats = createAsyncThunk(
   "categories/removeExpenseWithStats",
   async ({ categoryId, expenseId, date, amount }, { dispatch }) => {
     dispatch(removeExpense({ categoryId, expenseId }));
     dispatch(removeExpenseFromTable({ date, amount }));
+    dispatch(removeTransaction({categoryId, expenseId, date, amount}))
   }
 )
 
@@ -89,6 +104,7 @@ export const editExpenseWithStats = createAsyncThunk(
       updatedData,
       oldData,
     }));
+    dispatch(editTransaction({expenseId, updatedData}));
   }
 )
 
@@ -107,10 +123,10 @@ const categoriesSlice = createSlice({
       })
     },
     addExpense: (state, action) => {
-      const { categoryId, title, amount, date } = action.payload;
+      const { id, categoryId, title, amount, date } = action.payload;
       const category = state.find(cat => cat.id === categoryId);
       if (category) {
-        category.expenses.push({ id: nanoid(), title, amount, date });
+        category.expenses.push({ id, title, amount, date });
       }
     },
     removeExpense: (state, action) => {
