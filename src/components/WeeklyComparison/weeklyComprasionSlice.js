@@ -24,6 +24,7 @@ const weeklyComprasionSlice = createSlice({
     initialState,
     reducers: {
         addExpenseToTable: (state, action) => {
+            console.log(action.payload);
             const month = action.payload.date.slice(5, 7);
             state.data.map(i => {
                 if(i.id == month){
