@@ -3,10 +3,10 @@ import * as yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { removeBalance } from "../../../features/balance/balanceSlice";
-import { addExpenseToTable } from "../../WeeklyComparison/weeklyComprasionSlice";
+// import { addExpenseToTable } from "../../WeeklyComparison/weeklyComprasionSlice";
 import "./AddExpenseModal.scss";
-import {addExpense, addExpenseWithStats, editExpenseWithStats } from "../categoriesSlice"
-import { addTransaction } from "../../Transactions/transactionsSlice";
+import { addExpenseWithStats, editExpenseWithStats } from "../categoriesSlice"
+// import { addTransaction } from "../../Transactions/transactionsSlice";
 import { useTranslation } from "react-i18next";
 
 
