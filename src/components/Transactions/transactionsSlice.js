@@ -1,46 +1,67 @@
-import { createSlice} from "@reduxjs/toolkit";
-
-
-
-
-
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
     data: [{
-      image: "/src/assets/icons/IconHousing.svg?react",
+      id: nanoid(),
+      image: "/src/assets/icons/IconShopping.svg?react",
       alt: "Joystick",
       title: "GTR 5",
       amount: 160.00,
       date: "2023-11-17",
+      type: "Expense",
+      category: "Shopping",
     },
     {
-      image: "/src/assets/icons/IconFood.svg?react",
+      id: nanoid(),
+      image: "/src/assets/icons/IconShopping.svg?react",
       alt: "Bag",
       title: "Polo Shirt",
       amount: 20.00,
       date: "2023-08-17",
+      type: "Expense",
+      category: "Shopping",
     },
     {
+      id: nanoid(),
       image: "/src/assets/icons/IconFood.svg?react",
       alt: "House",
       title: "Biriyani",
       amount: 10.00,
       date: "2023-09-17",
+      type: "Expense",
+      category: "Food",
     },
     {
-      image: "/src/assets/icons/IconFood.svg?react",
+      id: nanoid(),
+      image: "/src/assets/icons/IconTransportation.svg?react",
       alt: "Taxi",
       title: "Taxi Fare",
       amount: 12.00,
       date: "2023-10-17",
+      type: "Expense",
+      category: "Transport",
     },
     {
-      image: "/src/assets/icons/IconFood.svg?react",
+      id: nanoid(),
+      image: "/src/assets/icons/IconShopping.svg?react",
       alt: "Bag2",
       title: "Keyboard",
       amount: 22.50,
       date: "2023-05-17",
-    },]
+      type: "Expense",
+      category: "Food",
+    },
+    {
+      id: nanoid(),
+      image: "/src/assets/icons/IconOthers.svg?react",
+      alt: "Other",
+      title: "Salary",
+      amount: 1500.0,
+      date: "2023-05-01",
+      type: "Income",
+      category: "Work",
+    },
+  ]
 };
 
 

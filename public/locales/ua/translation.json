@@ -67,5 +67,20 @@
       "other": "Інше",
       "health": "Здоров'я",
       "transport": "Транспорт"
-    }
+    },
+
+    "All": "Всі",
+    "Revenue": "Дохід",
+    "Add Transaction": "Додати транзакцію",
+    "Title": "Назва",
+    "Category": "Категорія",
+    "Type": "Тип",
+    "Actions": "Дії",
+    "Work": "Робота",
+    "Expense": "Витрата",
+    "Income": "Надходження",
+    "Save Changes": "Зберегти зміни",
+    "Change Goal": "Редагувати ціль",
+    "New Goal": "Нова ціль",
+    "Goal Amount": "Сума цілі"
   }

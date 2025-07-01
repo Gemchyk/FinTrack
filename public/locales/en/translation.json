@@ -67,5 +67,20 @@
       "other": "Other",
       "health": "Health",
       "transport": "Transport"
-    }
+    },
+
+    "All": "All",
+    "Revenue": "Revenue",
+    "Add Transaction": "Add transaction",
+    "Title": "Title",
+    "Category": "Category",
+    "Type": "Type",
+    "Actions": "Actions",
+    "Work": "Work",
+    "Expense": "Expense",
+    "Income": "Income",
+    "Save Changes": "Save Changes",
+    "Change Goal": "Change Goal",
+    "New Goal": "New Goal",
+    "Goal Amount": "Goal Amount"
   }

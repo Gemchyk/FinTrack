@@ -1,0 +1,97 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+
+    h2 {
+        margin: 0;
+        font-weight: 400;
+        font-size: 22px;
+        color: #878787;
+    }
+
+    .tabs {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        span:first-child {
+            display: flex;
+            gap: 16px;
+        }
+
+        button {
+            background: none;
+            border: none;
+            padding: 6px 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            color: #525256;
+        }
+
+        .active {
+            border-bottom: 2px solid #299D91;
+            color: #299D91;
+        }
+    }
+}
+
+
+.table {
+    min-width: 1200px;
+    min-height: 400px;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 10px 20px;
+
+    .row:last-child {
+        border-bottom: none;
+    }
+
+    .header {
+        font-weight: bold;
+    }
+
+    .header,
+    .row {
+        display: grid;
+        grid-template-columns: 2fr 2fr 1.5fr 1.5fr 1.5fr 2fr;
+        align-items: center;
+        padding: 10px 12px;
+        border-bottom: 1px solid #F3F3F3;
+        color: black;
+
+        .gray {
+            color: #878787;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .amount {
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+
+            button {
+                color: #299D91;
+                background-color: transparent;
+                border: 1px solid #299D91;
+                border-radius: 4px;
+
+                &:hover {
+                    background-color: rgba(41, 157, 145, 0.1);
+                }
+            }
+        }
+    }
+}
