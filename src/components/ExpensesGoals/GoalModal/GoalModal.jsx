@@ -3,13 +3,15 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { setGoal } from '../../Categories/categoriesSlice.js';
+import { useTranslation } from 'react-i18next';
 
 const validationSchema = yup.object().shape({
-    goal: yup.number().positive('Має бути більше 0').required('Обовʼязково'),
+    goal: yup.number().positive('Must be higher than 0').required('Required'),
 });
 
 export default function GoalModal({ categoryId, onClose, initialGoal }) {
     const dispatch = useDispatch();
+    const {t} = useTranslation();
 
     const handleSubmit = (values) => {
         dispatch(setGoal({ categoryId, goalAmount: values.goal }));
@@ -19,7 +21,7 @@ export default function GoalModal({ categoryId, onClose, initialGoal }) {
     return (
         <div className={styles.modalContainer}>
             <div className={styles.modal}>
-                <h2>{initialGoal ? 'Редагувати ціль' : 'Нова ціль'}</h2>
+                <h2>{initialGoal ? t('Change Goal') : t('New Goal')}</h2>
 
                 <Formik
                 initialValues={{ goal: initialGoal || '' }}
@@ -27,13 +29,13 @@ export default function GoalModal({ categoryId, onClose, initialGoal }) {
                 onSubmit={handleSubmit}
                 >
                     <Form>
-                        <label>Сума цілі</label>
+                        <label>{t('Goal Amount')}</label>
                         <Field name="goal" type="number" />
                         <ErrorMessage name="goal" component="div" className={styles.error} />
 
                         <div className={styles.actions}>
-                        <button type="button" onClick={onClose}>Скасувати</button>
-                        <button type="submit">{initialGoal ? 'Зберегти' : 'Додати'}</button>
+                        <button type="button" onClick={onClose}>{t('Cancel')}</button>
+                        <button type="submit">{initialGoal ? t('Save Changes') : t('Add')}</button>
                         </div>
                     </Form>
                 </Formik>

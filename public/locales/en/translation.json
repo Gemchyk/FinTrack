@@ -79,5 +79,8 @@
     "Work": "Work",
     "Expense": "Expense",
     "Income": "Income",
-    "Save Changes": "Save Changes"
+    "Save Changes": "Save Changes",
+    "Change Goal": "Change Goal",
+    "New Goal": "New Goal",
+    "Goal Amount": "Goal Amount"
   }
