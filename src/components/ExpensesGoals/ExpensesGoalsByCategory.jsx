@@ -14,7 +14,7 @@ import IconShopping from "/src/assets/icons/IconShopping.svg?react";
 import IconOthers from "/src/assets/icons/IconOthers.svg?react";
 
 
-const iconMap = {
+export const iconMap = {
   Housing: <IconHousing />,
   Food: <IconFood />,
   Transport: <IconTransportation />,
