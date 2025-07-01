@@ -6,9 +6,10 @@
     align-items: center;
   
     .balances {
-      margin-bottom: 120px;
-      margin-top: -145px;
+      margin-bottom: 40px;
+      margin-top: 10px;
       margin-right: auto;
+      margin-left: -50px;
       font-weight: 400;
       font-size: 22px;
       color: #878787;
@@ -141,3 +142,8 @@
     }
   }
   
+  .courseWrapper {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }

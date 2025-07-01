@@ -1,10 +1,10 @@
 import React from "react"
 import TotalBalance from "../components/TotalBalance/TotalBalance"
-import UpcomingBillList from "../components/UpcomingBills/UpcomingBillList"
 import Goal from "../components/Goals/Goal"
 import WeeklyComparison from "../components/WeeklyComparison/WeeklyComparison"
 import styles from './Overview.module.scss';
 import TransactionsList from "../components/Transactions/TransactionsList"
+import RatesSection from "../components/OverviewCourse/RatesSection"
 
 function Overview () {
     return (
@@ -12,7 +12,7 @@ function Overview () {
            <div className={styles['header']}>
                 <TotalBalance /> 
                 <Goal /> 
-                <UpcomingBillList /> 
+                <RatesSection />
             </div>  
 
             <div className={styles['flex']}>
