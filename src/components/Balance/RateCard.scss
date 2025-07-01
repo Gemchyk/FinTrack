@@ -1,0 +1,24 @@
+.courseCard {
+  color: black;
+  height: 60px;
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  .courseName {
+    font-weight: bold;
+  }
+
+  &:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+  }
+}

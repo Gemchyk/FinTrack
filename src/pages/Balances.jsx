@@ -4,6 +4,9 @@ import cardLogo from '../components/TotalBalance/imgs/cardLogo.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchBalance, addBalance, removeBalance } from '../features/balance/balanceSlice';
 import { useTranslation } from 'react-i18next';
+import BalanceAddModalForm from '../components/Balance/BalanceAddModalForm';
+import RateCard from '../components/Balance/RateCard';
+
 
 
 function Balances() {
@@ -72,7 +75,6 @@ function Balances() {
             <div className="total-sum">${sum}</div>
             )}
           <div className="total-amount-text">{t("Total Amount")}</div>
-            {/* {error && <div className="error">Ошибка: {error}</div>} */}
             {error && <div className="text-danger">{error}</div>}
         </div>
         <div className="buttons">
@@ -82,27 +84,38 @@ function Balances() {
       </div>
     </div>
 
-    {showModal && 
-      <div className="modal-overlay" onClick={handleClose}>
-        <div className="modal" onClick={e => e.stopPropagation()}>
-          <h3>
-            {modalType === 'add' ? t("Add Amount") : t("Remove Amount")}
-          </h3>
-          <input
-            name="test"
-            type="number"
-            min="0"
-            value={inputValue}
-            onChange={e => setInputValue(e.target.value)}
-            placeholder={t("Enter amount")}
-          />
-          <div className="modal-buttons">
-            <button onClick={handleConfirm}>{t("Confirm")}</button>
-            <button onClick={handleClose}>{t("Cancel")}</button>
+        {showModal && modalType === 'add' && (
+         <BalanceAddModalForm onClose={handleClose} mode="add" />
+        )}
+
+      {showModal && modalType === 'remove' && (
+        <div className="modal-overlay" onClick={handleClose}>
+          <div className="modal" onClick={e => e.stopPropagation()}>
+            <h3>{t("Remove Amount")}</h3>
+            <input
+              type="number"
+              min="0"
+              value={inputValue}
+              onChange={e => setInputValue(e.target.value)}
+              placeholder={t("Enter amount")}
+            />
+            <div className="modal-buttons">
+              <button onClick={handleConfirm}>{t("Confirm")}</button>
+              <button onClick={handleClose}>{t("Cancel")}</button>
+            </div>
           </div>
         </div>
+      )}
+      <div className=''>
+        <h2>{t("Actual Exchange Rate")}</h2>
       </div>
-    }
+      <div className='courseWrapper'>
+        <RateCard title="USD/HRN" type="currency" base="usd" target="uah" />
+        <RateCard title="EUR/HRN" type="currency" base="eur" target="uah" />
+        <RateCard title="BTC/USD" type="crypto" symbol="BTCUSDT" />
+        <RateCard title="ETH/USD" type="crypto" symbol="ETHUSDT" />
+        <RateCard title="TON/USD" type="crypto" symbol="TONUSDT" />
+      </div>
     </>
   );
 }
