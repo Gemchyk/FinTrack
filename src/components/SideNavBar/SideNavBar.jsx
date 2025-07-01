@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from './SideNavBar.module.scss';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import Switch from "../SwitchButton/Switch";
+import SwitchLang from "../SwitchButton/SwitchLang";
+import SwitchTheme from "../SwitchButton/SwitchTheme";
+import { ThemeContext } from "../../context/ThemeContext.jsx";
+
 
 function SideNavBar() {
   const { t, i18n } = useTranslation();
+  const {theme, toggleTheme} = useContext(ThemeContext);
   const currentLang = i18n.language;
 
   const handleSwitchLang = () => {
     i18n.changeLanguage(currentLang === "en" ? "ua" : "en");
   };
+
+
+
 
   return (
     <nav className={styles['sidebar']}>
@@ -22,14 +29,23 @@ function SideNavBar() {
       <Link to="/Bills">📅 {t("Bills")}</Link>
       <Link to="/Expenses">💸 {t("Expenses")}</Link>
       <Link to="/Goals">🎯 {t("Goals")}</Link>
-      
+
       <div className={styles['flex']}>
-        EN
-        <Switch
+        <span className={styles.label}>EN</span>
+        <SwitchLang
           checked={currentLang === "ua"}
           onChange={handleSwitchLang}
         />
-        UA
+        <span className={styles.label}>UA</span>
+      </div>
+
+      <div className={styles['flex']}>
+        <span className={styles.label}>Dark</span>
+        <SwitchTheme
+          checked={theme === 'dark'}
+          onChange={toggleTheme}
+        />
+        <span className={styles.label}>Light</span>
       </div>
     </nav>
   );

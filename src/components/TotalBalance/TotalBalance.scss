@@ -1,14 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
-.totalBalanceTitle{
+:root {
+    --cb-bg-color: #fff;
+    --cb-text-primary: #000000;
+    --cb-text-secondary: gray;
+    --cb-text-inverse: #fff;
+    --cb-shadow-color: rgba(76, 103, 100, 0.1);
+    --cb-card-bg: #299d92;
+    --cb-card-link-bg: #fff;
+  }
+  
+  .dark {
+    --cb-bg-color:#1a1919;
+    --cb-text-primary: #e0e0e0;
+    --cb-text-secondary: #7a7a7a;
+    --cb-text-inverse: #fff;
+    --cb-shadow-color: rgba(0, 0, 0, 0.7);
+    --cb-card-bg: #4fc3b1;
+    --cb-card-link-bg: #2c2c2c;
+  }
+  
+  .totalBalanceTitle {
     font-weight: 400;
     font-size: 22px;
     line-height: 145%;
-    color: gray;
-    
-}  
-
-.balanceAmount{
+    color: var(--cb-text-secondary);
+  }
+  
+  .balanceAmount {
     display: block;
     font-size: 1.17em;
     margin-block-start: 1em;
@@ -17,121 +34,115 @@
     margin-inline-end: 0px;
     font-weight: bold;
     unicode-bidi: isolate;
-    color: #FFF;
-}
-
-.wrapper{
+    color: var(--cb-text-inverse);
+  }
+  
+  .wrapper {
     width: 27.5%;
     max-width: 352px;
     max-height: 272px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items:flex-start;
-
-}
-
-.main{
+    align-items: flex-start;
+  }
+  
+  .main {
     border-radius: 8px;
     padding: 0 24px;
     width: 352px;
     height: 280px;
-    box-shadow: 0 20px 25px 0 rgba(76, 103, 100, 0.1);
-    background: #FFF;
-}
-
-.main-header{
+    box-shadow: 0 20px 25px 0 var(--cb-shadow-color);
+    background: var(--cb-bg-color);
+  }
+  
+  .main-header {
     width: 98%;
     max-width: 392px;
     height: 64px;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--cb-text-secondary);
     display: flex;
     justify-content: space-between;
-}
-
-
-.main-title{
+  }
+  
+  .main-title {
     font-family: Inter, sans-serif;
     font-weight: 800;
     font-size: 22px;
     line-height: 145%;
     text-transform: capitalize;
-    color: black;
+    color: var(--cb-text-primary);
     margin-bottom: 10px;
-}
-
-.main-sec-title{
+  }
+  
+  .main-sec-title {
     font-family: Inter, sans-serif;
     font-weight: 500;
     font-size: 14px;
     line-height: 143%;
     text-transform: capitalize;
-    color: gray;
+    color: var(--cb-text-secondary);
     display: flex;
     align-items: center;
-}
-
-
-/*----------------Credit Card Preview-------------*/
-
-
-.card-preview{
+  }
+  
+  /*----------------Credit Card Preview-------------*/
+  
+  .card-preview {
     margin-top: 12px;
     border-radius: 4px;
     width: 88.6%;
     height: 64px;
-    background-color: #299d92;
+    background-color: var(--cb-card-bg);
     padding: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-
-.card-preview-info{
+  }
+  
+  .card-preview-info {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-}
-
-.card-preview-info h3{
+  }
+  
+  .card-preview-info h3 {
     margin: 0;
-}
-
-.card-preview-info h4{
+  }
+  
+  .card-preview-info h4 {
     margin: 0;
-}
-
-.card-preview-info-title{
+  }
+  
+  .card-preview-info-title {
     font-family: Inter, sans-serif;
     font-weight: 700;
     font-size: 16px;
     line-height: 150%;
     text-transform: capitalize;
-    color: #FFF;
-}
-
-.card-preview-addinfo{
+    color: var(--cb-text-inverse);
+  }
+  
+  .card-preview-addinfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
     gap: 12px;
-}
-
-
-
-.card-preview-linkDiv{
+  }
+  
+  .card-preview-linkDiv {
     display: flex;
     padding: 4px;
     align-items: flex-start;
     gap: 8px;
     border-radius: 20px;
-    background: white;
-}
-
-.card-preview-moneyDiv{
+    background: var(--cb-card-link-bg);
+  }
+  
+  .card-preview-moneyDiv {
     display: flex;
     align-items: center;
     gap: 12px;
-}
+  }
+  

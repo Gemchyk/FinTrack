@@ -10,9 +10,10 @@ import AddCategoryButton from '../components/Categories/CategoriesList/CategoryM
 function Expenses () {
     return (
         <>
-            <SearchForm />
-            <Balances />
-            <AddCategoryButton />
+            <div>
+                <SearchForm />
+                <AddCategoryButton />
+            </div>
             <ExpensesGoalsByCategory />  
         </>
     )

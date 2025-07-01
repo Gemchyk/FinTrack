@@ -56,7 +56,7 @@ const GoalsChart = () => {
                 borderRadius: 2,
               }}
             />
-            <span style={{ fontSize: 14 }}>{t(`categories.${entry.name}`)}</span>
+            <span className='goals-mini-title' style={{ fontSize: 14 }}>{t(`categories.${entry.name}`)}</span>
           </div>
         ))}
       </div>
