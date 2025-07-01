@@ -1,8 +1,9 @@
 import styles from "./CategoriesList.module.scss";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import AddExpenseModal from "./AddExpenseModal";
 import { useDispatch,  useSelector  } from "react-redux";
 import { removeExpenseWithStats } from "../categoriesSlice";
+import { useTranslation } from 'react-i18next';
 
 
 const CategoriesList = () => {

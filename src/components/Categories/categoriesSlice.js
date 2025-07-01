@@ -148,6 +148,17 @@ const categoriesSlice = createSlice({
         }
       }
     },
+    addCategory: (state, action) => {
+  const { id, name, iconName } = action.payload;
+  state.push({
+    id,
+    name,
+    iconName,
+    goalAmount: null,
+    expenses: [],
+    isShownOnPage: true,
+  });
+},
     setGoal: (state, action) => {
       const { categoryId, goalAmount } = action.payload;
       const category = state.find(cat => cat.id === categoryId);
@@ -158,7 +169,7 @@ const categoriesSlice = createSlice({
   },
 });
 
-export const { searchCategories, addExpense, removeExpense, editExpense, setGoal } = categoriesSlice.actions;
+export const { searchCategories, addExpense, removeExpense, editExpense, addCategory, setGoal } = categoriesSlice.actions;
 export default categoriesSlice.reducer;
 
 
