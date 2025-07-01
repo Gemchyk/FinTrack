@@ -1,19 +1,25 @@
 .courseCard {
-  color: black;
-  height: 60px;
+  color: var(--color-text-primary, black);
+  height: 50px;
   width: 160px;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: var(--color-bg-light, #ffffff);
   border-radius: 8px;
   padding: 16px;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-bottom: 2px solid var(--singleBill-border);
 
   .courseName {
     font-weight: bold;
+    color: var(--color-text-primary, black);
+  }
+
+  .secondaryText {
+    color: var(--color-text-secondary, #878787);
+    font-size: 14px;
   }
 
   &:hover {
