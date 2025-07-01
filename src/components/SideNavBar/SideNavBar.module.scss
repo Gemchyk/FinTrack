@@ -41,12 +41,17 @@ h2 {
     color: #fff;
   }
 
-  .flex{
+  .flex {
     display: flex;
-    gap: 10px;
-    position: relative;
-    top: 40px;
-    left: 60px;
+    align-items: center;
+    gap: 8px;
+    margin-left: 40px;
+  }
+
+  .label {
+    width: 30px;
+    text-align: center;
+    margin: 0 10px;
   }
 
   

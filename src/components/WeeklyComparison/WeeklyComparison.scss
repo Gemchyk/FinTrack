@@ -1,54 +1,69 @@
-@use '../../styles/variables' as *;
+:root {
+  --color-white: #fff;
+  --color-black: #000;
+  --color-primary: #299d91;
+  --color-gray: #999999;
+  --radius: 8px;
+  --box-shadow: 0 20px 25px 0 rgba(76, 103, 100, 0.1);
+}
+
+.dark {
+  --color-white: #1a1919;
+  --color-black: #eee;
+  --color-primary: #4ecdc4;
+  --color-gray: #666666;
+  --box-shadow: 0 20px 25px 0 rgba(0, 0, 0, 0.7);
+}
 
 .weekly-comparison {
-    max-width: 770px;
-    background: $color-white;
-    border-radius: $radius;
-    padding: 16px 24px 40px 24px;
-    box-shadow: $box-shadow;
+  max-width: 770px;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  padding: 16px 24px 40px 24px;
+  box-shadow: var(--box-shadow);
+}
 
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+.weekly-comparison__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
 
-    h3 {
-      font-size: 18px;
-      font-weight: 600;
-      margin: 0;
-      color: $color-black;
-    }
-  }
+.weekly-comparison__header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-black);
+}
 
-  &__legend {
-    display: flex;
-    gap: 20px;
+.weekly-comparison__legend {
+  display: flex;
+  gap: 20px;
+}
 
-    .legend-item {
-      position: relative;
-      padding-left: 20px;
-      font-size: 14px;
-      color: $color-black;
+.weekly-comparison__legend .legend-item {
+  position: relative;
+  padding-left: 20px;
+  font-size: 14px;
+  color: var(--color-black);
+}
 
-      &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 16px;
-        height: 8px;
-        border-radius: 2px;
-      }
+.weekly-comparison__legend .legend-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 8px;
+  border-radius: 2px;
+}
 
-      &.this-week::before {
-        background-color: $color-primary;
-      }
+.weekly-comparison__legend .legend-item.this-week::before {
+  background-color: var(--color-primary);
+}
 
-      &.last-week::before {
-        background-color: $color-gray;
-      }
-    }
-  }
+.weekly-comparison__legend .legend-item.last-week::before {
+  background-color: var(--color-gray);
 }

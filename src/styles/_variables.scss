@@ -6,3 +6,27 @@ $color-bg-light: rgba(0, 0, 0, 0.05);
 
 $radius: 10px;
 $box-shadow: 0 1px 4px $color-bg-light;
+
+
+:root {
+    --color-bg-light: #fff;
+    --color-text-primary: #000000;
+    --color-text-secondary: #878787;
+    --color-border: #ddd;
+    --color-border-light: #f1f1f1;
+    --color-accent: #299D91;
+    --color-accent-hover: rgba(41, 157, 145, 0.1);
+    --color-box-shadow: rgba(0, 0, 0, 0.05);
+  }
+  
+  .dark {
+    --color-bg-light:#1a1919;
+    --color-text-primary: #e0e0e0;
+    --color-text-secondary: #7a7a7a;
+    --color-border: #3a3a3a;
+    --color-border-light: #3a3a3a;
+    --color-accent: #4fc3b1;
+    --color-accent-hover: rgba(79, 195, 177, 0.2);
+    --color-box-shadow: rgba(0, 0, 0, 0.3);
+  }
+

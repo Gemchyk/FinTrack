@@ -1,143 +1,165 @@
+:root {
+  --wb-color-black: #000000;
+  --wb-color-gray-light: #878787;
+  --wb-color-gray-medium: #666666;
+  --wb-color-gray-dark: #807e7e;
+  --wb-color-gray-muted: #9f9f9f;
+  --wb-color-white: #ffffff;
+  --wb-color-red: red;
+  --wb-border-radius: 8px;
+}
+
+.dark {
+  --wb-color-black: #e0e0e0;
+  --wb-color-gray-light: #b0b0b0;
+  --wb-color-gray-medium: #999999;
+  --wb-color-gray-dark: #555555;
+  --wb-color-gray-muted: #7a7a7a;
+  --wb-color-white: #2c2c2c;
+  --wb-color-red: #ff4d4d;
+}
+
 .wrapper-balances {
-    width: 1104px;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  
-    .balances {
-      margin-bottom: 120px;
-      margin-top: -145px;
-      margin-right: auto;
-      font-weight: 400;
-      font-size: 22px;
-      color: #878787;
-    }
-  
-    .credit-card {
-      width: 352px;
-      height: 288px;
-      display: flex;
-      flex-direction: column;
-      background-color: #ffffff;
-      border-radius: 8px;
-      padding: 24px;
-      gap: 16px;
-  
-      &-header {
-        width: 100%;
-        height: 44px;
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid #807e7e;
-  
-        .credit-card-text {
-          font-weight: bold;
-          height: 24px;
-          width: 90px;
-          font-size: 16px;
-          color: #878787;
-        }
-  
-        .master-card {
-          display: flex;
-          justify-content: space-between;
-          height: 32px;
-          width: 123px;
-  
-          &-text {
-            height: 32px;
-            width: 71px;
-            font-weight: 500;
-            font-size: 12px;
-            color: #666666;
-            margin-top: 4px;
-          }
-  
-          .icon {
-            width: 48px;
-            height: 32px;
-            display: block;         
-            object-fit: contain;
-          }
-        }
-      }
-  
-      .account-number {
-        height: 52px;
-  
-        .card-num {
-          font-weight: 600;
-          font-size: 20px;
-          color: #191919;
-        }
-  
-        .acc-num {
-          font-weight: 400;
-          font-size: 14px;
-          color: #9f9f9f;
-        }
-      }
-      
-      .text-danger {
-        color: red;
-        font-weight: bold;
-      }
-  
-      .total-amount {
-        .total-sum {
-          font-weight: 600;
-          font-size: 20px;
-          color: #191919;
-        }
-  
-        .total-amount-text {
-          font-weight: 400;
-          font-size: 14px;
-          color: #9f9f9f;
-        }
-      }
-  
-      .buttons {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 24px;
-      }
-    }
-  }
-  
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  
-    .modal {
-      background: white;
-      color: #191919;
-      text-align: center;
-      padding: 20px;
-      border-radius: 8px;
-      min-width: 300px;
-      margin-right: -215px;
-      margin-top: 20px;
-  
-      input {
-        width: 90%;
-        padding: 8px;
-        margin: 10px 0;
-        font-size: 16px;
-      }
-  
-      .modal-buttons {
-        display: flex;
-        justify-content: space-between;
-      }
-    }
-  }
-  
+  width: 1104px;
+  color: var(--wb-color-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrapper-balances .balances {
+  margin-bottom: 120px;
+  margin-top: -145px;
+  margin-right: auto;
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--wb-color-gray-light);
+}
+
+.wrapper-balances .credit-card {
+  width: 352px;
+  height: 288px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--wb-color-white);
+  border-radius: var(--wb-border-radius);
+  padding: 24px;
+  gap: 16px;
+}
+
+.wrapper-balances .credit-card-header {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--wb-color-gray-dark);
+}
+
+.wrapper-balances .credit-card-header .credit-card-text {
+  font-weight: bold;
+  height: 24px;
+  width: 90px;
+  font-size: 16px;
+  color: var(--wb-color-gray-light);
+}
+
+.wrapper-balances .credit-card-header .master-card {
+  display: flex;
+  justify-content: space-between;
+  height: 32px;
+  width: 123px;
+}
+
+.wrapper-balances .credit-card-header .master-card-text {
+  height: 32px;
+  width: 71px;
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--wb-color-gray-medium);
+  margin-top: 4px;
+}
+
+.wrapper-balances .credit-card-header .icon {
+  width: 48px;
+  height: 32px;
+  display: block;
+  object-fit: contain;
+}
+
+.wrapper-balances .account-number {
+  height: 52px;
+}
+
+.wrapper-balances .account-number .card-num {
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--wb-color-black);
+}
+
+.wrapper-balances .account-number .acc-num {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--wb-color-gray-muted);
+}
+
+.wrapper-balances .text-danger {
+  color: var(--wb-color-red);
+  font-weight: bold;
+}
+
+.wrapper-balances .total-amount .total-sum {
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--wb-color-black);
+}
+
+.wrapper-balances .total-amount .total-amount-text {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--wb-color-gray-muted);
+}
+
+.wrapper-balances .buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay .modal {
+  background: var(--wb-color-white);
+  color: var(--wb-color-black);
+  text-align: center;
+  padding: 20px;
+  border-radius: var(--wb-border-radius);
+  min-width: 300px;
+  margin-right: -215px;
+  margin-top: 20px;
+}
+
+.modal-overlay .modal input {
+  width: 90%;
+  padding: 8px;
+  margin: 10px 0;
+  font-size: 16px;
+  background: var(--wb-color-white);
+  color: var(--wb-color-black);
+  border: 1px solid var(--wb-color-gray-dark);
+  border-radius: var(--wb-border-radius);
+}
+
+.modal-overlay .modal .modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}

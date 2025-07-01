@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Switch = ({ checked, onChange }) => {
+const SwitchLang = ({ checked, onChange }) => {
     return (
       <StyledWrapper>
         <input
@@ -53,8 +53,7 @@ const StyledWrapper = styled.div`
   }
   /* Switch background change */
   #checkboxInput:checked+.toggleSwitch {
-    background-color: rgb(153, 197, 151);
     transition-duration: .3s;
   }`;
 
-export default Switch;
+export default SwitchLang;

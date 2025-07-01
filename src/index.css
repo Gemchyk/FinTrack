@@ -1,4 +1,4 @@
-
+@import '../src/styles/_variables.scss';
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -30,6 +30,22 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+}
+
+body.light {
+  --bg-color: #fff;
+  --text-color: #000;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+body.dark {
+  --bg-color: #121212;
+  --text-color: #fff;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 h1 {
