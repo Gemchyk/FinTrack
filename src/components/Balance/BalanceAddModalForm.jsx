@@ -50,7 +50,6 @@ export default function BalanceAddModalForm({ onClose, mode = 'add', editingTran
                 amount,
               }));
           
-              console.log('Dispatching addBalance...');
               dispatch(addBalance(amount));
             }
           

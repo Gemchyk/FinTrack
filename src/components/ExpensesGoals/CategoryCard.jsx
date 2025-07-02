@@ -13,7 +13,7 @@ export default function CategoryCard({
   onEdit,
   onDelete,
 }) {
-  const { title, icon, amount, goalAmount } = category;
+  const { name, icon, amount, goalAmount } = category;
 
   const percentOfGoal = goalAmount ? Math.min((amount / goalAmount) * 100, 100) : 0;
   const isOverGoal = goalAmount && amount > goalAmount;
@@ -34,7 +34,7 @@ export default function CategoryCard({
             <span className={styles.icon}>{icon}</span>
       
             <div className={styles.cardText}>
-              <span className={styles.title}>{title}</span>
+              <span className={styles.title}>{name}</span>
               <span className={styles.amount}>{amount.toFixed(2)} ₴</span>
             </div>
       

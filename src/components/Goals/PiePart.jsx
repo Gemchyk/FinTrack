@@ -5,12 +5,12 @@ import { useTranslation } from 'react-i18next';
 
 
 const data = [
-  { name: 'shopping', value: 0, color: '#1E2A38' },
-  { name: 'fun', value: 0, color: '#00C49F' },
-  { name: 'groceries', value: 0, color: '#4A5A6A' },
-  { name: 'other', value: 0, color: '#738FA7'},
-  { name: 'health', value: 0, color: '#BFA2DB'},
-  { name: 'transport', value: 0, color: '#3EDBB3'}
+  { name: 'Shopping', value: 0, color: '#1E2A38' },
+  { name: 'Fun', value: 0, color: '#00C49F' },
+  { name: 'Food', value: 0, color: '#4A5A6A' },
+  { name: 'Other', value: 0, color: '#738FA7'},
+  { name: 'Health', value: 0, color: '#BFA2DB'},
+  { name: 'Transport', value: 0, color: '#3EDBB3'}
 ];
 
 
@@ -37,7 +37,7 @@ const GoalsChart = () => {
   const {t} = useTranslation();
   const store = useSelector((state) => state.categories);  
   data.map((i) => {
-    const storeIndex = store[store.findIndex((j) => j.id == i.name)];
+    const storeIndex = store[store.findIndex((j) => j.name == i.name)];
     const indexExpenses = storeIndex.expenses;
       i.value = indexExpenses.reduce((sum, el) => sum += el.amount, 0);
     });
@@ -56,7 +56,7 @@ const GoalsChart = () => {
                 borderRadius: 2,
               }}
             />
-            <span className='goals-mini-title' style={{ fontSize: 14 }}>{t(`categories.${entry.name}`)}</span>
+            <span className='goals-mini-title' style={{ fontSize: 14 }}>{t(`${entry.name}`)}</span>
           </div>
         ))}
       </div>

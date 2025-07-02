@@ -26,9 +26,7 @@ function SideNavBar() {
       <Link to="/Overview">📊 {t("Overview")}</Link>
       <Link to="/Balances">💰 {t("Balances")}</Link>
       <Link to="/Transactions">🔄 {t("Transactions")}</Link>
-      <Link to="/Bills">📅 {t("Bills")}</Link>
       <Link to="/Expenses">💸 {t("Expenses")}</Link>
-      <Link to="/Goals">🎯 {t("Goals")}</Link>
 
       <div className={styles['flex']}>
         <span className={styles.label}>EN</span>

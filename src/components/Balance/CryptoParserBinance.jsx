@@ -25,7 +25,7 @@ function CryptoPrice({ symbol }) {
 
     fetchPrice();
 
-    const interval = setInterval(fetchPrice, 10000); // автообновление каждые 10 секунд
+    const interval = setInterval(fetchPrice, 10000); 
     return () => clearInterval(interval);
   }, [symbol]);
 

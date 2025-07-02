@@ -23,7 +23,7 @@ const NewCategoryModal = ({ onClose }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <h3>Нова категорія</h3>
+        <h3>{t("Newcategory")}</h3>
         <input
           type="text"
           placeholder={t("Name category")}

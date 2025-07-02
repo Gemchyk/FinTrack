@@ -4,7 +4,7 @@ import { addTransaction, removeTransaction, editTransaction } from "../Transacti
 
 const initialState = [
   {
-    id: "groceries",
+    id: 1,
     name: "Food",
     iconName: "Food",
     goalAmount: 3000,
@@ -15,7 +15,7 @@ const initialState = [
     isShownOnPage: true,
   },
   {
-    id: "fun",
+    id: 2,
     name: "Fun",
     iconName: "Entertainment",
     goalAmount: 2500,
@@ -26,7 +26,7 @@ const initialState = [
     isShownOnPage: true,
   },
   {
-    id: "transport",
+    id: 3,
     name: "Transport",
     iconName: "Transport",
     goalAmount: 1000,
@@ -36,7 +36,7 @@ const initialState = [
     isShownOnPage: true,
   },
   {
-    id: "shopping",
+    id: 4,
     name: "Shopping",
     iconName: "Shopping",
     goalAmount: 2000,
@@ -46,7 +46,7 @@ const initialState = [
     isShownOnPage: true,
   },
   {
-    id: "health",
+    id: 5,
     name: "Health",
     iconName: "Health",
     goalAmount: 1500,
@@ -56,7 +56,7 @@ const initialState = [
     isShownOnPage: true,
   },
   {
-    id: "other",
+    id: 6,
     name: "Other",
     iconName: "Other",
     goalAmount: null,
@@ -71,11 +71,11 @@ const initialState = [
 
 export const addExpenseWithStats = createAsyncThunk(
   "categories/addExpenseWithStats",
-  async ({  categoryId, image, title, amount, date }, { dispatch }) => {
+  async ({  categoryId, category, type, image, title, amount, date }, { dispatch }) => {
     const id = nanoid();
     dispatch(addExpense({ id, categoryId, title, amount, date }));
     dispatch(addExpenseToTable({ date, amount }));
-    dispatch(addTransaction({ id, categoryId, image, title, amount, date}));
+    dispatch(addTransaction({ categoryId, type, category, image, title, amount, date}));
   }
 )
 
@@ -123,6 +123,7 @@ const categoriesSlice = createSlice({
       })
     },
     addExpense: (state, action) => {
+      console.log(action.payload);
       const { id, categoryId, title, amount, date } = action.payload;
       const category = state.find(cat => cat.id === categoryId);
       if (category) {
@@ -158,6 +159,7 @@ const categoriesSlice = createSlice({
         expenses: [],
         isShownOnPage: true,
       });
+      console.log(iconName);
 },
     setGoal: (state, action) => {
       const { categoryId, goalAmount } = action.payload;

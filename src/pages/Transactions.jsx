@@ -1,28 +1,43 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Transactions.module.scss";
 import TransactionModalForm from "../components/RecentTransactionsFull/TransactionModalForm";
 import { removeTransaction } from "../components/Transactions/transactionsSlice";
 import { useTranslation } from 'react-i18next';
-import { iconMap } from "../components/ExpensesGoals/ExpensesGoalsByCategory";
+import { iconMap, titleMap } from "../components/ExpensesGoals/ExpensesGoalsByCategory";
+import CategorySelect from "../components/SelectButton/CategorySelect";
+import { ThemeContext } from "../context/ThemeContext.jsx";
 
 function Transactions () {
     const transactions = useSelector((state) => state.transactions.data);
     const dispatch = useDispatch();
     const {t} = useTranslation();
+    const {theme} = useContext(ThemeContext);
 
     const [filter, setFilter] = useState("all");
     const [showModal, setShowModal] = useState(false);
     const [editingTransaction, setEditingTransaction] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState('all');
 
     const filteredData = transactions.filter((tx) => {
-        if (filter === "all") return true;
-        return tx.type === filter;
+        const filterForCat = iconMap[tx.category] ? tx.category : "Other";
+        if (filter !== "all" && tx.type !== filter){
+            return false;
+        } 
+        if (selectedCategory !== "all" && filterForCat !== selectedCategory){
+            return false;
+        } 
+        return true;
     });
 
     const getIcon = (category) => {
-        return iconMap[category] || iconMap["Others"];
+        const res = filteredData.find(i => i.id == category.id).image;
+        return res;
     };
+
+    filteredData.forEach(i => {
+        console.log( i);
+    })
 
     const handleEdit = (transaction) => {
         setEditingTransaction(transaction);
@@ -60,6 +75,7 @@ function Transactions () {
                         {t('Expenses')}
                     </button>
                 </span>
+                <CategorySelect value={selectedCategory} onChange={setSelectedCategory} theme={theme}/>
                 <span>
                     <button className={styles.addButton} onClick={() => handleAdd()}>
                         {t('Add Transaction')}
@@ -80,7 +96,7 @@ function Transactions () {
                 {filteredData.map((tx) => (
                     <div className={styles.row} key={tx.id}>
                         <span className={styles.item}>
-                            {getIcon(tx.category)}
+                            <img src={getIcon(tx)} alt="" />
                             {tx.title}
                         </span>
                         <span className={styles.gray}>{t(tx.category) || "—"}</span>
