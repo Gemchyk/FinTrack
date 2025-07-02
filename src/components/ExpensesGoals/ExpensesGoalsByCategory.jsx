@@ -6,7 +6,7 @@ import AddExpenseModal from "../Categories/CategoriesList/AddExpenseModal";
 import { removeExpenseWithStats } from "../Categories/categoriesSlice";
 import { useTranslation } from "react-i18next";
 
-import IconHousing from "/src/assets/icons/IconHousing.svg?react";
+
 import IconFood from "/src/assets/icons/IconFood.svg?react";
 import IconTransportation from "/src/assets/icons/IconTransportation.svg?react";
 import IconEntertainment from "/src/assets/icons/IconEntertainment.svg?react";
@@ -15,21 +15,19 @@ import IconOthers from "/src/assets/icons/IconOthers.svg?react";
 
 
 export const iconMap = {
-  Housing: <IconHousing />,
   Food: <IconFood />,
   Transport: <IconTransportation />,
-  Entertainment: <IconEntertainment />,
+  Fun: <IconEntertainment />,
   Shopping: <IconShopping />,
   Others: <IconOthers />,
 };
 
-const titleMap = {
-  Housing: "Housing",
+export const titleMap = {
   Food: "Food",
   Transport: "Transport",
-  Entertainment: "Entertainment",
+  Fun: "Fun",
   Shopping: "Shopping",
-  Others: "Others",
+  Other: "Other",
 };
 
 export default function ExpensesGoalsByCategory() {
@@ -39,6 +37,7 @@ export default function ExpensesGoalsByCategory() {
   const [activeCategoryId, setActiveCategoryId] = useState(null);
   const [showModalForCategory, setShowModalForCategory] = useState(null);
   const [editingExpense, setEditingExpense] = useState(null);
+  console.log(categories);
 
   const handleToggleDetails = (id) => {
     setActiveCategoryId((prev) => (prev === id ? null : id));
@@ -70,7 +69,7 @@ export default function ExpensesGoalsByCategory() {
             amount: total,
             goal: category.goalAmount ?? null,
             icon: iconMap[category.iconName] || <IconOthers />,
-            title: titleMap[category.iconName] || category.name,
+            name: titleMap[category.iconName] || category.name,
           };
 
           return (

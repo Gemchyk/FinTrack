@@ -39,7 +39,7 @@
       color: var(--color-accent);
     }
 
-    .addButton {
+    .addButton{
       color: var(--color-accent);
       border: 1px solid var(--color-accent);
       border-radius: 4px;
@@ -47,11 +47,19 @@
       padding: 6px 12px;
       cursor: pointer;
       transition: background-color 0.3s, color 0.3s;
-
+      font-weight: 600; 
+      font-family: inherit; 
+      appearance: none;
       &:hover {
         background-color: var(--color-accent-hover);
       }
     }
+    
+
+    .select__control {
+      @extend .addButton; 
+    }
+
   }
 }
 
@@ -116,4 +124,7 @@
       }
     }
   }
+
+
+ 
 }

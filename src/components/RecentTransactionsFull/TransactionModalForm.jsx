@@ -5,6 +5,20 @@ import { nanoid } from '@reduxjs/toolkit';
 import { addTransaction, editTransaction } from '../Transactions/transactionsSlice';
 import { useTranslation } from 'react-i18next';
 
+
+
+const iconMap = {
+  Housing: "/src/assets/icons/IconHousing.svg",
+  Food: "/src/assets/icons/IconFood.svg",
+  Transport: "/src/assets/icons/IconTransportation.svg",
+  Entertainment: "/src/assets/icons/IconEntertainment.svg",
+  Shopping: "/src/assets/icons/IconShopping.svg",
+  Health: "/src/assets/icons/IconOthers.svg",
+  Other: "/src/assets/icons/IconOthers.svg",
+};
+
+
+
 export default function TransactionModalForm({ onClose, mode = 'add', editingTransaction }) {
   const dispatch = useDispatch();
   const isEdit = mode === 'edit';
@@ -33,15 +47,23 @@ export default function TransactionModalForm({ onClose, mode = 'add', editingTra
             return errors;
           }}
           onSubmit={(values, { resetForm }) => {
+            console.log(values.category);
+            const payload = {
+              id: isEdit ? editingTransaction.id : nanoid(),
+              ...values,
+              amount: parseFloat(values.amount),
+              image: iconMap[values.category] || iconMap.Other,
+            };
+    
             if (isEdit) {
-              dispatch(editTransaction({ expenseId: initialValues.id, updatedData: values }));
-            } else {
-              dispatch(addTransaction({
-                id: nanoid(),
-                ...values,
-                amount: parseFloat(values.amount),
+              dispatch(editTransaction({
+                expenseId: editingTransaction.id,
+                updatedData: payload
               }));
+            } else {
+              dispatch(addTransaction(payload));
             }
+    
             resetForm();
             onClose();
           }}

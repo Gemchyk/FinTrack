@@ -79,16 +79,7 @@ function LoginPage({}) {
             )}
             </Formik>
 
-            <div className={styles['flex']}>
-            <div className={styles['line-div']}></div>
-            <div className={styles['signIn-header-background']}>
-                <h3 className={styles['signIn-header']}>{t("or sign in with")}</h3>
-            </div>
-            </div>
-
-            <button type="submit" className={styles['create-account-btn']}>
-            {t("create an account")}
-            </button>
+            
         </>
     );
 }

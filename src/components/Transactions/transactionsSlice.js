@@ -49,7 +49,7 @@ const initialState = {
       amount: 22.50,
       date: "2023-05-17",
       type: "Expense",
-      category: "Food",
+      category: "Shopping",
     },
     {
       id: nanoid(),

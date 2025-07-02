@@ -3,10 +3,8 @@ import * as yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { removeBalance } from "../../../features/balance/balanceSlice";
-// import { addExpenseToTable } from "../../WeeklyComparison/weeklyComprasionSlice";
 import "./AddExpenseModal.scss";
 import { addExpenseWithStats, editExpenseWithStats } from "../categoriesSlice"
-// import { addTransaction } from "../../Transactions/transactionsSlice";
 import { useTranslation } from "react-i18next";
 
 
@@ -17,18 +15,21 @@ const validationSchema = yup.object().shape({
 });
 
 const iconMap = {
-  housing: "/src/assets/icons/IconHousing.svg?react",
-  groceries: "/src/assets/icons/IconFood.svg?react",
-  transport: "/src/assets/icons/IconTransportation.svg?react",
-  fun: "/src/assets/icons/IconEntertainment.svg?react",
-  shopping: "/src/assets/icons/IconShopping.svg?react",
-  health: "/src/assets/icons/IconOthers.svg?react",
-  other: "/src/assets/icons/IconOthers.svg?react",
+  Housing: "/src/assets/icons/IconHousing.svg?react",
+  Food: "/src/assets/icons/IconFood.svg?react",
+  Transport: "/src/assets/icons/IconTransportation.svg?react",
+  Entertainment: "/src/assets/icons/IconEntertainment.svg?react",
+  Shopping: "/src/assets/icons/IconShopping.svg?react",
+  Health: "/src/assets/icons/IconOthers.svg?react",
+  Other: "/src/assets/icons/IconOthers.svg?react",
 };
 
 const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
   const dispatch = useDispatch();
   const balance = useSelector((state) => state.balance.sum);
+  const categories = useSelector((state) => state.categories);
+  const iconName = categories.find(i => i.id == categoryId).iconName;
+  const category = categories.find(i => i.id == categoryId).name;
   const [error, setError] = useState("");
   const {t} = useTranslation();
 
@@ -41,7 +42,6 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
 
   const handleSubmit = (values) => {
   const amount = Number(values.amount);
-  console.log(values);
 
   if (editingExpense) {
     dispatch(editExpenseWithStats({
@@ -59,9 +59,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
     return;
   }
 
-  // dispatch(addTransaction({categoryId, image: iconMap[categoryId] || "other", ...values}))
-  dispatch(addExpenseWithStats({ categoryId, image: iconMap[categoryId] || "other",  ...values }));
-  // dispatch(addExpenseToTable(values));
+  dispatch(addExpenseWithStats({ categoryId, category, type: "Expense", image: iconMap[iconName] || iconMap["Other"],  ...values }));
   dispatch(removeBalance(amount));
   onClose();
 };
