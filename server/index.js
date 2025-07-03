@@ -21,8 +21,6 @@ const users = [
   }
 ];
 
-bcrypt.hash('admin', 10).then(console.log);
-
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
@@ -48,7 +46,7 @@ app.post('/signin', async (req, res) => {
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) return res.status(401).json({ error: 'Wrong password' });
 
-  const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '10s' });
+  const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '10m' });
   res.json({ token });
 });
 
