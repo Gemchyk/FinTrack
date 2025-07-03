@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styles from './SideNavBar.module.scss';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import SwitchLang from "../SwitchButton/SwitchLang";
 import SwitchTheme from "../SwitchButton/SwitchTheme";
@@ -11,6 +11,7 @@ function SideNavBar() {
   const { t, i18n } = useTranslation();
   const {theme, toggleTheme} = useContext(ThemeContext);
   const currentLang = i18n.language;
+  const location = useLocation();
 
   const handleSwitchLang = () => {
     i18n.changeLanguage(currentLang === "en" ? "ua" : "en");
@@ -18,11 +19,14 @@ function SideNavBar() {
 
 
 
+  if(location.pathname === '/'){
+    return null;
+  }
+
 
   return (
     <nav className={styles['sidebar']}>
       <h2 className={styles['logo']}>{t("MyFinance")}</h2>
-      <Link to="/">{t("Home")}</Link>
       <Link to="/Overview">📊 {t("Overview")}</Link>
       <Link to="/Balances">💰 {t("Balances")}</Link>
       <Link to="/Transactions">🔄 {t("Transactions")}</Link>
