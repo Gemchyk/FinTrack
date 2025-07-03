@@ -106,7 +106,7 @@ function Balances() {
           </div>
         </div>
       )}
-      <div className=''>
+      <div className='exchangeRate'>
         <h2>{t("Actual Exchange Rate")}</h2>
       </div>
       <div className='courseWrapper'>
