@@ -1,53 +1,83 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Fetch balance from server
-export const fetchBalance = createAsyncThunk('balance/fetchBalance', async (_, { rejectWithValue }) => {
-  try {
-    const res = await fetch('/balance');
-    if (!res.ok) throw new Error('Failed to fetch balance');
-    const data = await res.json();
-    return data.sum;
-  } catch (err) {
-    return rejectWithValue(err.message);
+export const fetchBalance = createAsyncThunk(
+  'balance/fetchBalance',
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token');
+
+      const res = await fetch('http://localhost:5050/balance', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        }
+      });
+
+      if (!res.ok) throw new Error('Failed to fetch balance');
+      
+      const data = await res.json();
+      return data.sum;
+
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
   }
-});
+);
 
 // Add amount
-export const addBalance = createAsyncThunk('balance/addBalance', async (amount, { rejectWithValue }) => {
-  try {
-    const res = await fetch('/balance/add', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount }),
-    });
-    const data = await res.json();
-    if (res.ok) return data.sum;
-    throw new Error(data.error || 'Failed to add funds');
-  } catch (err) {
-    return rejectWithValue(err.message);
+export const addBalance = createAsyncThunk(
+  'balance/addBalance',
+  async (amount, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token');
+
+      const res = await fetch('http://localhost:5050/balance/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ amount }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) return data.sum;
+
+      throw new Error(data.error || 'Failed to add funds');
+    } catch (err) {
+      return rejectWithValue(err.message || 'Network error');
+    }
   }
-});
+);
 
 // Remove amount
-export const removeBalance = createAsyncThunk('balance/removeBalance', async (amount, { rejectWithValue }) => {
-  try {
-    const res = await fetch('/balance/remove', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount }),
-    });
-    const data = await res.json();
+export const removeBalance = createAsyncThunk(
+  'balance/removeBalance',
+  async (amount, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token');
 
-    if (!res.ok) {
+      const res = await fetch('http://localhost:5050/balance/remove', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ amount }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) return data.sum;
+
       return rejectWithValue(data.error || 'Failed to withdraw funds');
+    } catch (err) {
+      return rejectWithValue(err.message || 'Network error');
     }
-
-    return data.sum;
-  } catch (err) {
-    return rejectWithValue(err.message || 'Network error');
   }
-});
-
+);
 const balanceSlice = createSlice({
   name: 'balance',
   initialState: {
