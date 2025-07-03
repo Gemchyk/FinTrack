@@ -5,7 +5,7 @@ const options = [
   { value: 'all', label: 'All Categories' },
   { value: 'Food', label: 'Food' },
   { value: 'Transport', label: 'Transport' },
-  { value: 'Entertainment', label: 'Entertainment' },
+  { value: 'Fun', label: 'Fun' },
   { value: 'Shopping', label: 'Shopping' },
   { value: 'Other', label: 'Other' },
 ];
@@ -45,7 +45,7 @@ const customStyles = (theme = 'light') => {
       '&:hover': {
         backgroundColor: state.menuIsOpen ? c.bg : c.accentHover,
       },
-      minWidth: '160px',
+      width: '160px',
     }),
     singleValue: (base) => ({
       ...base,

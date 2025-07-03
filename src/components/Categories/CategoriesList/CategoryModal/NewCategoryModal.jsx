@@ -28,6 +28,8 @@ const NewCategoryModal = ({ onClose }) => {
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h3>{t("Newcategory")}</h3>
 
+      
+
         <select
           value={iconName}
           onChange={(e) => setIconName(e.target.value)}

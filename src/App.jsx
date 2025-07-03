@@ -1,46 +1,89 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
-import './App.css'
-import WeeklyComparison from './components/WeeklyComparison/WeeklyComparison';
-
-
-import Goal from './components/Goals/Goal';
-import SideNavBar from './components/SideNavBar/SideNavBar';
-import Home from './pages/Home';
-import Overview from './pages/Overview';
-import Balances from './pages/Balances';
-import Transactions from './pages/Transactions'
-import Bills from './pages/Bills'
-import Expenses from './pages/Expenses'
-import Goals from './pages/Goals'
-import Settings from './pages/Settings'
-import LoginPage from './pages/LoginPage';
+import './App.css';
 import { Suspense } from 'react';
 
+import SideNavBar from './components/SideNavBar/SideNavBar';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+
+import LoginPage from './pages/LoginPage';
+import Overview from './pages/Overview';
+import Balances from './pages/Balances';
+import Transactions from './pages/Transactions';
+import Bills from './pages/Bills';
+import Expenses from './pages/Expenses';
+import Goals from './pages/Goals';
+import Settings from './pages/Settings';
+
 function App() {
-
-
   return (
-    <>
-     <Suspense fallback="loading">
+    <Suspense fallback="loading...">
       <Router>
         <SideNavBar />
         <div style={{ marginLeft: '220px', padding: '20px' }}>
           <Routes>
             <Route path="/" element={<LoginPage />} />
-            <Route path="/Overview" element={<Overview />} />
-            <Route path="/Balances" element={<Balances />} />
-            <Route path="/Transactions" element={<Transactions />} />
-            <Route path="/Bills" element={<Bills />} />
-            <Route path="/Expenses" element={<Expenses />} />
-            <Route path="/Goals" element={<Goals />} />
-            <Route path="/Settings" element={<Settings />} />
+            
+            <Route
+              path="/Overview"
+              element={
+                <PrivateRoute>
+                  <Overview />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/Balances"
+              element={
+                <PrivateRoute>
+                  <Balances />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/Transactions"
+              element={
+                <PrivateRoute>
+                  <Transactions />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/Bills"
+              element={
+                <PrivateRoute>
+                  <Bills />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/Expenses"
+              element={
+                <PrivateRoute>
+                  <Expenses />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/Goals"
+              element={
+                <PrivateRoute>
+                  <Goals />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/Settings"
+              element={
+                <PrivateRoute>
+                  <Settings />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </div>
       </Router>
-     </Suspense>
-
-    </>
-  )
+    </Suspense>
+  );
 }
 
-export default App
+export default App;

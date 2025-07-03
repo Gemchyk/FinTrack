@@ -38,12 +38,12 @@ function SideNavBar() {
       </div>
 
       <div className={styles['flex']}>
-        <span className={styles.label}>Dark</span>
+        <span className={styles.label}>Light</span>
         <SwitchTheme
           checked={theme === 'dark'}
           onChange={toggleTheme}
         />
-        <span className={styles.label}>Light</span>
+        <span className={styles.label}>Dark</span>
       </div>
     </nav>
   );
