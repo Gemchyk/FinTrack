@@ -4,15 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import AddExpenseModal from "../Categories/CategoriesList/AddExpenseModal";
 import { removeExpenseWithStats } from "../Categories/categoriesSlice";
-import { useTranslation } from "react-i18next";
-
 
 import IconFood from "/src/assets/icons/IconFood.svg?react";
 import IconTransportation from "/src/assets/icons/IconTransportation.svg?react";
 import IconEntertainment from "/src/assets/icons/IconEntertainment.svg?react";
 import IconShopping from "/src/assets/icons/IconShopping.svg?react";
 import IconOthers from "/src/assets/icons/IconOthers.svg?react";
-
 
 export const iconMap = {
   Food: <IconFood />,
@@ -33,7 +30,6 @@ export const titleMap = {
 export default function ExpensesGoalsByCategory() {
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
   const [activeCategoryId, setActiveCategoryId] = useState(null);
   const [showModalForCategory, setShowModalForCategory] = useState(null);
   const [editingExpense, setEditingExpense] = useState(null);
@@ -44,7 +40,14 @@ export default function ExpensesGoalsByCategory() {
   };
 
   const handleDelete = (categoryId, exp) => {
-    dispatch(removeExpenseWithStats({categoryId, expenseId: exp.id, date: exp.date, amount: exp.amount}))
+    dispatch(
+      removeExpenseWithStats({
+        categoryId,
+        expenseId: exp.id,
+        date: exp.date,
+        amount: exp.amount,
+      })
+    );
   };
 
   const handleEdit = (categoryId, expense) => {
@@ -59,7 +62,6 @@ export default function ExpensesGoalsByCategory() {
 
   return (
     <div className={styles.expensesGoals}>
-      <h2>{t("Expenses by category")}</h2>
       <div className={styles.cardsGrid}>
         {categories.map((category) => {
           const total = category.expenses.reduce((sum, e) => sum + e.amount, 0);
@@ -69,7 +71,6 @@ export default function ExpensesGoalsByCategory() {
             amount: total,
             goal: category.goalAmount ?? null,
             icon: iconMap[category.iconName] || <IconOthers />,
-            name: titleMap[category.iconName] || category.name,
           };
 
           return (

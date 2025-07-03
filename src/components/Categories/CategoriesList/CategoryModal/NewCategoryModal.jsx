@@ -7,16 +7,19 @@ import { useTranslation } from 'react-i18next';
 const NewCategoryModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
-  const [iconName, setIconName] = useState("Other");
-  const {t} = useTranslation();
+  const [iconName, setIconName] = useState("Housing");
+  const { t } = useTranslation();
 
   const handleSubmit = () => {
-    if (!name.trim()) return;
+    const finalName = iconName === "Other" ? name.trim() : iconName;
+    if (!finalName) return;
+
     dispatch(addCategory({
       id: nanoid(),
-      name,
-      iconName
+      name: finalName,
+      iconName,
     }));
+
     onClose();
   };
 
@@ -24,13 +27,11 @@ const NewCategoryModal = ({ onClose }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h3>{t("Newcategory")}</h3>
-        <input
-          type="text"
-          placeholder={t("Name category")}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <select value={iconName} onChange={(e) => setIconName(e.target.value)}>
+
+        <select
+          value={iconName}
+          onChange={(e) => setIconName(e.target.value)}
+        >
           <option value="Housing">Housing</option>
           <option value="Food">Food</option>
           <option value="Transport">Transport</option>
@@ -39,6 +40,16 @@ const NewCategoryModal = ({ onClose }) => {
           <option value="Health">Health</option>
           <option value="Other">Other</option>
         </select>
+
+        {iconName === "Other" && (
+          <input
+            type="text"
+            placeholder={t("Name category")}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        )}
+
         <div className="modal-buttons">
           <button onClick={handleSubmit}>{t("Add")}</button>
           <button onClick={onClose}>{t("Cancel")}</button>

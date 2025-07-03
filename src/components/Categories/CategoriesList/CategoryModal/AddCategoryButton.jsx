@@ -8,7 +8,7 @@ const AddCategoryButton = () => {
 
   return (
     <>
-      <div style={{ textAlign: "center", margin: "20px 0" }}>
+      <div>
         <button onClick={() => setShowModal(true)}>
           {t("Add new category")}
         </button>
