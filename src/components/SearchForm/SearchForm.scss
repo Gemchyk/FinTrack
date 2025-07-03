@@ -1,11 +1,16 @@
-
-
 .searchInput{
     // position: absolute;
     // top: 100px;
-
+    display: flex;
+    column-gap: 10px;
     input{
         height: 40px;
+        border-radius: 8px;
         color-scheme: light;
     }
+}
+.Expense_head {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
 }
