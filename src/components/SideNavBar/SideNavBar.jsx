@@ -20,7 +20,29 @@ function SideNavBar() {
 
 
   if(location.pathname === '/'){
-    return null;
+    return (
+      <>
+      <nav className={styles['sidebarLogin']}>
+        <div className={styles['flex']}>
+            <span className={styles.label}>EN</span>
+            <SwitchLang
+              checked={currentLang === "ua"}
+              onChange={handleSwitchLang}
+            />
+            <span className={styles.label}>UA</span>
+        </div>
+        <div className={styles['flex']}>
+          <span className={styles.label}>Light</span>
+          <SwitchTheme
+            checked={theme === 'dark'}
+            onChange={toggleTheme}
+          />
+          <span className={styles.label}>Dark</span>
+        </div>
+      </nav>
+        
+      </>
+    );
   }
 
 
