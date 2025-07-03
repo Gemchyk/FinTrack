@@ -41,6 +41,14 @@
   color: #fff;
 }
 
+
+.sidebarLogin{
+  @extend .sidebar;
+  background-color: transparent;
+  box-shadow: none;
+
+}
+
 .flex {
   display: flex;
   align-items: center;
