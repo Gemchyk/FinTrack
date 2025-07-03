@@ -44,11 +44,6 @@ function Transactions () {
         setShowModal(true);
       };
     
-      const handleAdd = () => {
-        setEditingTransaction(null);
-        setShowModal(true);
-      };
-    
       const handleClose = () => {
         setShowModal(false);
         setEditingTransaction(null);
@@ -64,23 +59,17 @@ function Transactions () {
             <h2>{t('Recent Transaction')}</h2>
 
             <div className={styles.tabs}>
-                <span>
-                    <button className={filter==="all" ? styles.active : "" } onClick={()=> setFilter("all")}>
-                        {t('All')}
-                    </button>
-                    <button className={filter==="Income" ? styles.active : "" } onClick={()=> setFilter("Income")}>
-                        {t('Revenue')}
-                    </button>
-                    <button className={filter==="Expense" ? styles.active : "" } onClick={()=> setFilter("Expense")}>
-                        {t('Expenses')}
-                    </button>
-                </span>
+                <button className={filter==="all" ? styles.active : "" } onClick={()=> setFilter("all")}>
+                    {t('All')}
+                </button>
+                <button className={filter==="Income" ? styles.active : "" } onClick={()=> setFilter("Income")}>
+                    {t('Revenue')}
+                </button>
+                <button className={filter==="Expense" ? styles.active : "" } onClick={()=> setFilter("Expense")}>
+                    {t('Expenses')}
+                </button>
+                
                 <CategorySelect value={selectedCategory} onChange={setSelectedCategory} theme={theme}/>
-                <span>
-                    <button className={styles.addButton} onClick={() => handleAdd()}>
-                        {t('Add Transaction')}
-                    </button>
-                </span>
             </div>
 
             <div className={styles.table}>

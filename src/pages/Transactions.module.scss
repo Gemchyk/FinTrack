@@ -17,7 +17,8 @@
   .tabs {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    gap: 16px;
+    justify-content: center;
 
     span:first-child {
       display: flex;
