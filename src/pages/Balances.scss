@@ -45,6 +45,7 @@
   border-radius: var(--wb-border-radius);
   padding: 24px;
   gap: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .wrapper-balances .credit-card-header {
@@ -162,4 +163,14 @@
 .modal-overlay .modal .modal-buttons {
   display: flex;
   justify-content: space-between;
+}
+
+.courseWrapper {
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.exchangeRate {
+ text-align: center;
 }
