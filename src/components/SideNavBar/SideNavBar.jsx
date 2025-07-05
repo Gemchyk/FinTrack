@@ -24,20 +24,20 @@ function SideNavBar() {
       <>
       <nav className={styles['sidebarLogin']}>
         <div className={styles['flex']}>
-            <span className={styles.label}>EN</span>
+            <span className={styles['labelLogin']}>EN</span>
             <SwitchLang
               checked={currentLang === "ua"}
               onChange={handleSwitchLang}
             />
-            <span className={styles.label}>UA</span>
+            <span className={styles['labelLogin']}>UA</span>
         </div>
         <div className={styles['flex']}>
-          <span className={styles.label}>Light</span>
+          <span className={styles['labelLogin']}>Light</span>
           <SwitchTheme
             checked={theme === 'dark'}
             onChange={toggleTheme}
           />
-          <span className={styles.label}>Dark</span>
+          <span className={styles['labelLogin']}>Dark</span>
         </div>
       </nav>
         
