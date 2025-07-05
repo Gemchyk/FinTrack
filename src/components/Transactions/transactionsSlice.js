@@ -72,6 +72,10 @@ const transactionsSlice = createSlice({
         addTransaction: (state, action) => {
           console.log(action.payload);
           state.data.unshift(action.payload);
+          state.data[0].image = state.data[0].category ? state.data[0].image : "/src/assets/icons/IconOthers.svg?react";
+          state.data[0].category = state.data[0].category ? state.data[0].category : "Work";
+          console.log(state.data[0])
+
         },
         removeTransaction: (state, action) => {
           state.data = state.data.filter(item => item.id != action.payload.expenseId);

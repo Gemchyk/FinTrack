@@ -4,7 +4,7 @@ import styles from "./Transactions.module.scss";
 import TransactionModalForm from "../components/RecentTransactionsFull/TransactionModalForm";
 import { removeTransaction } from "../components/Transactions/transactionsSlice";
 import { useTranslation } from 'react-i18next';
-import { iconMap, titleMap } from "../components/ExpensesGoals/ExpensesGoalsByCategory";
+import { iconMap } from "../components/ExpensesGoals/ExpensesGoalsByCategory";
 import CategorySelect from "../components/SelectButton/CategorySelect";
 import { ThemeContext } from "../context/ThemeContext.jsx";
 
@@ -34,10 +34,6 @@ function Transactions () {
         const res = filteredData.find(i => i.id == category.id).image;
         return res;
     };
-
-    filteredData.forEach(i => {
-        console.log( i);
-    })
 
     const handleEdit = (transaction) => {
         setEditingTransaction(transaction);

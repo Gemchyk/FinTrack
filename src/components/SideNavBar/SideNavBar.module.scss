@@ -60,5 +60,11 @@
   width: 30px;
   text-align: center;
   margin: 0 10px;
-  color: #fff;
+  color: #FFF;
+}
+
+
+.labelLogin{
+  @extend .label;
+  color: var( --color-text-primary);
 }
