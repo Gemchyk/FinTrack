@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Transactions.scss";
 import Transaction from "./Transaction";
-import IconHousing from "/src/assets/icons/IconHousing.svg?react";
-import { filterByAmount, filterByDate, filterByName } from './transactionsSlice';
+import { sortTransactions, fetchPaginatedTransactions } from './transactionsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
@@ -11,9 +10,18 @@ import { useTranslation } from 'react-i18next';
 
 const TransactionsList = () => {
 
-    const store = useSelector(state => state.transactions.data);
+  let transactions = useSelector(state => state.transactions.data);
+    
+
     const dispatch = useDispatch();
     const {t} = useTranslation();
+
+    useEffect(() => {
+      if (transactions.length === 0) {
+        dispatch(fetchPaginatedTransactions({ page: 1 }));
+      }
+    }, [dispatch]);
+
 
     const [isDateFilter, setIsDateFilter] = useState(true);
     const [isAmountFilter, setIsAmountFilter] = useState(false);
@@ -24,20 +32,22 @@ const TransactionsList = () => {
       setIsAmountFilter(false);
       setIsNameFilter(false);
       setIsDateFilter(true);
-      dispatch(filterByDate());
-    }
+      dispatch(sortTransactions("date"));
+    };
+    
     const handleAmountClick = () => {
       setIsAmountFilter(true);
       setIsNameFilter(false);
       setIsDateFilter(false);
-      dispatch(filterByAmount())
-    }
+      dispatch(sortTransactions("amount"));
+    };
+    
     const handleNameClick = () => {
       setIsAmountFilter(false);
       setIsNameFilter(true);
       setIsDateFilter(false);
-      dispatch(filterByName())
-    }
+      dispatch(sortTransactions("name"));
+    };
 
     
       return (
@@ -56,7 +66,7 @@ const TransactionsList = () => {
               </a>
             </nav>
             <main>
-              {store.map((tx, index) => (
+              {transactions.map((tx, index) => (
                 <Transaction key={index} item={tx} />
               ))}
             </main>

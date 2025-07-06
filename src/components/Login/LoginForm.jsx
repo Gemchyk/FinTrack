@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRef } from 'react';
 import { useNavigate } from 'react-router';
 import styles from './LoginPage.module.scss';
 import {Formik, Form, Field, ErrorMessage} from 'formik';

@@ -36,7 +36,7 @@ const handleEdit = (categoryId, expense) => {
       return (
         <li className={styles.categories__item} key={cat.id}>
           <div className={styles.categories__card}>
-            <div className={styles.categories__name}>{cat.name}</div>
+            <div className={styles.categories__name}>{t(cat.name)}</div>
             <div className={styles.categories__total}>{total}₴</div>
             <button
               type="button"

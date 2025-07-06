@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styles from './TransactionModalForm.module.scss';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
-import { addTransaction, editTransaction } from '../Transactions/transactionsSlice';
+import { addTransaction, editTransactionWithServer } from '../Transactions/transactionsSlice';
 import { useTranslation } from 'react-i18next';
 
 
@@ -56,7 +56,7 @@ export default function TransactionModalForm({ onClose, mode = 'add', editingTra
             };
     
             if (isEdit) {
-              dispatch(editTransaction({
+              dispatch(editTransactionWithServer({
                 expenseId: editingTransaction.id,
                 updatedData: payload
               }));

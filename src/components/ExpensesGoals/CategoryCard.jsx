@@ -34,7 +34,7 @@ export default function CategoryCard({
             <span className={styles.icon}>{icon}</span>
       
             <div className={styles.cardText}>
-              <span className={styles.title}>{name}</span>
+              <span className={styles.title}>{t(name)}</span>
               <span className={styles.amount}>{amount.toFixed(2)} ₴</span>
             </div>
       
