@@ -1,6 +1,14 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { addExpenseToTable, removeExpenseFromTable, editExpenseInTable } from "../WeeklyComparison/weeklyComprasionSlice";
-import { addTransaction, removeTransaction, editTransaction } from "../Transactions/transactionsSlice";
+import {
+  addExpenseToTable,
+  removeExpenseFromTable,
+  editExpenseInTable,
+} from "../WeeklyComparison/weeklyComprasionSlice";
+import {
+  addTransaction,
+  removeTransaction,
+  editTransaction,
+} from "../Transactions/transactionsSlice";
 
 const initialState = [
   {
@@ -30,9 +38,7 @@ const initialState = [
     name: "Transport",
     iconName: "Transport",
     goalAmount: 1000,
-    expenses: [
-      { id: "5", title: "Метро", amount: 100, date: "2025-06-04" },
-    ],
+    expenses: [{ id: "5", title: "Метро", amount: 100, date: "2025-06-04" }],
     isShownOnPage: true,
   },
   {
@@ -40,9 +46,7 @@ const initialState = [
     name: "Shopping",
     iconName: "Shopping",
     goalAmount: 2000,
-    expenses: [
-      { id: "6", title: "H&M", amount: 900, date: "2025-06-05" },
-    ],
+    expenses: [{ id: "6", title: "H&M", amount: 900, date: "2025-06-05" }],
     isShownOnPage: true,
   },
   {
@@ -50,9 +54,7 @@ const initialState = [
     name: "Health",
     iconName: "Health",
     goalAmount: 1500,
-    expenses: [
-      { id: "7", title: "Аптека", amount: 300, date: "2025-06-06" },
-    ],
+    expenses: [{ id: "7", title: "Аптека", amount: 300, date: "2025-06-06" }],
     isShownOnPage: true,
   },
   {
@@ -67,50 +69,54 @@ const initialState = [
   },
 ];
 
-
-
 export const addExpenseWithStats = createAsyncThunk(
   "categories/addExpenseWithStats",
-  async ({  categoryId, category, type, image, title, amount, date }, { dispatch }) => {
+  async (
+    { categoryId, category, type, image, title, amount, date },
+    { dispatch }
+  ) => {
     const id = nanoid();
     dispatch(addExpense({ id, categoryId, title, amount, date }));
     dispatch(addExpenseToTable({ date, amount }));
-    dispatch(addTransaction({ categoryId, type, category, image, title, amount, date}));
+    dispatch(
+      addTransaction({ categoryId, type, category, image, title, amount, date })
+    );
   }
-)
-
-
+);
 
 export const removeExpenseWithStats = createAsyncThunk(
   "categories/removeExpenseWithStats",
   async ({ categoryId, expenseId, date, amount }, { dispatch }) => {
     dispatch(removeExpense({ categoryId, expenseId }));
     dispatch(removeExpenseFromTable({ date, amount }));
-    dispatch(removeTransaction({categoryId, expenseId, date, amount}))
+    dispatch(removeTransaction({ categoryId, expenseId, date, amount }));
   }
-)
+);
 
 export const editExpenseWithStats = createAsyncThunk(
   "categories/editExpenseWithStats",
   async ({ categoryId, expenseId, updatedData, oldData }, { dispatch }) => {
-    dispatch(editExpense({
-      categoryId,
-      expenseId,
-      updatedData,
-    }));
-    dispatch(editExpenseInTable({
-      categoryId, 
-      expenseId,
-      updatedData,
-      oldData,
-    }));
-    dispatch(editTransaction({expenseId, updatedData}));
+    dispatch(
+      editExpense({
+        categoryId,
+        expenseId,
+        updatedData,
+      })
+    );
+    dispatch(
+      editExpenseInTable({
+        categoryId,
+        expenseId,
+        updatedData,
+        oldData,
+      })
+    );
+    dispatch(editTransaction({ expenseId, updatedData }));
   }
-)
-
+);
 
 const categoriesSlice = createSlice({
-  name: 'categories',
+  name: "categories",
   initialState,
   reducers: {
     setCategoriesFromTransactions: (state, action) => {
@@ -148,34 +154,36 @@ const categoriesSlice = createSlice({
       }
     },
     searchCategories: (state, action) => {
-      state.map(item => {
-        if(item.name.includes(action.payload)){
+      state.map((item) => {
+        if (item.name.includes(action.payload)) {
           item.isShownOnPage = true;
-        }else{
+        } else {
           item.isShownOnPage = false;
         }
-      })
+      });
     },
     addExpense: (state, action) => {
       console.log(action.payload);
       const { id, categoryId, title, amount, date } = action.payload;
-      const category = state.find(cat => cat.id === categoryId);
+      const category = state.find((cat) => cat.id === categoryId);
       if (category) {
         category.expenses.push({ id, title, amount, date });
       }
     },
     removeExpense: (state, action) => {
       const { categoryId, expenseId } = action.payload;
-      const category = state.find(cat => cat.id === categoryId);
+      const category = state.find((cat) => cat.id === categoryId);
       if (category) {
-        category.expenses = category.expenses.filter(exp => exp.id !== expenseId);
+        category.expenses = category.expenses.filter(
+          (exp) => exp.id !== expenseId
+        );
       }
     },
     editExpense: (state, action) => {
       const { categoryId, expenseId, updatedData } = action.payload;
-      const category = state.find(cat => cat.id === categoryId);
+      const category = state.find((cat) => cat.id === categoryId);
       if (category) {
-        const expense = category.expenses.find(exp => exp.id === expenseId);
+        const expense = category.expenses.find((exp) => exp.id === expenseId);
         if (expense) {
           expense.title = updatedData.title;
           expense.amount = updatedData.amount;
@@ -194,21 +202,32 @@ const categoriesSlice = createSlice({
         isShownOnPage: true,
       });
       console.log(iconName);
-},
+    },
     setGoal: (state, action) => {
       const { categoryId, goalAmount } = action.payload;
-      const category = state.find(cat => cat.id === categoryId);
+      const category = state.find((cat) => cat.id === categoryId);
       if (category) {
         category.goalAmount = goalAmount;
       }
-    }
+    },
+    removeCategory: (state, action) => {
+      const index = state.findIndex((cat) => cat.id === action.payload);
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
+    },
   },
 });
 
-export const { setCategoriesFromTransactions, removeExpenseMirror, searchCategories, addExpense, removeExpense, editExpense, addCategory, setGoal } = categoriesSlice.actions;
+export const { 
+  setCategoriesFromTransactions, 
+  removeExpenseMirror,
+  searchCategories,
+  addExpense,
+  removeExpense,
+  editExpense,
+  addCategory,
+  setGoal,
+  removeCategory,
+} = categoriesSlice.actions;
 export default categoriesSlice.reducer;
-
-
-
-
-

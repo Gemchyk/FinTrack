@@ -3,7 +3,10 @@ import CategoryCard from "./CategoryCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import AddExpenseModal from "../Categories/CategoriesList/AddExpenseModal";
-import { removeExpenseWithStats } from "../Categories/categoriesSlice";
+import {
+  removeExpenseWithStats,
+  removeCategory,
+} from "../Categories/categoriesSlice";
 import { fetchTransactionsAndSyncCategories } from "../Transactions/transactionsSlice";
 
 import IconFood from "/src/assets/icons/IconFood.svg?react";
@@ -63,6 +66,9 @@ export default function ExpensesGoalsByCategory() {
     setEditingExpense(null);
     setShowModalForCategory(categoryId);
   };
+  const handleDeleteCategory = (categoryId) => {
+    dispatch(removeCategory(categoryId));
+  };
 
   return (
     <div className={styles.expensesGoals}>
@@ -87,6 +93,7 @@ export default function ExpensesGoalsByCategory() {
               onDetailsToggle={() => handleToggleDetails(category.id)}
               onEdit={(exp) => handleEdit(category.id, exp)}
               onDelete={(exp) => handleDelete(category.id, exp)}
+              onDeleteCategory={handleDeleteCategory}
             />
           );
         })}

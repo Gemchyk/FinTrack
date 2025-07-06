@@ -16,6 +16,7 @@
     "Categories Spendings 2025": "Categories Spendings 2025",
     "Add new category": "Add new category",
     "Name category": "Name  of category",
+    "New category": "New category",
   
     "Recent Transaction": "Recent Transaction",
     "Statistics": "Statistics",
@@ -49,6 +50,7 @@
     "Set goal": "Set goal",
   
     "Food": "Food",
+    "Housing": "Housing",
     "Entertainment": "Entertainment",
     "Transport": "Transport",
     "Shopping": "Shopping",
@@ -65,6 +67,7 @@
     "Cancel": "Cancel",
     "Ok": "Ok",
     "categories": {
+      "food": "Food",
       "shopping": "Shopping",
       "fun": "Fun",
       "groceries": "Groceries",

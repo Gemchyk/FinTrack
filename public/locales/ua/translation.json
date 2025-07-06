@@ -16,7 +16,8 @@
     "Categories Spendings 2025": "Витрати за категоріями 2025",
     "Add new category": "Додати нову категорію",
     "Name category": "Назва категорії",
-  
+    "New category": "Нова категорія",
+
     "Recent Transaction": "Останні транзакції",
     "Statistics": "Статистика",
     "Monthly Comparison": "Місячне порівняння",
@@ -47,6 +48,7 @@
     "Set goal": "Встановити ціль",
   
     "Food": "Їжа",
+    "Housing": "Житло",
     "Entertainment": "Розваги",
     "Transport": "Транспорт",
     "Shopping": "Покупки",
@@ -63,6 +65,7 @@
     "Cancel": "Скасувати",
     "Ok": "ОК",
     "categories": {
+      "food": "Їжа",
       "shopping": "Покупки",
       "fun": "Розваги",
       "groceries": "Продукти",
