@@ -1,7 +1,7 @@
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
 
-const options = [
+export const options = [
   { value: 'all', label: 'All Categories' },
   { value: 'Food', label: 'Food' },
   { value: 'Transport', label: 'Transport' },
@@ -41,11 +41,11 @@ const customStyles = (theme = 'light') => {
       boxShadow: 'none',
       backgroundColor: c.bg,
       cursor: 'pointer',
-      minHeight: '36px',
+      minHeight: '50px',
       '&:hover': {
         backgroundColor: state.menuIsOpen ? c.bg : c.accentHover,
       },
-      width: '160px',
+      width: '180px',
     }),
     singleValue: (base) => ({
       ...base,
@@ -78,10 +78,12 @@ const customStyles = (theme = 'light') => {
   };
 };
 
-export default function CategorySelect({ value, onChange, theme = 'light' }) {
+export default function CategorySelect({ value, onChange, theme = 'light', customOptions }) {
   const { t } = useTranslation();
 
-  const translatedOptions = options.map(opt => ({
+  const finalOprions = customOptions || options;
+
+  const translatedOptions = finalOprions.map(opt => ({
     value: opt.value,
     label: t(`${opt.label}`) 
   }));

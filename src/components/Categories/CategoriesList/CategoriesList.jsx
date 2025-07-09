@@ -83,16 +83,16 @@ const handleEdit = (categoryId, expense) => {
               </ul>
             )}
                 {showModalForCategory && (
-  <AddExpenseModal
-    show={true}
-    categoryId={showModalForCategory}
-    onClose={() => {
-      setShowModalForCategory(null);
-      setEditingExpense(null);
-    }}
-    editingExpense={editingExpense}
-  />
-)}
+                  <AddExpenseModal
+                    show={true}
+                    categoryId={showModalForCategory}
+                    onClose={() => {
+                      setShowModalForCategory(null);
+                      setEditingExpense(null);
+                    }}
+                    editingExpense={editingExpense}
+                  />
+                )}
               </div>
             </li>
           );

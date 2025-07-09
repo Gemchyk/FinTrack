@@ -7,7 +7,7 @@ import {
   removeExpenseWithStats,
   removeCategory,
 } from "../Categories/categoriesSlice";
-import { fetchTransactionsAndSyncCategories } from "../Transactions/transactionsSlice";
+import { fetchAllTransactionsForCategories } from "../Transactions/transactionsSlice";
 
 import IconFood from "/src/assets/icons/IconFood.svg?react";
 import IconTransportation from "/src/assets/icons/IconTransportation.svg?react";
@@ -39,7 +39,7 @@ export default function ExpensesGoalsByCategory() {
   const [editingExpense, setEditingExpense] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchTransactionsAndSyncCategories());
+    dispatch(fetchAllTransactionsForCategories());
   }, [dispatch]);
 
   const handleToggleDetails = (id) => {

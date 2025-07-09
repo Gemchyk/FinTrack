@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, nanoid } from '@reduxjs/toolkit';
 import { setCategoriesFromTransactions, removeExpenseMirror } from '../Categories/categoriesSlice';
+import { fetchTransactionsToDashboard } from '../WeeklyComparison/weeklyComprasionSlice.js';
 
 const BASE_URL = 'http://localhost:5050';
 
@@ -19,46 +20,41 @@ const getAuthHeader = (getState) => {
   };
 };
 
-export const fetchTransactionsAndSyncCategories = createAsyncThunk(
-  'transactions/fetchAndSync',
+export const fetchAllTransactionsForCategories = createAsyncThunk(
+  'transactions/fetchAllForCategories',
   async (_, { dispatch, getState }) => {
     const res = await fetch(`${BASE_URL}/transactions`, {
       headers: getAuthHeader(getState),
     });
 
-    if (!res.ok) {
-      const text = await res.text();
-      throw new Error(`Fetch failed: ${res.status} ${text}`);
-    }
+    if (!res.ok) throw new Error('Failed to load all transactions');
 
-    const transactions = await res.json();
-    dispatch(setTransactions(transactions));
-    dispatch(setCategoriesFromTransactions(transactions));
-    return transactions;
+    const allTransactions = await res.json();
+    dispatch(setCategoriesFromTransactions(allTransactions));
   }
 );
 
 export const fetchPaginatedTransactions = createAsyncThunk(
   'transactions/fetchPaginated',
   async (
-    { page, limit = 5, skipPageIncrement = false },
+    { page, limit = 5, filter = "all", selectedCategory = "all", skipPageIncrement = false },
     { getState }
   ) => {
     const res = await fetch(
-      `${BASE_URL}/transactions/paginated?page=${page}&limit=${limit}`,
+      `${BASE_URL}/transactions/filtered?page=${page}&limit=${limit}&type=${filter}&category=${selectedCategory}`,
       { headers: getAuthHeader(getState) }
     );
 
     if (!res.ok) throw new Error('Failed to load transactions');
 
-    const data = await res.json(); 
+    const data = await res.json();
     return { ...data, page, limit, skipPageIncrement };
   }
 );
 
 export const addTransaction = createAsyncThunk(
   'transactions/add',
-  async (transaction, { getState }) => {
+  async (transaction, { dispatch, getState }) => {
     const fallbackCategory = transaction.category || "Work";
     const fallbackImage = transaction.image || "/src/assets/icons/IconOthers.svg?react";
 
@@ -75,6 +71,10 @@ export const addTransaction = createAsyncThunk(
       body: JSON.stringify(newTransaction),
     });
 
+    dispatch(resetTransactions());
+    dispatch(fetchPaginatedTransactions({ page: 1 })); 
+
+    dispatch(fetchTransactionsToDashboard());
     return newTransaction;
   }
 );
@@ -87,7 +87,12 @@ export const removeTransaction = createAsyncThunk(
       headers: getAuthHeader(getState),
     });
 
+    dispatch(fetchTransactionsToDashboard());
     dispatch(removeExpenseMirror(id));
+
+    dispatch(resetTransactions()); 
+    dispatch(fetchPaginatedTransactions({ page: 1 }));
+
     return id;
   }
 );
@@ -101,11 +106,11 @@ export const editTransactionWithServer = createAsyncThunk(
       body: JSON.stringify(updatedData),
     });
 
-    if (!res.ok) {
-      throw new Error('Failed to edit transaction');
-    }
+    if (!res.ok) throw new Error('Failed to edit transaction');
 
-    dispatch(editTransaction({ id: expenseId, updatedData }));
+    dispatch(fetchTransactionsToDashboard());
+    dispatch(resetTransactions());
+    dispatch(fetchPaginatedTransactions({ page: 1 }));
 
     const allTransactions = getState().transactions.data;
     dispatch(setCategoriesFromTransactions(allTransactions));
@@ -148,9 +153,6 @@ const transactionsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTransactionsAndSyncCategories.fulfilled, (state, action) => {
-        state.data = action.payload;
-      })
       .addCase(addTransaction.fulfilled, (state, action) => {
         state.data.unshift(action.payload);
       })

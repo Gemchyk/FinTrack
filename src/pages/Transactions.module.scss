@@ -130,3 +130,13 @@
 
  
 }
+
+.flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.loader{
+  font-size: 20px;
+}

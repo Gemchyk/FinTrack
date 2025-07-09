@@ -8,6 +8,7 @@ import { iconMap } from "../components/ExpensesGoals/ExpensesGoalsByCategory";
 import CategorySelect from "../components/SelectButton/CategorySelect";
 import { ThemeContext } from "../context/ThemeContext.jsx";
 import store from '../store/store.js'
+import Loader from "../components/Loaders/Loader";
 
 function Transactions () {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function Transactions () {
     const { theme } = useContext(ThemeContext);
 
     const transactions = useSelector((state) => state.transactions.data);
+    console.log(transactions);
     const loading = useSelector((state) => state.transactions.loading);
     const error = useSelector((state) => state.transactions.error);
 
@@ -27,22 +29,23 @@ function Transactions () {
     const [showModal, setShowModal] = useState(false);
     const [editingTransaction, setEditingTransaction] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState('all');
+    const [isLoadedMore, setIsLoadedMore] = useState(false);
 
     useEffect(() => {
-        dispatch(resetTransactions()); 
-        dispatch(fetchPaginatedTransactions({ page: 1 }));
-      }, [dispatch]);
+        dispatch(resetTransactions());
+        dispatch(fetchPaginatedTransactions({ page: 1, filter, selectedCategory }));
+      }, [dispatch, filter, selectedCategory])
 
 
 
-    const filteredData = transactions.filter((tx) => {
-        const categoryKey = iconMap[tx.category] ? tx.category : "Other";
+    // const filteredData = transactions.filter((tx) => {
+    //     const categoryKey = iconMap[tx.category] ? tx.category : "Other";
 
-        if (filter !== "all" && tx.type !== filter) return false;
-        if (selectedCategory !== "all" && categoryKey !== selectedCategory) return false;
+    //     if (filter !== "all" && tx.type !== filter) return false;
+    //     if (selectedCategory !== "all" && categoryKey !== selectedCategory) return false;
 
-        return true;
-    });
+    //     return true;
+    // });
 
     const handleDelete = async (id) => {
         await dispatch(removeTransaction(id));
@@ -58,7 +61,9 @@ function Transactions () {
           dispatch(fetchPaginatedTransactions({
             page: page - 1,
             limit: gap - 1,
-            skipPageIncrement: true
+            skipPageIncrement: true,
+            filter,
+            selectedCategory
           }));
         }
       };
@@ -75,8 +80,15 @@ function Transactions () {
     
 
     const handleLoadMore = () => {
-        dispatch(fetchPaginatedTransactions({ page }));
-      };
+        setIsLoadedMore(true)
+        dispatch(fetchPaginatedTransactions({ page, filter, selectedCategory }));
+    };
+
+    const handleHideAll = () => {
+        setIsLoadedMore(false);
+        dispatch(resetTransactions());
+        dispatch(fetchPaginatedTransactions({ page: 1, filter, selectedCategory }));
+    }
 
     const getIcon = (tx) => {
         return tx.image || "/src/assets/icons/IconOthers.svg?react";
@@ -100,7 +112,7 @@ function Transactions () {
                 <CategorySelect value={selectedCategory} onChange={setSelectedCategory} theme={theme}/>
             </div>
 
-            {loading && <p>{t('Loading...')}</p>}
+            
             {error && <p className={styles.error}>{t('Error')}: {error}</p>}
 
             <div className={styles.table}>
@@ -112,8 +124,8 @@ function Transactions () {
                     <span>{t('Amount')}</span>
                     <span>{t('Actions')}</span>
                 </div>
-                {console.log("Filtered data:", filteredData)}
-                {filteredData.map((tx) => (
+                {loading && <div className={styles.flex}> <span className={styles.loader}>{t('Loading...')}</span>{<Loader />}</div>}
+                {transactions.map((tx) => (
                     <div className={styles.row} key={tx.id}>
                         <span className={styles.item}>
                             <img src={getIcon(tx)} alt="" />
@@ -124,7 +136,7 @@ function Transactions () {
                         <span className={styles.gray}>{t(tx.type)}</span>
                         <span className={styles.amount}>
                             {tx.type === "Expense" ? "-" : "+"}
-                            {tx.amount.toFixed(2)}₴
+                            {tx.amount.toFixed(2)}$
                         </span>
                         <span className={styles.actions}>
                             <button onClick={() => handleEdit(tx)} className={styles.editBtn}>
@@ -145,13 +157,24 @@ function Transactions () {
                     onClose={handleClose}
                 />
             )}
-            {hasMore && (
-                <div className={styles.loadMoreContainer}>
-                    <button onClick={handleLoadMore} className={styles.loadMoreBtn}>
-                    {t("Load More")}
-                    </button>
-                </div>
-            )}
+            {
+                <div className={styles.flex}>
+                    {hasMore && (
+                        <div className={styles.loadMoreContainer}>
+                            <button onClick={handleLoadMore} className={styles.loadMoreBtn}>
+                            {t("Load More")}
+                            </button>
+                        </div>
+                    )}
+                    {isLoadedMore &&
+                        <div className={styles.loadMoreContainer}>
+                            <button onClick={handleHideAll} className={styles.loadMoreBtn}>
+                            {t("Hide")}
+                            </button>
+                        </div>
+                    }
+                </div>            
+                }
         </div>
     );
 }

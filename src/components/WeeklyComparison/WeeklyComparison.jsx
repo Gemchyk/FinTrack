@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   BarChart,
   Bar,
@@ -10,8 +10,9 @@ import {
   ReferenceLine
 } from "recharts";
 import "./WeeklyComparison.scss";
-import {useSelector  } from "react-redux";
+import {useDispatch, useSelector  } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { fetchTransactionsToDashboard } from "./weeklyComprasionSlice";
 
 
 
@@ -19,7 +20,16 @@ import { useTranslation } from "react-i18next";
 const WeeklyComparison = () => {
 
   const data = useSelector(state => state.weeklyComparison.data);
+  const dispatch = useDispatch();
   const {t} = useTranslation();
+
+
+  useEffect(() => {
+    if (!data || data.length === 0) {
+      dispatch(fetchTransactionsToDashboard());
+    }
+  }, [dispatch, data]);
+  
   
   return (
     <>
@@ -39,14 +49,16 @@ const WeeklyComparison = () => {
               <XAxis dataKey="day" />
               <YAxis domain={[0, 'auto']} />
               <Tooltip />
-              <ReferenceLine y={4000} stroke="#888888" alwaysShow ifOverflow="extendDomain" />
-              <ReferenceLine y={8000} stroke="#888888" alwaysShow ifOverflow="extendDomain" />
-              <ReferenceLine y={12000} stroke="#888888" alwaysShow ifOverflow="extendDomain" />
-              <ReferenceLine y={16000} stroke="#888888" alwaysShow ifOverflow="extendDomain" />
-              <ReferenceLine y={20000} stroke="#888888" alwaysShow ifOverflow="extendDomain" />
-              <ReferenceLine y={24000} stroke="#888888" alwaysShow ifOverflow="extendDomain" />
-              <ReferenceLine y={28000} stroke="#888888" alwaysShow ifOverflow="extendDomain" />
-              <ReferenceLine y={32000} stroke="#888888" alwaysShow ifOverflow="extendDomain" />
+              {data.length && Array.from({ length: 20 }, (_, i) => (
+                <ReferenceLine
+                  key={i}
+                  y={(i + 1) * 50}
+                  stroke="#888888"
+                  alwaysShow
+                  ifOverflow="extendDomain"
+                />
+              ))}
+
 
               <Bar dataKey="thisWeek" fill="#299D91" name={t("This Month")} radius={[5, 5, 0, 0]} />
             </BarChart>

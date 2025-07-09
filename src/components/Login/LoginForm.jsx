@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router';
 import styles from './LoginPage.module.scss';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
@@ -22,6 +22,7 @@ function LoginForm({}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {t} = useTranslation();
+    const [isLogged, setIsLogged] = useState()
 
 
     const handleSubmit = (values) => {
@@ -29,9 +30,11 @@ function LoginForm({}) {
             username: values.login,
             password: values.password,
           })).then((res) => {
-            console.log(res);
             if(res.payload.token){
+                setIsLogged(true);
                 navigate('/Overview')
+            }else{
+                setIsLogged(false);
             }
           });
     }
@@ -75,6 +78,7 @@ function LoginForm({}) {
                     />
                 </div>
                 {status && <div style={{ color: 'red' }}>{status}</div>}
+                {isLogged === false && <div style={{ color: 'red' }}>Incorrect Login</div>}
                 <button className={styles['form-btn']} type="submit">
                     {t("Login-btn")}
                 </button>
