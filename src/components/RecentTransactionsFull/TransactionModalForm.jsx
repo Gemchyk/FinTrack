@@ -88,13 +88,13 @@ export default function TransactionModalForm({ onClose, mode = 'add', editingTra
                 <ErrorMessage name="date" component="div" className={styles.error} />
               </label>
 
-              <label>
+              {/* <label>
                 {t('Type')}
                 <Field name="type" as="select">
                   <option value="Expense">{t('Expense')}</option>
                   <option value="Income">{t('Income')}</option>
                 </Field>
-              </label>
+              </label> */}
 
               <label>
                 {t('Category')}
