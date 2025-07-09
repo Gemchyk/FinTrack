@@ -91,7 +91,10 @@
     "New Goal": "New Goal",
     "Goal Amount": "Goal Amount",
     "All Categories": "All Categories",
+    "Transaction": "Transaction",
     "Fun": "Fun",
     "Load More": "Load More",
-    "Hide": "Hide"
+    "Hide": "Hide",
+    "No transactions found": "No transactions found",
+    "Select": "Select"
   }

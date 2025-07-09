@@ -138,5 +138,15 @@
   gap: 20px;
 }
 .loader{
-  font-size: 20px;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.noData {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #888;
 }

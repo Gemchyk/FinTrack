@@ -35,7 +35,7 @@ export default function TransactionModalForm({ onClose, mode = 'add', editingTra
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h3>{isEdit ? 'Edit' : 'Add'} {t('Transaction')}</h3>
+        <h3>{isEdit ? t('Edit') : 'Add'} {t('Transaction')}</h3>
         <Formik
           initialValues={initialValues}
           validate={(values) => {

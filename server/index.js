@@ -23,6 +23,9 @@ const users = [
     password: '$2b$10$S9k5THchbjn7a.YbQzpkvuWe8HVb055x/qqlrBNkh5.sApymc6ScO' // пароль: "admin"
   }
 ];
+
+const STANDARD_CATEGORIES = ['Food', 'Health', 'Transport', 'Shopping', 'Fun', 'Other'];
+
 let transactions = [
   {
     id: "1",
@@ -380,7 +383,11 @@ app.get('/transactions/filtered', authenticateToken, (req, res) => {
   }
 
   if (category !== 'all') {
-    filtered = filtered.filter(tx => tx.category === category);
+    if (category === 'Other') {
+      filtered = filtered.filter(tx => !STANDARD_CATEGORIES.includes(tx.category) || tx.category === 'Other');
+    } else {
+      filtered = filtered.filter(tx => tx.category === category);
+    }
   }
 
   const total = filtered.length;

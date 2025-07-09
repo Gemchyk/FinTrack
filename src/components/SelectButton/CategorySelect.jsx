@@ -7,6 +7,7 @@ export const options = [
   { value: 'Transport', label: 'Transport' },
   { value: 'Fun', label: 'Fun' },
   { value: 'Shopping', label: 'Shopping' },
+  { value: 'Health', label: 'Health' },
   { value: 'Other', label: 'Other' },
 ];
 
@@ -105,6 +106,7 @@ export default function CategorySelect({ value, onChange, theme = 'light', custo
           neutral80: 'var(--color-text-primary)',
         },
       })}
+      placeholder={t("Select")}
     />
   );
 }

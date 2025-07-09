@@ -90,7 +90,10 @@
     "Goal Amount": "Сума цілі",
     "All Categories": "Всі Категорії",
     "Actual Exchange Rate": "Актуальний обмінний курс",
+    "Transaction": "Транзакцію",
     "Fun": "Розваги",
     "Load More": "Завантажити більше",
-    "Hide": "Сховати"
+    "Hide": "Сховати",
+    "No transactions found": "Транзакцій не знайдено",
+    "Select": "Обрати"
   }
