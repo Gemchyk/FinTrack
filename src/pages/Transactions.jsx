@@ -1,9 +1,12 @@
 import TransactionsFullPage from "../components/RecentTransactionsFull/TransactionsFullPage";
 
+function Transactions({}) {
 
-function Transactions () {
     return (
-        <TransactionsFullPage />
-    )
+        <>
+           <TransactionsFullPage />
+        </>
+    );
 }
-export default Transactions
+
+export default Transactions;

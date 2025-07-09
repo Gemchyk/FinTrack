@@ -15,6 +15,7 @@ export default function CategoryCard({
   onDeleteCategory,
 }) {
   const { name, icon, amount, goalAmount, id } = category;
+  console.log(name);
 
   const percentOfGoal = goalAmount
     ? Math.min((amount / goalAmount) * 100, 100)
@@ -40,7 +41,7 @@ export default function CategoryCard({
             <span className={styles.title}>
               {t(`categories.${name.toLowerCase()}`, { defaultValue: name })}
             </span>
-            <span className={styles.amount}>{amount.toFixed(2)} ₴</span>
+            <span className={styles.amount}>{amount.toFixed(2)} $</span>
           </div>
 
           <button type="button" className={styles.adjustBtn} onClick={onAdd}>
@@ -78,7 +79,7 @@ export default function CategoryCard({
 
           <div className={styles.goalDisplay}>
             <button className={styles.goalBtn} onClick={handleGoalClick}>
-              {goalAmount !== null ? `${goalAmount}₴` : t("Set goal")}
+              {goalAmount !== null ? `${goalAmount}$` : t("Set goal")}
             </button>
           </div>
         </div>

@@ -15,7 +15,7 @@ const initialState = [
     id: 1,
     name: "Food",
     iconName: "Food",
-    goalAmount: 3000,
+    goalAmount: 300,
     expenses: [
       { id: "1", title: "АТБ", amount: 1200, date: "2025-06-01" },
       { id: "2", title: "РОСТ", amount: 800, date: "2025-06-03" },
@@ -26,7 +26,7 @@ const initialState = [
     id: 2,
     name: "Fun",
     iconName: "Entertainment",
-    goalAmount: 2500,
+    goalAmount: 250,
     expenses: [
       { id: "3", title: "Кіно", amount: 600, date: "2025-06-02" },
       { id: "4", title: "Спорт", amount: 600, date: "2025-06-02" },
@@ -37,7 +37,7 @@ const initialState = [
     id: 3,
     name: "Transport",
     iconName: "Transport",
-    goalAmount: 1000,
+    goalAmount: 100,
     expenses: [{ id: "5", title: "Метро", amount: 100, date: "2025-06-04" }],
     isShownOnPage: true,
   },
@@ -53,7 +53,7 @@ const initialState = [
     id: 5,
     name: "Health",
     iconName: "Health",
-    goalAmount: 1500,
+    goalAmount: 150,
     expenses: [{ id: "7", title: "Аптека", amount: 300, date: "2025-06-06" }],
     isShownOnPage: true,
   },
@@ -119,6 +119,40 @@ const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
+    setCategoriesFromTransactions: (state, action) => {
+      const transactions = action.payload;
+
+      state.forEach(category => {
+        category.expenses = [];
+      });
+
+
+      transactions.forEach(tx => {
+
+        const category = state.find(cat => cat.name === tx.category);
+        if (category) {
+          category.expenses.push(tx);
+        } else {
+
+          let others = state.find(cat => cat.name === 'Other');
+          if (!others) {
+            others = {
+              id: 'others',
+              name: 'Others',
+              expenses: [],
+            };
+            state.push(others);
+          }
+          others.expenses.push(tx);
+        }
+      });
+    },
+    removeExpenseMirror: (state, action) => {
+      const id = action.payload;
+      for (const cat of state) {
+        cat.expenses = cat.expenses.filter(exp => exp.id !== id);
+      }
+    },
     searchCategories: (state, action) => {
       state.map((item) => {
         if (item.name.includes(action.payload)) {
@@ -185,7 +219,9 @@ const categoriesSlice = createSlice({
   },
 });
 
-export const {
+export const { 
+  setCategoriesFromTransactions, 
+  removeExpenseMirror,
   searchCategories,
   addExpense,
   removeExpense,

@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { addCategory } from "../../categoriesSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import { useTranslation } from "react-i18next";
+import CategorySelect, {options} from "../../../SelectButton/CategorySelect";
+import { ThemeContext } from "../../../../context/ThemeContext";
+
+
 
 const NewCategoryModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [iconName, setIconName] = useState("Housing");
   const { t } = useTranslation();
+  const { theme } = useContext(ThemeContext);
+  const  filteredOptions = options.filter(i => i.value != 'all');
 
   const handleSubmit = () => {
     const finalName = iconName === "Other" ? name.trim() : iconName;
@@ -30,15 +36,9 @@ const NewCategoryModal = ({ onClose }) => {
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h3>{t("New category")}</h3>
 
-        <select value={iconName} onChange={(e) => setIconName(e.target.value)}>
-          <option value="Housing">{t("Housing")}</option>
-          <option value="Food">{t("categories.food")}</option>
-          <option value="Transport">{t("categories.transport")}</option>
-          <option value="Entertainment">{t("categories.fun")}</option>
-          <option value="Shopping">{t("categories.shopping")}</option>
-          <option value="Health">{t("categories.health")}</option>
-          <option value="Other">{t("categories.other")}</option>
-        </select>
+        <div className="select-center-wrapper">
+          <CategorySelect value={iconName} onChange={setIconName} theme={theme} customOptions={filteredOptions}/>
+        </div>
 
         {iconName === "Other" && (
           <input
