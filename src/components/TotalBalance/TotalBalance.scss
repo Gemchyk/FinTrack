@@ -63,6 +63,7 @@
     border-bottom: 1px solid var(--cb-text-secondary);
     display: flex;
     justify-content: space-between;
+    text-align: center;
   }
   
   .main-title {
@@ -92,7 +93,7 @@
     margin-top: 12px;
     border-radius: 4px;
     width: 88.6%;
-    height: 64px;
+    height: 90px;
     background-color: var(--cb-card-bg);
     padding: 16px;
     display: flex;
@@ -144,5 +145,12 @@
     display: flex;
     align-items: center;
     gap: 12px;
+  }
+
+  .card-preview-logo {
+    width: 32px;           
+    object-fit: contain;   
+    align-self: flex-end;    
+    margin-top: 25px;             
   }
   

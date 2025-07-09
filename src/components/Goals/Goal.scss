@@ -30,6 +30,18 @@
     box-shadow: 0 20px 25px 0 var(--goal-box-shadow);
     background: var(--goal-bg);
   }
+
+
+  .goals-main-header {
+    width: 98%;
+    max-width: 392px;
+    height: 64px;
+    border-bottom: 1px solid var(--cb-text-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: center;
+  }
   
   .goals-details-div {
     display: flex;

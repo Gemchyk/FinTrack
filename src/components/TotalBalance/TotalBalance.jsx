@@ -39,7 +39,7 @@ function TotalBalance() {
           </div>
 
           <div className="card-preview-addinfo">
-            <img src={cardLogo} alt="Card logo" />
+            <img className="card-preview-logo" src={cardLogo} alt="Card logo" />
             <div className="card-preview-moneyDiv">
               <h3 className="balanceAmount">${store}</h3>
               <div className="card-preview-linkDiv">
