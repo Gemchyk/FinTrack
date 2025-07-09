@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useState } from 'react';
 import './SearchForm.scss'
 import { useDispatch } from 'react-redux';
 import { searchCategories } from '../Categories/categoriesSlice';
 import { useTranslation } from 'react-i18next';
+import debounce from 'lodash.debounce';
 
 const SearchForm = () => {
 
@@ -20,8 +21,16 @@ const SearchForm = () => {
     const handleChange = (e) => {
         const newValue = e.target.value;
         setInputValue(e.target.value);
-        dispatch(searchCategories(newValue));
+        deboncedSearch(newValue);
     }
+
+    const deboncedSearch = useCallback(
+        debounce(value => {
+            dispatch(searchCategories(value));
+            console.log("Debounces");
+        }, 200), 
+        []
+    )
 
     return (
         <>

@@ -13,7 +13,7 @@ function Goal(props) {
         <div>
             <h1 className='title'>{t("Spendings")}</h1>
             <div className='main'>
-            <div className='main-header'>
+            <div className='goals-main-header'>
                 <h4 className='main-title'>{t("Categories Spendings 2025")}</h4>
             </div>
             <div className='goals-details-div'>
