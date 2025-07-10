@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styles from './TransactionModalForm.module.scss';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
-import { addTransaction, editTransaction } from '../Transactions/transactionsSlice';
+import { addTransaction, editTransactionWithServer } from '../Transactions/transactionsSlice';
 import { useTranslation } from 'react-i18next';
 
 
@@ -35,7 +35,7 @@ export default function TransactionModalForm({ onClose, mode = 'add', editingTra
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h3>{isEdit ? 'Edit' : 'Add'} {t('Transaction')}</h3>
+        <h3>{isEdit ? t('Edit') : 'Add'} {t('Transaction')}</h3>
         <Formik
           initialValues={initialValues}
           validate={(values) => {
@@ -56,7 +56,7 @@ export default function TransactionModalForm({ onClose, mode = 'add', editingTra
             };
     
             if (isEdit) {
-              dispatch(editTransaction({
+              dispatch(editTransactionWithServer({
                 expenseId: editingTransaction.id,
                 updatedData: payload
               }));
@@ -88,13 +88,13 @@ export default function TransactionModalForm({ onClose, mode = 'add', editingTra
                 <ErrorMessage name="date" component="div" className={styles.error} />
               </label>
 
-              <label>
+              {/* <label>
                 {t('Type')}
                 <Field name="type" as="select">
                   <option value="Expense">{t('Expense')}</option>
                   <option value="Income">{t('Income')}</option>
                 </Field>
-              </label>
+              </label> */}
 
               <label>
                 {t('Category')}
