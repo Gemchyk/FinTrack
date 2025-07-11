@@ -16,6 +16,7 @@
     "Categories Spendings 2025": "Categories Spendings 2025",
     "Add new category": "Add new category",
     "Name category": "Name  of category",
+    "New category": "New category",
   
     "Recent Transaction": "Recent Transaction",
     "Statistics": "Statistics",
@@ -36,6 +37,7 @@
 
     "My Balance": "My Balance",
     "Remove": "Remove",
+    "Confirm": "Confirm",
     "Add": "Add",
     "Edit": "Edit",
     "Account Number": "Account Number",
@@ -49,6 +51,7 @@
     "Set goal": "Set goal",
   
     "Food": "Food",
+    "Housing": "Housing",
     "Entertainment": "Entertainment",
     "Transport": "Transport",
     "Shopping": "Shopping",
@@ -65,6 +68,7 @@
     "Cancel": "Cancel",
     "Ok": "Ok",
     "categories": {
+      "food": "Food",
       "shopping": "Shopping",
       "fun": "Fun",
       "groceries": "Groceries",
@@ -87,5 +91,11 @@
     "Change Goal": "Change Goal",
     "New Goal": "New Goal",
     "Goal Amount": "Goal Amount",
-    "All Categories": "All Categories"
+    "All Categories": "All Categories",
+    "Transaction": "Transaction",
+    "Fun": "Fun",
+    "Load More": "Load More",
+    "Hide": "Hide",
+    "No transactions found": "No transactions found",
+    "Select": "Select"
   }

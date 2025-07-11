@@ -1,24 +1,32 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { addCategory } from "../../categoriesSlice";
 import { nanoid } from "@reduxjs/toolkit";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import CategorySelect, {options} from "../../../SelectButton/CategorySelect";
+import { ThemeContext } from "../../../../context/ThemeContext";
+
+
 
 const NewCategoryModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [iconName, setIconName] = useState("Housing");
   const { t } = useTranslation();
+  const { theme } = useContext(ThemeContext);
+  const  filteredOptions = options.filter(i => i.value != 'all');
 
   const handleSubmit = () => {
     const finalName = iconName === "Other" ? name.trim() : iconName;
     if (!finalName) return;
 
-    dispatch(addCategory({
-      id: nanoid(),
-      name: finalName,
-      iconName,
-    }));
+    dispatch(
+      addCategory({
+        id: nanoid(),
+        name: finalName,
+        iconName,
+      })
+    );
 
     onClose();
   };
@@ -26,22 +34,11 @@ const NewCategoryModal = ({ onClose }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <h3>{t("Newcategory")}</h3>
+        <h3>{t("New category")}</h3>
 
-      
-
-        <select
-          value={iconName}
-          onChange={(e) => setIconName(e.target.value)}
-        >
-          <option value="Housing">Housing</option>
-          <option value="Food">Food</option>
-          <option value="Transport">Transport</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Shopping">Shopping</option>
-          <option value="Health">Health</option>
-          <option value="Other">Other</option>
-        </select>
+        <div className="select-center-wrapper">
+          <CategorySelect value={iconName} onChange={setIconName} theme={theme} customOptions={filteredOptions}/>
+        </div>
 
         {iconName === "Other" && (
           <input

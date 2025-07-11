@@ -1,12 +1,13 @@
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
 
-const options = [
+export const options = [
   { value: 'all', label: 'All Categories' },
   { value: 'Food', label: 'Food' },
   { value: 'Transport', label: 'Transport' },
   { value: 'Fun', label: 'Fun' },
   { value: 'Shopping', label: 'Shopping' },
+  { value: 'Health', label: 'Health' },
   { value: 'Other', label: 'Other' },
 ];
 
@@ -41,11 +42,11 @@ const customStyles = (theme = 'light') => {
       boxShadow: 'none',
       backgroundColor: c.bg,
       cursor: 'pointer',
-      minHeight: '36px',
+      minHeight: '50px',
       '&:hover': {
         backgroundColor: state.menuIsOpen ? c.bg : c.accentHover,
       },
-      width: '160px',
+      width: '180px',
     }),
     singleValue: (base) => ({
       ...base,
@@ -78,10 +79,12 @@ const customStyles = (theme = 'light') => {
   };
 };
 
-export default function CategorySelect({ value, onChange, theme = 'light' }) {
+export default function CategorySelect({ value, onChange, theme = 'light', customOptions }) {
   const { t } = useTranslation();
 
-  const translatedOptions = options.map(opt => ({
+  const finalOprions = customOptions || options;
+
+  const translatedOptions = finalOprions.map(opt => ({
     value: opt.value,
     label: t(`${opt.label}`) 
   }));
@@ -103,6 +106,7 @@ export default function CategorySelect({ value, onChange, theme = 'light' }) {
           neutral80: 'var(--color-text-primary)',
         },
       })}
+      placeholder={t("Select")}
     />
   );
 }

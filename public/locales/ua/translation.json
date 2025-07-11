@@ -16,7 +16,8 @@
     "Categories Spendings 2025": "Витрати за категоріями 2025",
     "Add new category": "Додати нову категорію",
     "Name category": "Назва категорії",
-  
+    "New category": "Нова категорія",
+
     "Recent Transaction": "Останні транзакції",
     "Statistics": "Статистика",
     "Monthly Comparison": "Місячне порівняння",
@@ -35,6 +36,7 @@
 
     "My Balance": "Мiй баланс",
     "Remove": "Видалити",
+    "Confirm": "Підтвердити",
     "Add": "Додати",
     "Edit": "Редагувати",
     "Account Number": "Номер Картки",
@@ -47,6 +49,7 @@
     "Set goal": "Встановити ціль",
   
     "Food": "Їжа",
+    "Housing": "Житло",
     "Entertainment": "Розваги",
     "Transport": "Транспорт",
     "Shopping": "Покупки",
@@ -63,6 +66,7 @@
     "Cancel": "Скасувати",
     "Ok": "ОК",
     "categories": {
+      "food": "Їжа",
       "shopping": "Покупки",
       "fun": "Розваги",
       "groceries": "Продукти",
@@ -86,5 +90,11 @@
     "New Goal": "Нова ціль",
     "Goal Amount": "Сума цілі",
     "All Categories": "Всі Категорії",
-    "Actual Exchange Rate": "Актуальний обмінний курс"
+    "Actual Exchange Rate": "Актуальний обмінний курс",
+    "Transaction": "Транзакцію",
+    "Fun": "Розваги",
+    "Load More": "Завантажити більше",
+    "Hide": "Сховати",
+    "No transactions found": "Транзакцій не знайдено",
+    "Select": "Обрати"
   }
