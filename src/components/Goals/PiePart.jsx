@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { PieChart, Pie, Cell } from 'recharts';
 import { useTranslation } from 'react-i18next';
@@ -91,6 +90,6 @@ const GoalsChart = () => {
       </PieChart>
     </div>
   );
-};
+}
 
 export default GoalsChart;
