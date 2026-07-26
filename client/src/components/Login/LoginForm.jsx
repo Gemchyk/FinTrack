@@ -17,7 +17,7 @@ const validationSchema = Yup.object({
 
 
 
-function LoginForm({}) {
+function LoginForm() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();

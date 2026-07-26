@@ -4,7 +4,7 @@ import React from 'react';
 import './UpcomingBill.scss'
 import UpcomingBill from './UpcomingBill';
 
-function UpcomingBillList({}) {
+function UpcomingBillList() {
 
     const initialBills = [
         {
