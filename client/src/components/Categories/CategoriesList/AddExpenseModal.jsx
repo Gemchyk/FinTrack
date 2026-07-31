@@ -14,21 +14,10 @@ const validationSchema = yup.object().shape({
   date: yup.date().required("Оберіть дату"),
 });
 
-const iconMap = {
-  Housing: "/src/assets/icons/IconHousing.svg?react",
-  Food: "/src/assets/icons/IconFood.svg?react",
-  Transport: "/src/assets/icons/IconTransportation.svg?react",
-  Entertainment: "/src/assets/icons/IconEntertainment.svg?react",
-  Shopping: "/src/assets/icons/IconShopping.svg?react",
-  Health: "/src/assets/icons/IconOthers.svg?react",
-  Other: "/src/assets/icons/IconOthers.svg?react",
-};
-
 const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
   const dispatch = useDispatch();
   const balance = useSelector((state) => state.balance.sum);
   const categories = useSelector((state) => state.categories);
-  const iconName = categories.find(i => i.id == categoryId).iconName;
   const category = categories.find(i => i.id == categoryId).name;
   const [error, setError] = useState("");
   const {t} = useTranslation();
@@ -48,7 +37,6 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
       categoryId,
       expenseId: editingExpense.id,
       updatedData: values,
-      oldData: initialValues,
     }));
     onClose();
     return;
@@ -59,7 +47,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
     return;
   }
 
-  dispatch(addExpenseWithStats({ categoryId, category, type: "Expense", image: iconMap[iconName] || iconMap["Other"],  ...values }));
+  dispatch(addExpenseWithStats({ categoryId, category, type: "Expense", ...values }));
   dispatch(removeBalance(amount));
   onClose();
 };

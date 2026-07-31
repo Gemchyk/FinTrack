@@ -56,13 +56,11 @@ export const addTransaction = createAsyncThunk(
   'transactions/add',
   async (transaction, { dispatch, getState }) => {
     const fallbackCategory = transaction.category || "Work";
-    const fallbackImage = transaction.image || "/src/assets/icons/IconOthers.svg?react";
 
     const newTransaction = {
       ...transaction,
       id: nanoid(),
       category: fallbackCategory,
-      image: fallbackImage,
     };
 
     await fetch(`${BASE_URL}/transactions`, {

@@ -8,20 +8,7 @@ import {
   removeCategory,
 } from "../Categories/categoriesSlice";
 import { fetchAllTransactionsForCategories } from "../Transactions/transactionsSlice";
-
-import IconFood from "/src/assets/icons/IconFood.svg?react";
-import IconTransportation from "/src/assets/icons/IconTransportation.svg?react";
-import IconEntertainment from "/src/assets/icons/IconEntertainment.svg?react";
-import IconShopping from "/src/assets/icons/IconShopping.svg?react";
-import IconOthers from "/src/assets/icons/IconOthers.svg?react";
-
-export const iconMap = {
-  Food: <IconFood />,
-  Transport: <IconTransportation />,
-  Fun: <IconEntertainment />,
-  Shopping: <IconShopping />,
-  Others: <IconOthers />,
-};
+import { iconFor } from "../../assets/icons/iconFor";
 
 export const titleMap = {
   Food: "Food",
@@ -80,7 +67,7 @@ export default function ExpensesGoalsByCategory() {
             ...category,
             amount: total,
             goal: category.goalAmount ?? null,
-            icon: iconMap[category.iconName] || <IconOthers />,
+            icon: iconFor(category.iconName),
           };
 
           return (

@@ -1,12 +1,12 @@
 
-
+import { iconFor } from "../../assets/icons/iconFor";
 
 function Transaction({ item }) {
     return (
       <>
         <div className="container-2">
           <div className="main-block">
-            <img src={item.image} alt="" />
+            {iconFor(item.category)}
           </div>
           <div className="main-text">
             <h3>{item.title}</h3>
