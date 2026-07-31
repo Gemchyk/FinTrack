@@ -29,8 +29,6 @@ const STANDARD_CATEGORIES = ['Food', 'Health', 'Transport', 'Shopping', 'Fun', '
 let transactions = [
   {
     id: "1",
-    image: "/src/assets/icons/IconShopping.svg?react",
-    alt: "Shopping",
     title: "GTR 5",
     amount: 160.0,
     date: "2024-01-15",
@@ -39,8 +37,6 @@ let transactions = [
   },
   {
     id: "2",
-    image: "/src/assets/icons/IconFood.svg?react",
-    alt: "Food",
     title: "Biriyani",
     amount: 10.0,
     date: "2024-02-10",
@@ -49,8 +45,6 @@ let transactions = [
   },
   {
     id: "3",
-    image: "/src/assets/icons/IconEntertainment.svg?react",
-    alt: "Fun",
     title: "Steam",
     amount: 25.0,
     date: "2024-03-05",
@@ -59,8 +53,6 @@ let transactions = [
   },
   {
     id: "4",
-    image: "/src/assets/icons/IconTransportation.svg?react",
-    alt: "Transport",
     title: "Taxi",
     amount: 40.0,
     date: "2024-04-22",
@@ -69,8 +61,6 @@ let transactions = [
   },
   {
     id: "5",
-    image: "/src/assets/icons/IconOthers.svg?react",
-    alt: "Other",
     title: "Gift",
     amount: 50.0,
     date: "2024-05-13",
@@ -79,8 +69,6 @@ let transactions = [
   },
   {
     id: "6",
-    image: "/src/assets/icons/IconShopping.svg?react",
-    alt: "Shopping",
     title: "H&M Clothes",
     amount: 89.99,
     date: "2024-06-29",
@@ -89,8 +77,6 @@ let transactions = [
   },
   {
     id: "7",
-    image: "/src/assets/icons/IconEntertainment.svg?react",
-    alt: "Fun",
     title: "Netflix",
     amount: 12.99,
     date: "2024-07-01",
@@ -99,8 +85,6 @@ let transactions = [
   },
   {
     id: "8",
-    image: "/src/assets/icons/IconFood.svg?react",
-    alt: "Food",
     title: "McDonald's",
     amount: 15.5,
     date: "2024-08-20",
@@ -109,8 +93,6 @@ let transactions = [
   },
   {
     id: "9",
-    image: "/src/assets/icons/IconTransportation.svg?react",
-    alt: "Transport",
     title: "Bus Pass",
     amount: 20.0,
     date: "2024-09-10",
@@ -119,8 +101,6 @@ let transactions = [
   },
   {
     id: "10",
-    image: "/src/assets/icons/IconOthers.svg?react",
-    alt: "Other",
     title: "Medicine",
     amount: 33.0,
     date: "2024-10-08",
@@ -129,8 +109,6 @@ let transactions = [
   },
   {
     id: "11",
-    image: "/src/assets/icons/IconEntertainment.svg?react",
-    alt: "Fun",
     title: "Concert Ticket",
     amount: 70.0,
     date: "2024-11-01",
@@ -139,8 +117,6 @@ let transactions = [
   },
   {
     id: "12",
-    image: "/src/assets/icons/IconShopping.svg?react",
-    alt: "Shopping",
     title: "Shoes",
     amount: 120.0,
     date: "2024-12-25",
@@ -150,8 +126,6 @@ let transactions = [
   // Новые транзакции
   {
     id: "13",
-    image: "/src/assets/icons/IconFood.svg?react",
-    alt: "Food",
     title: "Coffee",
     amount: 5.0,
     date: "2024-01-20",
@@ -160,8 +134,6 @@ let transactions = [
   },
   {
     id: "14",
-    image: "/src/assets/icons/IconTransportation.svg?react",
-    alt: "Transport",
     title: "Subway Ticket",
     amount: 2.75,
     date: "2024-03-15",
@@ -170,8 +142,6 @@ let transactions = [
   },
   {
     id: "15",
-    image: "/src/assets/icons/IconOthers.svg?react",
-    alt: "Other",
     title: "Donation",
     amount: 30.0,
     date: "2024-07-10",
@@ -180,8 +150,6 @@ let transactions = [
   },
   {
     id: "16",
-    image: "/src/assets/icons/IconEntertainment.svg?react",
-    alt: "Fun",
     title: "Movie Ticket",
     amount: 12.0,
     date: "2024-10-22",

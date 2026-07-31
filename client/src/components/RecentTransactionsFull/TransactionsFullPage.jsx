@@ -8,6 +8,7 @@ import CategorySelect from "../SelectButton/CategorySelect";
 import { ThemeContext } from "../../context/ThemeContext";
 import store from '../../store/store.js'
 import Loader from "../Loaders/Loader";
+import { iconFor } from "../../assets/icons/iconFor";
 
 function TransactionsFullPage() {
     const dispatch = useDispatch();
@@ -78,10 +79,6 @@ function TransactionsFullPage() {
         dispatch(fetchPaginatedTransactions({ page: 1, filter, selectedCategory }));
     }
 
-    const getIcon = (tx) => {
-        return tx.image || "/src/assets/icons/IconOthers.svg?react";
-    };
-
     return (
         <div className={styles.wrapper}>
             <h2>{t('Recent Transaction')}</h2>
@@ -121,7 +118,7 @@ function TransactionsFullPage() {
                 {transactions.map((tx) => (
                     <div className={styles.row} key={tx.id}>
                         <span className={styles.item}>
-                            <img src={getIcon(tx)} alt="" />
+                            {iconFor(tx.category)}
                             {tx.title}
                         </span>
                         <span className={styles.gray}>{t(tx.category) || "—"}</span>
