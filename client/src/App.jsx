@@ -9,10 +9,7 @@ import LoginPage from './pages/LoginPage';
 import Overview from './pages/Overview';
 import Balances from './pages/Balances';
 import Transactions from './pages/Transactions';
-import Bills from './pages/Bills';
 import Expenses from './pages/Expenses';
-import Goals from './pages/Goals';
-import Settings from './pages/Settings';
 
 function App() {
   return (
@@ -23,62 +20,12 @@ function App() {
           <Routes>
             <Route path="/" element={<LoginPage />} />
             
-            <Route
-              path="/Overview"
-              element={
-                <PrivateRoute>
-                  <Overview />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/Balances"
-              element={
-                <PrivateRoute>
-                  <Balances />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/Transactions"
-              element={
-                <PrivateRoute>
-                  <Transactions />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/Bills"
-              element={
-                <PrivateRoute>
-                  <Bills />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/Expenses"
-              element={
-                <PrivateRoute>
-                  <Expenses />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/Goals"
-              element={
-                <PrivateRoute>
-                  <Goals />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/Settings"
-              element={
-                <PrivateRoute>
-                  <Settings />
-                </PrivateRoute>
-              }
-            />
+            <Route element={<PrivateRoute />}>
+              <Route path="/Overview" element={<Overview />} />
+              <Route path="/Balances" element={<Balances />} />
+              <Route path="/Transactions" element={<Transactions />} />
+              <Route path="/Expenses" element={<Expenses />} />
+            </Route>
           </Routes>
         </div>
       </Router>

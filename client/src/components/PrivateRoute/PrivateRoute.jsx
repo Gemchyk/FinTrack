@@ -1,4 +1,4 @@
-import { Navigate } from "react-router";
+import { Navigate, Outlet } from "react-router";
 import{ jwtDecode } from 'jwt-decode';
 
 
@@ -14,9 +14,9 @@ function isTokenExpired(token) {
     }
   }
 
-function PrivateRoute({ children }) {
+function PrivateRoute() {
   const token = localStorage.getItem('token');
-  return !isTokenExpired(token) ? children : <Navigate to="/" />;
+  return isTokenExpired(token) ? <Navigate to="/" replace /> : <Outlet />;
 }
 
 export default PrivateRoute;
