@@ -18,10 +18,6 @@ function SideNavBar() {
   };
 
   if(location.pathname === '/'){
-    return null;
-  }
-
-  if(location.pathname === '/'){
     return (
       <>
       <nav className={styles['sidebarLogin']}>
