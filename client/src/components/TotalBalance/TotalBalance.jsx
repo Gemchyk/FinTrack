@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import cardLogo from './imgs/cardLogo.png';
-import './TotalBalance.scss'; 
-import { useDispatch } from 'react-redux';
+import './TotalBalance.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchBalance } from '../../features/balance/balanceSlice';
 import { useTranslation } from 'react-i18next';
 
 function TotalBalance() {
   const dispatch = useDispatch();
-  const [store, setStore] = useState();
+  const store = useSelector((state) => state.balance.sum);
   const { t } = useTranslation();
 
   useEffect(() => {
-    dispatch(fetchBalance())
-      .unwrap()
-      .then(data => {
-        setStore(data);
-      })
-      .catch(err => {
-        console.error('Balance error:', err);
-      });
+    dispatch(fetchBalance());
   }, [dispatch]);
 
   return (

@@ -11,10 +11,7 @@ const initialState = [
     name: "Food",
     iconName: "Food",
     goalAmount: 300,
-    expenses: [
-      { id: "1", title: "АТБ", amount: 1200, date: "2025-06-01" },
-      { id: "2", title: "РОСТ", amount: 800, date: "2025-06-03" },
-    ],
+    expenses: [],
     isShownOnPage: true,
   },
   {
@@ -22,10 +19,7 @@ const initialState = [
     name: "Fun",
     iconName: "Entertainment",
     goalAmount: 250,
-    expenses: [
-      { id: "3", title: "Кіно", amount: 600, date: "2025-06-02" },
-      { id: "4", title: "Спорт", amount: 600, date: "2025-06-02" },
-    ],
+    expenses: [],
     isShownOnPage: true,
   },
   {
@@ -33,7 +27,7 @@ const initialState = [
     name: "Transport",
     iconName: "Transport",
     goalAmount: 100,
-    expenses: [{ id: "5", title: "Метро", amount: 100, date: "2025-06-04" }],
+    expenses: [],
     isShownOnPage: true,
   },
   {
@@ -41,7 +35,7 @@ const initialState = [
     name: "Shopping",
     iconName: "Shopping",
     goalAmount: 2000,
-    expenses: [{ id: "6", title: "H&M", amount: 900, date: "2025-06-05" }],
+    expenses: [],
     isShownOnPage: true,
   },
   {
@@ -49,7 +43,7 @@ const initialState = [
     name: "Health",
     iconName: "Health",
     goalAmount: 150,
-    expenses: [{ id: "7", title: "Аптека", amount: 300, date: "2025-06-06" }],
+    expenses: [],
     isShownOnPage: true,
   },
   {
@@ -57,9 +51,7 @@ const initialState = [
     name: "Other",
     iconName: "Other",
     goalAmount: null,
-    expenses: [
-      { id: "8", title: "Подарунок", amount: 500, date: "2025-06-07" },
-    ],
+    expenses: [],
     isShownOnPage: true,
   },
 ];
