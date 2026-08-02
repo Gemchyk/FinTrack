@@ -328,19 +328,6 @@ app.get('/transactions/sortBy/:criteria', authenticateToken, (req, res) => {
 });
 
 
-
-app.get('/transactions/paginated', authenticateToken, (req, res) => {
-  const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 5;
-
-  const start = (page - 1) * limit;
-  const end = start + limit;
-  const paginated = transactions.slice(start, end)
-  const hasMore = end < transactions.length;
-
-  res.json({ data: paginated, hasMore });
-});
-
 app.get('/transactions/filtered', authenticateToken, (req, res) => {
   const { page = 1, limit = 5, type = 'all', category = 'all' } = req.query;
 
