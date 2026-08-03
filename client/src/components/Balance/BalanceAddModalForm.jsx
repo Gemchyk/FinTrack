@@ -1,4 +1,3 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styles from '../RecentTransactionsFull/TransactionModalForm.module.scss';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
@@ -19,71 +18,51 @@ export default function BalanceAddModalForm({ onClose, mode = 'add', editingTran
     category: '',
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const values = Object.fromEntries(new FormData(e.target));
+    const amount = parseFloat(values.amount);
+
+    if (isEdit) {
+      dispatch(editTransaction({ expenseId: initialValues.id, updatedData: values }));
+    } else {
+      dispatch(addTransaction({
+        id: nanoid(),
+        ...values,
+        amount,
+      }));
+
+      dispatch(addBalance(amount));
+    }
+
+    onClose();
+  };
+
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <h3>{isEdit ? 'Edit' : 'Add'} {t('Balance')}</h3>
-        <Formik
-          initialValues={initialValues}
-          validate={(values) => {
-            const errors = {};
-            if (!values.title) errors.title = 'Required';
-            if (!values.amount || isNaN(values.amount)) errors.amount = 'Enter a valid amount';
-            if (!values.date) errors.date = 'Required';
-            return errors;
-          }}
-          onSubmit={(values, { resetForm }) => {
-            const amount = parseFloat(values.amount);
-            console.log('Submitting form with values:', values);
-          
-            if (isNaN(amount) || amount <= 0) {
-              console.error('Invalid amount:', amount);
-              return;
-            }
-          
-            if (isEdit) {
-              dispatch(editTransaction({ expenseId: initialValues.id, updatedData: values }));
-            } else {
-              dispatch(addTransaction({
-                id: nanoid(),
-                ...values,
-                amount,
-              }));
-          
-              dispatch(addBalance(amount));
-            }
-          
-            resetForm();
-            onClose();
-          }}
-        >
-          {() => (
-            <Form className={styles.form}>
-              <label>
-                {t('Title')}
-                <Field name="title" type="text" />
-                <ErrorMessage name="title" component="div" className={styles.error} />
-              </label>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <label>
+            {t('Title')}
+            <input name="title" type="text" defaultValue={initialValues.title} required />
+          </label>
 
-              <label>
-                {t('Amount')}
-                <Field name="amount" type="number" step="0.01" />
-                <ErrorMessage name="amount" component="div" className={styles.error} />
-              </label>
+          <label>
+            {t('Amount')}
+            <input name="amount" type="number" min="0.01" step="0.01" defaultValue={initialValues.amount} required />
+          </label>
 
-              <label>
-                {t('Date')}
-                <Field name="date" type="date" />
-                <ErrorMessage name="date" component="div" className={styles.error} />
-              </label>
+          <label>
+            {t('Date')}
+            <input name="date" type="date" defaultValue={initialValues.date} required />
+          </label>
 
-              <div className={styles.actions}>
-                <button type="submit">{isEdit ? t('Save Changes') : t('Add Balance')}</button>
-                <button type="button" onClick={onClose}>{t('Cancel')}</button>
-              </div>
-            </Form>
-          )}
-        </Formik>
+          <div className={styles.actions}>
+            <button type="submit">{isEdit ? t('Save Changes') : t('Add Balance')}</button>
+            <button type="button" onClick={onClose}>{t('Cancel')}</button>
+          </div>
+        </form>
       </div>
     </div>
   );

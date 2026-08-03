@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './SwitchLang.module.scss';
+import styles from './Toggle.module.scss';
 
-const SwitchLang = ({ checked, onChange }) => {
+const Toggle = ({ checked, onChange, variant = 'lang' }) => {
   return (
-    <label className={styles.toggleSwitch}>
+    <label className={`${styles.toggle} ${styles[variant]}`}>
       <input
         type="checkbox"
         className={styles.checkbox}
@@ -15,4 +15,4 @@ const SwitchLang = ({ checked, onChange }) => {
   );
 };
 
-export default SwitchLang;
+export default Toggle;
