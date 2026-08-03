@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import styles from './SideNavBar.module.scss';
 import { Link, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import SwitchLang from "../SwitchButton/SwitchLang";
-import SwitchTheme from "../SwitchButton/SwitchTheme";
+import Toggle from "../SwitchButton/Toggle";
 import { ThemeContext } from "../../context/ThemeContext.jsx";
 
 
@@ -23,7 +22,8 @@ function SideNavBar() {
       <nav className={styles['sidebarLogin']}>
         <div className={styles['flex']}>
             <span className={styles['labelLogin']}>EN</span>
-            <SwitchLang
+            <Toggle
+              variant="lang"
               checked={currentLang === "ua"}
               onChange={handleSwitchLang}
             />
@@ -31,14 +31,14 @@ function SideNavBar() {
         </div>
         <div className={styles['flex']}>
           <span className={styles['labelLogin']}>Light</span>
-          <SwitchTheme
+          <Toggle
+            variant="theme"
             checked={theme === 'dark'}
             onChange={toggleTheme}
           />
           <span className={styles['labelLogin']}>Dark</span>
         </div>
       </nav>
-        
       </>
     );
   }
@@ -54,7 +54,8 @@ function SideNavBar() {
 
       <div className={styles['flex']}>
         <span className={styles.label}>EN</span>
-        <SwitchLang
+        <Toggle
+          variant="lang"
           checked={currentLang === "ua"}
           onChange={handleSwitchLang}
         />
@@ -63,7 +64,8 @@ function SideNavBar() {
 
       <div className={styles['flex']}>
         <span className={styles.label}>Light</span>
-        <SwitchTheme
+        <Toggle
+          variant="theme"
           checked={theme === 'dark'}
           onChange={toggleTheme}
         />
