@@ -1,18 +1,10 @@
 import React, { useState } from "react";
-import * as yup from "yup";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { removeBalance } from "../../../features/balance/balanceSlice";
 import "./AddExpenseModal.scss";
 import { addExpenseWithStats, editExpenseWithStats } from "../categoriesSlice"
 import { useTranslation } from "react-i18next";
 
-
-const validationSchema = yup.object().shape({
-  title: yup.string().required("Обов'язково"),
-  amount: yup.number().positive("Має бути > 0").required("Обов'язково"),
-  date: yup.date().required("Оберіть дату"),
-});
 
 const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
   const dispatch = useDispatch();
@@ -27,30 +19,31 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
     amount: editingExpense?.amount || "",
     date: editingExpense?.date || "",
   };
-  
 
-  const handleSubmit = (values) => {
-  const amount = Number(values.amount);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const values = Object.fromEntries(new FormData(e.target));
+    const amount = Number(values.amount);
 
-  if (editingExpense) {
-    dispatch(editExpenseWithStats({
-      categoryId,
-      expenseId: editingExpense.id,
-      updatedData: values,
-    }));
+    if (editingExpense) {
+      dispatch(editExpenseWithStats({
+        categoryId,
+        expenseId: editingExpense.id,
+        updatedData: values,
+      }));
+      onClose();
+      return;
+    }
+
+    if (amount > balance) {
+      setError("❌ Not enough money on balance");
+      return;
+    }
+
+    dispatch(addExpenseWithStats({ categoryId, category, type: "Expense", ...values }));
+    dispatch(removeBalance(amount));
     onClose();
-    return;
-  }
-
-  if (amount > balance) {
-    setError("❌ Not enough money on balance");
-    return;
-  }
-
-  dispatch(addExpenseWithStats({ categoryId, category, type: "Expense", ...values }));
-  dispatch(removeBalance(amount));
-  onClose();
-};
+  };
 
   if (!show) return null;
 
@@ -59,51 +52,30 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h3>{editingExpense ? t("Edit Expense") : t("New Expense")}</h3>
 
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          <Form>
-            <div className="form-group">
-              <label>{t("Name")}</label>
-              <Field name="title" className="form-control" />
-              <ErrorMessage
-                name="title"
-                component="div"
-                className="text-danger"
-              />
-            </div>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>{t("Name")}</label>
+            <input name="title" className="form-control" defaultValue={initialValues.title} required />
+          </div>
 
-            <div className="form-group">
-              <label>{t("Amount")}</label>
-              <Field name="amount" type="number" className="form-control" />
-              <ErrorMessage
-                name="amount"
-                component="div"
-                className="text-danger"
-              />
-            </div>
+          <div className="form-group">
+            <label>{t("Amount")}</label>
+            <input name="amount" type="number" min="0.01" step="0.01" className="form-control" defaultValue={initialValues.amount} required />
+          </div>
 
-            <div className="form-group">
-              <label>{t("Date")}</label>
-              <Field name="date" type="date" className="form-control" />
-              <ErrorMessage
-                name="date"
-                component="div"
-                className="text-danger"
-              />
-            </div>
+          <div className="form-group">
+            <label>{t("Date")}</label>
+            <input name="date" type="date" className="form-control" defaultValue={initialValues.date} required />
+          </div>
 
-            {error && <div className="text-danger mb-2">{error}</div>}
-            <div className="modal-buttons">
-              <button type="submit">{t("Ok")}</button>
-              <button type="button" onClick={onClose}>
-                {t("Cancel")}
-              </button>
-            </div>
-          </Form>
-        </Formik>
+          {error && <div className="text-danger mb-2">{error}</div>}
+          <div className="modal-buttons">
+            <button type="submit">{t("Ok")}</button>
+            <button type="button" onClick={onClose}>
+              {t("Cancel")}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
