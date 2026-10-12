@@ -44,7 +44,8 @@ export const addTransaction = createAsyncThunk(
 
     const newTransaction = {
       ...transaction,
-      id: nanoid(),
+      // Category expenses pass their own id so a later delete hits the same record on the server
+      id: transaction.id ?? nanoid(),
       category: fallbackCategory,
     };
 

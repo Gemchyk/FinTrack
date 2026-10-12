@@ -65,16 +65,16 @@ export const addExpenseWithStats = createAsyncThunk(
     const id = nanoid();
     dispatch(addExpense({ id, categoryId, title, amount, date }));
     dispatch(
-      addTransaction({ categoryId, type, category, title, amount, date })
+      addTransaction({ id, categoryId, type, category, title, amount, date })
     );
   }
 );
 
 export const removeExpenseWithStats = createAsyncThunk(
   "categories/removeExpenseWithStats",
-  async ({ categoryId, expenseId, date, amount }, { dispatch }) => {
+  async ({ categoryId, expenseId }, { dispatch }) => {
     dispatch(removeExpense({ categoryId, expenseId }));
-    dispatch(removeTransaction({ categoryId, expenseId, date, amount }));
+    dispatch(removeTransaction(expenseId));
   }
 );
 
@@ -196,8 +196,8 @@ const categoriesSlice = createSlice({
   },
 });
 
-export const { 
-  setCategoriesFromTransactions, 
+export const {
+  setCategoriesFromTransactions,
   removeExpenseMirror,
   searchCategories,
   addExpense,

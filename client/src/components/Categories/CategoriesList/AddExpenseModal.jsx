@@ -29,7 +29,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
       dispatch(editExpenseWithStats({
         categoryId,
         expenseId: editingExpense.id,
-        updatedData: values,
+        updatedData: { ...values, amount },
       }));
       onClose();
       return;
@@ -40,7 +40,7 @@ const AddExpenseModal = ({ categoryId, onClose, show, editingExpense }) => {
       return;
     }
 
-    dispatch(addExpenseWithStats({ categoryId, category, type: "Expense", ...values }));
+    dispatch(addExpenseWithStats({ categoryId, category, type: "Expense", ...values, amount }));
     dispatch(removeBalance(amount));
     onClose();
   };

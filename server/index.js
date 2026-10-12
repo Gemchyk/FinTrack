@@ -267,6 +267,10 @@ app.post('/transactions', authenticateToken, (req, res) => {
   if (!transaction.id) {
     return res.status(400).json({ error: 'Missing transaction ID' });
   }
+  // A string amount gets concatenated in every sum and crashes the client on render
+  if (!Number.isFinite(transaction.amount)) {
+    return res.status(400).json({ error: 'Invalid amount' });
+  }
   transactions.unshift(transaction);
   res.json({ success: true });
 });
@@ -293,6 +297,10 @@ app.delete('/transactions/:id', authenticateToken, (req, res) => {
 app.put('/transactions/:id', authenticateToken, (req, res) => {
   const { id } = req.params;
   const updatedData = req.body;
+
+  if (!Number.isFinite(updatedData.amount)) {
+    return res.status(400).json({ error: 'Invalid amount' });
+  }
 
   const oldTransaction = transactions.find(t => t.id === id);
   if (!oldTransaction) return res.status(404).json({ error: 'Transaction not found' });
