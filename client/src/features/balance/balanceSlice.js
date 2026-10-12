@@ -1,21 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { api } from '../../api';
 
 // Fetch balance from server
 export const fetchBalance = createAsyncThunk(
   'balance/fetchBalance',
   async (_, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem('token');
-
-      const res = await fetch('http://localhost:5050/balance', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        }
-      });
+      const res = await api('/balance', { method: 'GET' });
 
       if (!res.ok) throw new Error('Failed to fetch balance');
-      
+
       const data = await res.json();
       return data.sum;
 
@@ -30,14 +24,8 @@ export const addBalance = createAsyncThunk(
   'balance/addBalance',
   async (amount, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem('token');
-
-      const res = await fetch('http://localhost:5050/balance/add', {
+      const res = await api('/balance/add', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
         body: JSON.stringify({ amount }),
       });
 
@@ -57,14 +45,8 @@ export const removeBalance = createAsyncThunk(
   'balance/removeBalance',
   async (amount, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem('token');
-
-      const res = await fetch('http://localhost:5050/balance/remove', {
+      const res = await api('/balance/remove', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
         body: JSON.stringify({ amount }),
       });
 

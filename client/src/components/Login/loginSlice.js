@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { api } from "../../api";
 
 const initialState = {
   isAuth: false,
@@ -7,24 +8,21 @@ const initialState = {
 
 export const signInAsync = createAsyncThunk('signin', async ({ username, password }) => {
     const body = { username, password };
-  
-    const result = await fetch('http://localhost:5050/signin', {
+
+    const result = await api('/signin', {
       method: 'POST',
       body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-      }
     });
-  
+
     const response = await result.json();
-  
+
     if (response.token) {
       localStorage.setItem('token', response.token);
     }
-  
+
     return { token: response.token };
   });
-  
+
 
 const authSlice = createSlice({
   name: 'auth',

@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk, nanoid } from '@reduxjs/toolkit';
 import { setCategoriesFromTransactions, removeExpenseMirror } from '../Categories/categoriesSlice';
 import { fetchTransactionsToDashboard } from '../WeeklyComparison/weeklyComprasionSlice.js';
-
-const BASE_URL = 'http://localhost:5050';
+import { api } from '../../api';
 
 const initialState = {
   data: [],
@@ -12,20 +11,10 @@ const initialState = {
   hasMore: true,
 };
 
-const getAuthHeader = (getState) => {
-  const token = getState().login.token || localStorage.getItem("token");
-  return {
-    Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  };
-};
-
 export const fetchAllTransactionsForCategories = createAsyncThunk(
   'transactions/fetchAllForCategories',
-  async (_, { dispatch, getState }) => {
-    const res = await fetch(`${BASE_URL}/transactions`, {
-      headers: getAuthHeader(getState),
-    });
+  async (_, { dispatch }) => {
+    const res = await api('/transactions');
 
     if (!res.ok) throw new Error('Failed to load all transactions');
 
@@ -36,13 +25,9 @@ export const fetchAllTransactionsForCategories = createAsyncThunk(
 
 export const fetchPaginatedTransactions = createAsyncThunk(
   'transactions/fetchPaginated',
-  async (
-    { page, limit = 5, filter = "all", selectedCategory = "all", skipPageIncrement = false },
-    { getState }
-  ) => {
-    const res = await fetch(
-      `${BASE_URL}/transactions/filtered?page=${page}&limit=${limit}&type=${filter}&category=${selectedCategory}`,
-      { headers: getAuthHeader(getState) }
+  async ({ page, limit = 5, filter = "all", selectedCategory = "all", skipPageIncrement = false }) => {
+    const res = await api(
+      `/transactions/filtered?page=${page}&limit=${limit}&type=${filter}&category=${selectedCategory}`
     );
 
     if (!res.ok) throw new Error('Failed to load transactions');
@@ -54,7 +39,7 @@ export const fetchPaginatedTransactions = createAsyncThunk(
 
 export const addTransaction = createAsyncThunk(
   'transactions/add',
-  async (transaction, { dispatch, getState }) => {
+  async (transaction, { dispatch }) => {
     const fallbackCategory = transaction.category || "Work";
 
     const newTransaction = {
@@ -63,14 +48,13 @@ export const addTransaction = createAsyncThunk(
       category: fallbackCategory,
     };
 
-    await fetch(`${BASE_URL}/transactions`, {
+    await api('/transactions', {
       method: 'POST',
-      headers: getAuthHeader(getState),
       body: JSON.stringify(newTransaction),
     });
 
     dispatch(resetTransactions());
-    dispatch(fetchPaginatedTransactions({ page: 1 })); 
+    dispatch(fetchPaginatedTransactions({ page: 1 }));
 
     dispatch(fetchTransactionsToDashboard());
     return newTransaction;
@@ -79,16 +63,15 @@ export const addTransaction = createAsyncThunk(
 
 export const removeTransaction = createAsyncThunk(
   'transactions/remove',
-  async (id, { getState, dispatch }) => {
-    await fetch(`${BASE_URL}/transactions/${id}`, {
+  async (id, { dispatch }) => {
+    await api(`/transactions/${id}`, {
       method: 'DELETE',
-      headers: getAuthHeader(getState),
     });
 
     dispatch(fetchTransactionsToDashboard());
     dispatch(removeExpenseMirror(id));
 
-    dispatch(resetTransactions()); 
+    dispatch(resetTransactions());
     dispatch(fetchPaginatedTransactions({ page: 1 }));
 
     return id;
@@ -98,9 +81,8 @@ export const removeTransaction = createAsyncThunk(
 export const editTransactionWithServer = createAsyncThunk(
   'transactions/edit',
   async ({ expenseId, updatedData }, { getState, dispatch }) => {
-    const res = await fetch(`${BASE_URL}/transactions/${expenseId}`, {
+    const res = await api(`/transactions/${expenseId}`, {
       method: 'PUT',
-      headers: getAuthHeader(getState),
       body: JSON.stringify(updatedData),
     });
 
@@ -119,10 +101,8 @@ export const editTransactionWithServer = createAsyncThunk(
 
 export const sortTransactions = createAsyncThunk(
   'transactions/sort',
-  async (criteria, { getState }) => {
-    const res = await fetch(`${BASE_URL}/transactions/sortBy/${criteria}`, {
-      headers: getAuthHeader(getState),
-    });
+  async (criteria) => {
+    const res = await api(`/transactions/sortBy/${criteria}`);
     return await res.json();
   }
 );
