@@ -6,12 +6,12 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 const app = express();
-const PORT = 5050;
+const PORT = process.env.PORT ?? 5050;
 
-app.use(cors());
+app.use(cors({ origin: process.env.CLIENT_URL ?? '*' }));
 app.use(bodyParser.json());
 
-const SECRET_KEY = 'FinTrack'
+const SECRET_KEY = process.env.SECRET_KEY ?? 'FinTrack'
 
 let balance = 25000;
 
@@ -183,13 +183,13 @@ function calculateMonthlyTotals(transactions) {
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
-  const token = authHeader?.split(' ')[1]; 
+  const token = authHeader?.split(' ')[1];
 
   if (!token) return res.sendStatus(401);
 
   jwt.verify(token, SECRET_KEY, (err, user) => {
     if (err) return res.sendStatus(403);
-    req.user = user; 
+    req.user = user;
     next();
   });
 }
@@ -206,7 +206,7 @@ app.post('/signin', async (req, res) => {
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) return res.status(401).json({ error: 'Wrong password' });
 
-  const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '10m' });
+  const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '2h' });
   res.json({ token });
 });
 
@@ -274,10 +274,10 @@ app.post('/transactions', authenticateToken, (req, res) => {
 // Удалить транзакцию
 app.delete('/transactions/:id', authenticateToken, (req, res) => {
   const { id } = req.params;
-  
+
   const transaction = transactions.find(t => t.id === id);
   if (!transaction) return res.status(404).json({ error: 'Transaction not found' });
-  
+
   if (transaction.type === 'Expense') {
     balance += transaction.amount;
   } else if (transaction.type === 'Income') {
@@ -285,7 +285,7 @@ app.delete('/transactions/:id', authenticateToken, (req, res) => {
   }
 
   transactions = transactions.filter(t => t.id !== id);
-  
+
   res.json({ success: true, balance });
 });
 
@@ -298,8 +298,8 @@ app.put('/transactions/:id', authenticateToken, (req, res) => {
   if (!oldTransaction) return res.status(404).json({ error: 'Transaction not found' });
 
   if (oldTransaction.type === 'Expense') {
-    balance += oldTransaction.amount;      
-    balance -= updatedData.amount;        
+    balance += oldTransaction.amount;
+    balance -= updatedData.amount;
   } else if (oldTransaction.type === 'Income') {
     balance -= oldTransaction.amount;
     balance += updatedData.amount;
