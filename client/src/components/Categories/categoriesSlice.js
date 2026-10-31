@@ -1,8 +1,8 @@
-import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 import {
   addTransaction,
   removeTransaction,
-  editTransaction,
+  editTransactionWithServer,
 } from "../Transactions/transactionsSlice";
 
 const initialState = [
@@ -56,31 +56,26 @@ const initialState = [
   },
 ];
 
-export const addExpenseWithStats = createAsyncThunk(
-  "categories/addExpenseWithStats",
-  async (
-    { categoryId, category, type, title, amount, date },
-    { dispatch }
-  ) => {
+export const addExpenseWithStats =
+  ({ categoryId, category, type, title, amount, date }) =>
+  (dispatch) => {
     const id = nanoid();
     dispatch(addExpense({ id, categoryId, title, amount, date }));
     dispatch(
       addTransaction({ id, categoryId, type, category, title, amount, date })
     );
-  }
-);
+  };
 
-export const removeExpenseWithStats = createAsyncThunk(
-  "categories/removeExpenseWithStats",
-  async ({ categoryId, expenseId }, { dispatch }) => {
+export const removeExpenseWithStats =
+  ({ categoryId, expenseId }) =>
+  (dispatch) => {
     dispatch(removeExpense({ categoryId, expenseId }));
     dispatch(removeTransaction(expenseId));
-  }
-);
+  };
 
-export const editExpenseWithStats = createAsyncThunk(
-  "categories/editExpenseWithStats",
-  async ({ categoryId, expenseId, updatedData }, { dispatch }) => {
+export const editExpenseWithStats =
+  ({ categoryId, expenseId, updatedData }) =>
+  (dispatch) => {
     dispatch(
       editExpense({
         categoryId,
@@ -88,9 +83,8 @@ export const editExpenseWithStats = createAsyncThunk(
         updatedData,
       })
     );
-    dispatch(editTransaction({ expenseId, updatedData }));
-  }
-);
+    dispatch(editTransactionWithServer({ expenseId, updatedData }));
+  };
 
 const categoriesSlice = createSlice({
   name: "categories",
@@ -140,7 +134,6 @@ const categoriesSlice = createSlice({
       });
     },
     addExpense: (state, action) => {
-      console.log(action.payload);
       const { id, categoryId, title, amount, date } = action.payload;
       const category = state.find((cat) => cat.id === categoryId);
       if (category) {
@@ -178,7 +171,6 @@ const categoriesSlice = createSlice({
         expenses: [],
         isShownOnPage: true,
       });
-      console.log(iconName);
     },
     setGoal: (state, action) => {
       const { categoryId, goalAmount } = action.payload;

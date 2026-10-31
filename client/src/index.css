@@ -34,9 +34,11 @@ body {
 
 }
 
+/* color-scheme follows the app theme, not the OS: it decides the text colour of native buttons and inputs */
 body.light {
   --bg-color: #fff;
   --text-color: #000;
+  color-scheme: light;
   background-color: var(--bg-color);
   color: var(--text-color);
 }
@@ -44,6 +46,7 @@ body.light {
 body.dark {
   --bg-color: #121212;
   --text-color: #fff;
+  color-scheme: dark;
   background-color: var(--bg-color);
   color: var(--text-color);
 }
@@ -63,6 +66,10 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+}
+/* :where keeps the specificity of a bare `button`, so component button styles still win */
+:where(body.light) button {
+  background-color: #f9f9f9;
 }
 button:hover {
   border-color: #646cff;
@@ -84,18 +91,5 @@ button:focus-visible {
 @keyframes spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }

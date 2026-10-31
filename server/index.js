@@ -1,17 +1,25 @@
 // server/index.js
 import express from 'express';
 import cors from 'cors';
-import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+
+// Locally the secrets live in server/.env; in production the host injects them and the file is absent
+try {
+  process.loadEnvFile(new URL('.env', import.meta.url));
+} catch (err) {
+  if (err.code !== 'ENOENT') throw err;
+}
 
 const app = express();
 const PORT = process.env.PORT ?? 5050;
 
 app.use(cors({ origin: process.env.CLIENT_URL ?? '*' }));
-app.use(bodyParser.json());
+app.use(express.json());
 
-const SECRET_KEY = process.env.SECRET_KEY ?? 'FinTrack'
+// No fallback: a secret known from the source would let anyone forge a token
+const SECRET_KEY = process.env.SECRET_KEY;
+if (!SECRET_KEY) throw new Error('SECRET_KEY environment variable is required');
 
 let balance = 25000;
 

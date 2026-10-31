@@ -10,14 +10,6 @@ import {
 import { fetchAllTransactionsForCategories } from "../Transactions/transactionsSlice";
 import { iconFor } from "../../assets/icons/iconFor";
 
-export const titleMap = {
-  Food: "Food",
-  Transport: "Transport",
-  Fun: "Fun",
-  Shopping: "Shopping",
-  Other: "Other",
-};
-
 export default function ExpensesGoalsByCategory() {
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();

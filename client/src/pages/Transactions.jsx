@@ -1,6 +1,6 @@
 import TransactionsFullPage from "../components/RecentTransactionsFull/TransactionsFullPage";
 
-function Transactions({}) {
+function Transactions() {
 
     return (
         <>

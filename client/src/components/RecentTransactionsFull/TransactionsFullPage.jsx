@@ -16,7 +16,6 @@ function TransactionsFullPage() {
     const { theme } = useContext(ThemeContext);
 
     const transactions = useSelector((state) => state.transactions.data);
-    console.log(transactions);
     const loading = useSelector((state) => state.transactions.loading);
     const error = useSelector((state) => state.transactions.error);
 
@@ -38,14 +37,14 @@ function TransactionsFullPage() {
 
     const handleDelete = async (id) => {
         await dispatch(removeTransaction(id));
-      
+
         const state = store.getState().transactions;
         const page = state.page;
         const hasMore = state.hasMore;
         const currentCount = state.data.length;
-      
+
         const gap = (page * LIMIT) - currentCount;
-      
+
         if (gap > 0 && hasMore) {
           dispatch(fetchPaginatedTransactions({
             page: page - 1,
@@ -66,7 +65,7 @@ function TransactionsFullPage() {
         setShowModal(false);
         setEditingTransaction(null);
     };
-    
+
 
     const handleLoadMore = () => {
         setIsLoadedMore(true)
@@ -93,11 +92,11 @@ function TransactionsFullPage() {
                 <button className={filter==="Expense" ? styles.active : ""} onClick={() => setFilter("Expense")}>
                     {t('Expenses')}
                 </button>
-                
+
                 <CategorySelect value={selectedCategory} onChange={setSelectedCategory} theme={theme}/>
             </div>
 
-            
+
             {error && <p className={styles.error}>{t('Error')}: {error}</p>}
 
             <div className={styles.table}>
@@ -163,7 +162,7 @@ function TransactionsFullPage() {
                             </button>
                         </div>
                     }
-                </div>            
+                </div>
                 }
         </div>
     );

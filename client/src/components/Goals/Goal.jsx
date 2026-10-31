@@ -5,7 +5,7 @@ import PiePart from './PiePart';
 import './Goal.scss'
 import { useTranslation } from 'react-i18next';
 
-function Goal(props) {
+function Goal() {
 
     const {t} = useTranslation();
 
@@ -20,7 +20,7 @@ function Goal(props) {
                 <PiePart />
             </div>
             </div>
-            
+
         </div>
     );
 }

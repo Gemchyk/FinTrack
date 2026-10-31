@@ -1,7 +1,7 @@
 import styles from '../RecentTransactionsFull/TransactionModalForm.module.scss';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
-import { addTransaction, editTransaction } from '../Transactions/transactionsSlice';
+import { addTransaction, editTransactionWithServer } from '../Transactions/transactionsSlice';
 import { useTranslation } from 'react-i18next';
 import { addBalance } from '../../features/balance/balanceSlice';
 
@@ -24,7 +24,7 @@ export default function BalanceAddModalForm({ onClose, mode = 'add', editingTran
     const amount = parseFloat(values.amount);
 
     if (isEdit) {
-      dispatch(editTransaction({ expenseId: initialValues.id, updatedData: values }));
+      dispatch(editTransactionWithServer({ expenseId: initialValues.id, updatedData: { ...values, amount } }));
     } else {
       dispatch(addTransaction({
         id: nanoid(),
