@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import './SearchForm.scss'
 import { useDispatch } from 'react-redux';
@@ -14,6 +14,8 @@ const SearchForm = () => {
     const {t} = useTranslation();
 
     const handleClear = () => {
+        // Otherwise a search typed just before Clear fires afterwards and re-filters the list
+        deboncedSearch.cancel();
         setInputValue("");
         dispatch(searchCategories(""))
     }
@@ -24,13 +26,15 @@ const SearchForm = () => {
         deboncedSearch(newValue);
     }
 
-    const deboncedSearch = useCallback(
-        debounce(value => {
+    // useMemo with real deps: the linter checks them, unlike a debounce passed to useCallback
+    const deboncedSearch = useMemo(
+        () => debounce(value => {
             dispatch(searchCategories(value));
-            console.log("Debounces");
-        }, 200), 
-        []
+        }, 200),
+        [dispatch]
     )
+
+    useEffect(() => () => deboncedSearch.cancel(), [deboncedSearch]);
 
     return (
         <>
@@ -44,7 +48,7 @@ const SearchForm = () => {
         />
         <button onClick={handleClear}>{t("Clear")}</button>
         </div>
-            
+
         </>
     );
 };

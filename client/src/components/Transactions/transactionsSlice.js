@@ -81,7 +81,7 @@ export const removeTransaction = createAsyncThunk(
 
 export const editTransactionWithServer = createAsyncThunk(
   'transactions/edit',
-  async ({ expenseId, updatedData }, { getState, dispatch }) => {
+  async ({ expenseId, updatedData }, { dispatch }) => {
     const res = await api(`/transactions/${expenseId}`, {
       method: 'PUT',
       body: JSON.stringify(updatedData),
@@ -93,8 +93,8 @@ export const editTransactionWithServer = createAsyncThunk(
     dispatch(resetTransactions());
     dispatch(fetchPaginatedTransactions({ page: 1 }));
 
-    const allTransactions = getState().transactions.data;
-    dispatch(setCategoriesFromTransactions(allTransactions));
+    // Rebuild categories from the server: the list above was just reset, so its data is empty here
+    dispatch(fetchAllTransactionsForCategories());
 
     return { expenseId, updatedData };
   }
@@ -112,9 +112,6 @@ const transactionsSlice = createSlice({
   name: 'transactions',
   initialState,
   reducers: {
-    setTransactions: (state, action) => {
-      state.data = action.payload;
-    },
     resetTransactions: (state) => {
       state.data = [];
       state.loading = false;
@@ -122,13 +119,6 @@ const transactionsSlice = createSlice({
       state.page = 1;
       state.hasMore = true;
     },
-    editTransaction: (state, action) => {
-      const { id, updatedData } = action.payload;
-      const index = state.data.findIndex(item => item.id === id);
-      if (index !== -1) {
-        state.data[index] = { ...state.data[index], ...updatedData };
-      }
-    }
   },
   extraReducers: (builder) => {
     builder
@@ -172,8 +162,6 @@ const transactionsSlice = createSlice({
 
 export const {
   resetTransactions,
-  editTransaction,
-  setTransactions,
 } = transactionsSlice.actions;
 
 export default transactionsSlice.reducer;

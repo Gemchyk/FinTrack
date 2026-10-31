@@ -1,16 +1,15 @@
 import { Navigate, Outlet } from "react-router";
-import{ jwtDecode } from 'jwt-decode';
 
 
 function isTokenExpired(token) {
     try {
-      const decoded = jwtDecode(token);
-      const currentTime = Date.now() / 1000; 
-      console.log(decoded.exp);
-      console.log(currentTime);
-      return decoded.exp < currentTime;
-    } catch (e) {
-      return true; 
+      // The payload is base64url: atob throws on its '-' and '_' without this mapping
+      const payload = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+      const { exp } = JSON.parse(atob(payload));
+      const currentTime = Date.now() / 1000;
+      return exp < currentTime;
+    } catch {
+      return true;
     }
   }
 

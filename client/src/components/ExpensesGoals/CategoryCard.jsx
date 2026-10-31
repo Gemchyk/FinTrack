@@ -15,7 +15,6 @@ export default function CategoryCard({
   onDeleteCategory,
 }) {
   const { name, icon, amount, goalAmount, id } = category;
-  console.log(name);
 
   const percentOfGoal = goalAmount
     ? Math.min((amount / goalAmount) * 100, 100)
