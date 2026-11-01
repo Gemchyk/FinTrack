@@ -1,0 +1,46 @@
+@use '../../styles/breakpoints' as *;
+
+// Matches the 220px sidebar width in SideNavBar.module.scss
+.content {
+  margin-left: 220px;
+  padding: 20px;
+}
+
+// #root adds 2rem of padding on desktop (App.css)
+.public {
+  min-height: calc(100dvh - 4rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.publicToggles {
+  position: fixed;
+  top: 20px;
+  left: 40px;
+}
+
+.publicContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: $mobile) {
+  // Bottom padding = tab bar height (56px) + gap + iPhone home indicator
+  .content {
+    margin-left: 0;
+    padding: 16px 16px calc(72px + env(safe-area-inset-bottom));
+  }
+
+  .public {
+    box-sizing: border-box;
+    min-height: 100dvh;
+    padding: 16px;
+  }
+
+  .publicToggles {
+    position: static;
+  }
+}

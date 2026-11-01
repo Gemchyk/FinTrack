@@ -1,0 +1,8 @@
+{
+  "name": "FinTrack",
+  "short_name": "FinTrack",
+  "start_url": "/Overview",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e1e2f"
+}

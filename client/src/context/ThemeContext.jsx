@@ -14,6 +14,9 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     document.body.className = theme;
     localStorage.setItem('theme', theme);
+    // The phone's browser bar takes the colour of the app header, which changes with the theme
+    document.querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', getComputedStyle(document.body).getPropertyValue('--color-sidebar-bg').trim());
   }, [theme]);
 
   const toggleTheme = () => {

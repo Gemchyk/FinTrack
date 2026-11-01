@@ -1,0 +1,3 @@
+// Kept apart from _variables.scss: that file emits :root rules, which @use would copy into every module.
+// Plain .css files cannot read this variable and repeat 768px — update them together.
+$mobile: 768px;

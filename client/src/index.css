@@ -26,8 +26,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -56,6 +54,13 @@ h1 {
   line-height: 1.1;
 }
 
+/* Inputs do not inherit font-size (~13px by default); below 16px iOS zooms the page on focus */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -77,6 +82,35 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Shared backdrop of the .modal-overlay/.modal dialogs (Balance, AddExpenseModal, NewCategoryModal) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 768px = $mobile in styles/_breakpoints.scss. On phones the dialog becomes a bottom sheet */
+@media (max-width: 768px) {
+  .modal-overlay {
+    align-items: flex-end;
+  }
+
+  .modal-overlay .modal {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    max-height: 90dvh;
+    overflow-y: auto;
+    border-radius: 16px 16px 0 0;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
 }
 
 .loader {

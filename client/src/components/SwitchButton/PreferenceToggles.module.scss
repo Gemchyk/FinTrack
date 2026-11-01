@@ -1,0 +1,18 @@
+.toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label {
+  width: 30px;
+  text-align: center;
+  margin: 0 10px;
+  color: var(--color-text-primary);
+}

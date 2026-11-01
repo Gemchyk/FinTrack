@@ -1,0 +1,71 @@
+@use '../../styles/breakpoints' as *;
+
+// Phones only: the desktop has the sidebar
+.topBar,
+.tabBar {
+  display: none;
+}
+
+@media (max-width: $mobile) {
+  .topBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background-color: var(--color-sidebar-bg);
+  }
+
+  .logo {
+    color: var(--color-accent);
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 24px;
+    text-decoration: none;
+  }
+
+  .tabBar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    display: flex;
+    background-color: var(--color-sidebar-bg);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    // Keeps the tabs above the iPhone home indicator; needs viewport-fit=cover in index.html
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  // Selectors with :hover outrank the global a:hover colour, which would otherwise stick after a tap
+  .tab,
+  .tab:hover {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-height: 56px;
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .active,
+  .active:hover {
+    color: var(--color-accent);
+  }
+
+  .icon {
+    font-size: 20px;
+    line-height: 1;
+  }
+}

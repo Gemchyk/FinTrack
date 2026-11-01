@@ -8,11 +8,11 @@
     "Goals": "Цілі",
     "Settings": "Налаштування",
     "Spendings": "Витрати",
-  
+
     "All Accounts": "Всі рахунки",
     "Account Type": "Тип рахунку",
     "Credit Card": "Кредитна карта",
-  
+
     "Categories Spendings 2025": "Витрати за категоріями 2025",
     "Add new category": "Додати нову категорію",
     "Name category": "Назва категорії",
@@ -21,15 +21,15 @@
     "Recent Transaction": "Останні транзакції",
     "Statistics": "Статистика",
     "Monthly Comparison": "Місячне порівняння",
-  
+
     "Date": "Дата",
     "Amount": "Сума",
     "Name": "Назва",
-  
+
     "Figma - Monthly": "Figma - Щомісячно",
     "Last Charge": "Останнє списання",
     "Adobe - Yearly": "Adobe - Щорічно",
-  
+
     "Search": "Пошук",
     "Clear": "Очистити",
     "Expenses by category": "Витрати за категоріями",
@@ -43,11 +43,11 @@
     "Total Amount": "Загальний баланс",
     "Add Balance": "Додати",
 
-  
+
     "Adjust": "Додати",
     "Details": "Деталі",
     "Set goal": "Встановити ціль",
-  
+
     "Food": "Їжа",
     "Housing": "Житло",
     "Entertainment": "Розваги",
@@ -97,5 +97,6 @@
     "Hide": "Сховати",
     "No transactions found": "Транзакцій не знайдено",
     "Select": "Обрати",
-    "Loading...": "Завантаження..."
+    "Loading...": "Завантаження...",
+    "Profile": "Профіль"
   }

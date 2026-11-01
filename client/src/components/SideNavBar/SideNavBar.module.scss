@@ -1,8 +1,10 @@
+@use '../../styles/breakpoints' as *;
+
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 15%;
+  width: 220px;
   height: 100vh;
   background-color: var(--color-sidebar-bg);
   color: var(--color-text-primary);
@@ -41,30 +43,14 @@
   color: #fff;
 }
 
-
-.sidebarLogin{
-  @extend .sidebar;
-  background-color: transparent;
-  box-shadow: none;
-
+.profile {
+  margin-top: auto;
+  margin-bottom: 20px;
 }
 
-.flex {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: 40px;
-}
-
-.label {
-  width: 30px;
-  text-align: center;
-  margin: 0 10px;
-  color: #FFF;
-}
-
-
-.labelLogin{
-  @extend .label;
-  color: var( --color-text-primary);
+// The tab bar replaces the sidebar on phones
+@media (max-width: $mobile) {
+  .sidebar {
+    display: none;
+  }
 }

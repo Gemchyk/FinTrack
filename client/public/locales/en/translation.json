@@ -7,29 +7,29 @@
     "Expenses": "Expenses",
     "Goals": "Goals",
     "Settings": "Settings",
-    "Spendings": "Spendings", 
-  
+    "Spendings": "Spendings",
+
     "All Accounts": "All Accounts",
     "Account Type": "Account Type",
     "Credit Card": "Credit Card",
-  
+
     "Categories Spendings 2025": "Categories Spendings 2025",
     "Add new category": "Add new category",
     "Name category": "Name  of category",
     "New category": "New category",
-  
+
     "Recent Transaction": "Recent Transaction",
     "Statistics": "Statistics",
     "Monthly Comparison": "Monthly Comparison",
-  
+
     "Date": "Date",
     "Amount": "Amount",
     "Name": "Name",
-  
+
     "Figma - Monthly": "Figma - Monthly",
     "Last Charge": "Last Charge",
     "Adobe - Yearly": "Adobe - Yearly",
-  
+
     "Search": "Search",
     "Clear": "Clear",
     "Expenses by category": "Expenses by category",
@@ -45,11 +45,11 @@
     "Add Balance": "Add Balance",
     "Actual Exchange Rate": "Actual Exchange Rate",
 
-  
+
     "Adjust": "Adjust",
     "Details": "Details",
     "Set goal": "Set goal",
-  
+
     "Food": "Food",
     "Housing": "Housing",
     "Entertainment": "Entertainment",
@@ -98,5 +98,6 @@
     "Hide": "Hide",
     "No transactions found": "No transactions found",
     "Select": "Select",
-    "Loading...": "Loading..."
+    "Loading...": "Loading...",
+    "Profile": "Profile"
   }

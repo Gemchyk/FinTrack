@@ -5,7 +5,7 @@
   font-size: 22px;
   line-height: 145%;
   color: gray;
-  
+
 }
 
 
@@ -16,3 +16,9 @@
   font-family: Inter, sans-serif;
 }
 
+/* 768px = $mobile in styles/_breakpoints.scss */
+@media (max-width: 768px) {
+  #root {
+    padding: 0;
+  }
+}
