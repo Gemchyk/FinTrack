@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    // Existing .js/.jsx keep working unchecked; files are moved to .ts/.tsx as the plan rewrites them
+    "allowJs": true,
+    "checkJs": false,
+    // Vite builds with esbuild; tsc only checks types
+    "noEmit": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "types": ["vite/client", "vite-plugin-svgr/client"]
+  },
+  "include": ["src"]
+}

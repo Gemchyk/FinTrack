@@ -13,6 +13,7 @@
     "start:server": "npm run start --workspace server",
     "build": "npm run build --workspace client",
     "preview": "npm run preview --workspace client",
-    "lint": "npm run lint --workspace client"
+    "lint": "npm run lint --workspace client",
+    "typecheck": "npm run typecheck --workspaces"
   }
 }
