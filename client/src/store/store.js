@@ -3,7 +3,7 @@ import categoriesReducer from '../components/Categories/categoriesSlice';
 import balanceReducer from '../features/balance/balanceSlice'
 import weeklyComparisonReducer from '../components/WeeklyComparison/weeklyComprasionSlice'
 import transactionsReducer from '../components/Transactions/transactionsSlice';
-import loginReducer from '../components/Login/loginSlice'
+import { api } from './api';
 
 
 export const store = configureStore({
@@ -12,8 +12,9 @@ export const store = configureStore({
     balance: balanceReducer,
     weeklyComparison: weeklyComparisonReducer,
     transactions: transactionsReducer,
-    login: loginReducer
+    [api.reducerPath]: api.reducer,
    },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
 });
 
 export default store;
