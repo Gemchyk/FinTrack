@@ -13,7 +13,7 @@
     "Account Type": "Account Type",
     "Credit Card": "Credit Card",
 
-    "Categories Spendings 2025": "Categories Spendings 2025",
+    "Spending by category this month": "Spending by category this month",
     "Add new category": "Add new category",
     "Name category": "Name  of category",
     "New category": "New category",
@@ -65,15 +65,6 @@
     "Edit Expense": "Edit Expense",
     "Cancel": "Cancel",
     "Ok": "Ok",
-    "categories": {
-      "food": "Food",
-      "shopping": "Shopping",
-      "fun": "Fun",
-      "groceries": "Groceries",
-      "other": "Other",
-      "health": "Health",
-      "transport": "Transport"
-    },
 
     "All": "All",
     "Revenue": "Revenue",
@@ -98,6 +89,8 @@
     "Select": "Select",
     "Loading...": "Loading...",
     "Profile": "Profile",
+    "Without category": "Without category",
+    "No spendings yet": "No spendings yet",
 
     "Email": "Email",
     "Currency": "Currency",
@@ -136,9 +129,17 @@
     "profile": {
       "currencyConfirm": "Change the currency to {{currency}}? Amounts are not converted: 1000 stays 1000, only the currency changes."
     },
+    "category": {
+      "deleteConfirm": "Delete the category {{name}}? Its expenses stay, without a category.",
+      "exists": "A category with this name already exists"
+    },
+    "rates": {
+      "failed": "Could not load the rate"
+    },
     "errors": {
       "failed": "Something went wrong. Try again.",
       "offline": "The server does not answer. Check the connection and try again.",
-      "tooMany": "Too many attempts. Try again later."
+      "tooMany": "Too many attempts. Try again later.",
+      "invalid": "Check the values in the form"
     }
   }

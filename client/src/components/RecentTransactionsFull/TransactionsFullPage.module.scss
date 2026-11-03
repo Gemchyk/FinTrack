@@ -50,17 +50,17 @@
       padding: 6px 12px;
       cursor: pointer;
       transition: background-color 0.3s, color 0.3s;
-      font-weight: 600; 
-      font-family: inherit; 
+      font-weight: 600;
+      font-family: inherit;
       appearance: none;
       &:hover {
         background-color: var(--color-accent-hover);
       }
     }
-    
+
 
     .select__control {
-      @extend .addButton; 
+      @extend .addButton;
     }
 
   }
@@ -128,7 +128,7 @@
     }
   }
 
- 
+
 }
 
 .flex{
@@ -149,4 +149,9 @@
   padding: 2rem;
   font-size: 1.2rem;
   color: #888;
+}
+
+.error {
+  margin: 0;
+  color: #e53935;
 }

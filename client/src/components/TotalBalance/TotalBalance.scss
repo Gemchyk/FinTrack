@@ -7,7 +7,7 @@
     --cb-card-bg: #299d92;
     --cb-card-link-bg: #fff;
   }
-  
+
   .dark {
     --cb-bg-color:#1a1919;
     --cb-text-primary: #e0e0e0;
@@ -17,14 +17,14 @@
     --cb-card-bg: #4fc3b1;
     --cb-card-link-bg: #2c2c2c;
   }
-  
+
   .totalBalanceTitle {
     font-weight: 400;
     font-size: 22px;
     line-height: 145%;
     color: var(--cb-text-secondary);
   }
-  
+
   .balanceAmount {
     display: block;
     font-size: 1.17em;
@@ -36,7 +36,7 @@
     unicode-bidi: isolate;
     color: var(--cb-text-inverse);
   }
-  
+
   .wrapper {
     width: 27.5%;
     max-width: 352px;
@@ -46,7 +46,7 @@
     justify-content: center;
     align-items: flex-start;
   }
-  
+
   .main {
     border-radius: 8px;
     padding: 24px;
@@ -55,7 +55,7 @@
     box-shadow: 0 20px 25px 0 var(--cb-shadow-color);
     background: var(--cb-bg-color);
   }
-  
+
   .main-header {
     width: 98%;
     max-width: 392px;
@@ -65,7 +65,7 @@
     justify-content: space-between;
     text-align: center;
   }
-  
+
   .main-title {
     font-family: Inter, sans-serif;
     font-weight: 800;
@@ -75,7 +75,11 @@
     color: var(--cb-text-primary);
     margin-bottom: 10px;
   }
-  
+
+  .main-title.negative {
+    color: #e53935;
+  }
+
   .main-sec-title {
     font-family: Inter, sans-serif;
     font-weight: 500;
@@ -86,9 +90,9 @@
     display: flex;
     align-items: center;
   }
-  
+
   /*----------------Credit Card Preview-------------*/
-  
+
   .card-preview {
     margin-top: 12px;
     border-radius: 4px;
@@ -100,21 +104,21 @@
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .card-preview-info {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .card-preview-info h3 {
     margin: 0;
   }
-  
+
   .card-preview-info h4 {
     margin: 0;
   }
-  
+
   .card-preview-info-title {
     font-family: Inter, sans-serif;
     font-weight: 700;
@@ -123,7 +127,7 @@
     text-transform: capitalize;
     color: var(--cb-text-inverse);
   }
-  
+
   .card-preview-addinfo {
     display: flex;
     flex-direction: column;
@@ -131,7 +135,7 @@
     align-items: flex-end;
     gap: 12px;
   }
-  
+
   .card-preview-linkDiv {
     display: flex;
     padding: 4px;
@@ -140,7 +144,7 @@
     border-radius: 20px;
     background: var(--cb-card-link-bg);
   }
-  
+
   .card-preview-moneyDiv {
     display: flex;
     align-items: center;
@@ -148,9 +152,8 @@
   }
 
   .card-preview-logo {
-    width: 32px;           
-    object-fit: contain;   
-    align-self: flex-end;    
-    margin-top: 25px;             
+    width: 32px;
+    object-fit: contain;
+    align-self: flex-end;
+    margin-top: 25px;
   }
-  

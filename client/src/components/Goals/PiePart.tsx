@@ -1,20 +1,22 @@
-import { useSelector } from 'react-redux';
 import { PieChart, Pie, Cell } from 'recharts';
 import { useTranslation } from 'react-i18next';
+import { categoryName, useReportQuery } from '../Categories/categoriesApi';
+import { currentMonth } from '../../dates';
 
+// By position, so any category, the user's own included, gets a colour
+const COLORS = ['#1E2A38', '#00C49F', '#4A5A6A', '#738FA7', '#BFA2DB', '#3EDBB3'];
 
-const data = [
-  { name: 'Shopping', value: 0, color: '#1E2A38' },
-  { name: 'Fun', value: 0, color: '#00C49F' },
-  { name: 'Food', value: 0, color: '#4A5A6A' },
-  { name: 'Other', value: 0, color: '#738FA7'},
-  { name: 'Health', value: 0, color: '#BFA2DB'},
-  { name: 'Transport', value: 0, color: '#3EDBB3'}
-];
-
+interface LabelProps {
+  cx: number;
+  cy: number;
+  midAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+  percent: number;
+}
 
 const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: LabelProps) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -34,16 +36,14 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 const GoalsChart = () => {
   const {t} = useTranslation();
-  const store = useSelector((state) => state.categories); 
-  const chartData = data
-    .map((d) => {
-      const storeCategory = store.find((i) => i.name == d.name);
-      const value = storeCategory && storeCategory.expenses
-        ? storeCategory.expenses.reduce((sum, el) => sum + el.amount, 0)
-        : 0;
-      return { ...d, value };
-    })
-    .filter((d) => d.value > 0);
+  const report = useReportQuery(currentMonth()).data;
+  const chartData = [
+    ...(report?.categories ?? []).map((category) => ({ name: categoryName(t, category.name), value: category.spent })),
+    // Expenses whose category was deleted still belong to the month
+    { name: t('Without category'), value: report?.uncategorized ?? 0 },
+  ]
+    .filter((d) => d.value > 0)
+    .map((d, index) => ({ ...d, color: COLORS[index % COLORS.length] }));
 
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -62,7 +62,7 @@ const GoalsChart = () => {
                   borderRadius: 2,
                 }}
               />
-              <span className='goals-mini-title' style={{ fontSize: 14 }}>{t(`${entry.name}`)}</span>
+              <span className='goals-mini-title' style={{ fontSize: 14 }}>{entry.name}</span>
             </div>
           ))
         )}

@@ -27,14 +27,21 @@ const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> =
   return result;
 };
 
-// Endpoints are added next to the components that use them, with api.injectEndpoints.
-// Which mutation invalidates which tags:
-//   updateMe -> Me
+// Endpoints are added next to the components that use them, with api.injectEndpoints
 export const api = createApi({
   baseQuery,
-  tagTypes: ['Me'],
+  tagTypes: ['Me', 'Transactions', 'Balance', 'Report', 'Dashboard', 'Categories'],
   endpoints: () => ({}),
 });
+
+// What each kind of change makes stale. Every mutation takes its list from here: a tag missing from a
+// list leaves old data on screen until F5
+export const INVALIDATES = {
+  me: ['Me'],
+  transaction: ['Transactions', 'Balance', 'Report', 'Dashboard'],
+  // The transaction list shows the category name through a JOIN, and deleting a category clears it there
+  category: ['Categories', 'Report', 'Transactions'],
+} as const;
 
 // Translation key for a failed request: the form's own message for a known status, otherwise a common one
 export function errorKey(

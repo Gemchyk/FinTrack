@@ -1,18 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import cardLogo from './imgs/cardLogo.png';
 import './TotalBalance.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchBalance } from '../../features/balance/balanceSlice';
 import { useTranslation } from 'react-i18next';
+import { useBalanceQuery } from '../Balance/balanceApi';
+import { currentMonth } from '../../dates';
+import { useMoney } from '../../money';
 
 function TotalBalance() {
-  const dispatch = useDispatch();
-  const store = useSelector((state) => state.balance.sum);
   const { t } = useTranslation();
-
-  useEffect(() => {
-    dispatch(fetchBalance());
-  }, [dispatch]);
+  const { format } = useMoney();
+  const balance = useBalanceQuery(currentMonth()).data?.balance;
+  const amount = balance === undefined ? '…' : format(balance);
 
   return (
     <div>
@@ -20,7 +18,8 @@ function TotalBalance() {
 
       <div className="main">
         <div className="main-header">
-          <h1 className="main-title">${store}</h1>
+          {/* Spending more than came in this month is shown, not prevented */}
+          <h1 className={balance < 0 ? 'main-title negative' : 'main-title'}>{amount}</h1>
           <h4 className="main-sec-title">{t("All Accounts")}</h4>
         </div>
 
@@ -34,7 +33,7 @@ function TotalBalance() {
           <div className="card-preview-addinfo">
             <img className="card-preview-logo" src={cardLogo} alt="Card logo" />
             <div className="card-preview-moneyDiv">
-              <h3 className="balanceAmount">${store}</h3>
+              <h3 className="balanceAmount">{amount}</h3>
               <div className="card-preview-linkDiv">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
