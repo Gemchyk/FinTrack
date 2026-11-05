@@ -1,0 +1,115 @@
+@use '../../styles/breakpoints' as *;
+
+.hero {
+  padding: 24px 16px;
+  border-radius: 16px;
+  background: var(--color-bg-light);
+  box-shadow: 0 1px 4px var(--color-box-shadow);
+  text-align: center;
+}
+
+// Intl writes "листопад 2026 р." in lower case
+.month {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 15px;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.balance {
+  margin: 4px 0 16px;
+  color: var(--color-text-primary);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.negative {
+  color: #e53935;
+}
+
+.totals {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.label {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+.amount {
+  color: var(--color-text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.income {
+  color: var(--color-accent);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+// The same look for the two buttons and the link
+.action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 72px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.actionIcon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-accent-hover);
+  color: var(--color-accent);
+  font-size: 26px;
+  line-height: 1;
+}
+
+@media (hover: hover) {
+  // Outranks the global a:hover colour
+  .action:hover {
+    color: var(--color-text-primary);
+  }
+
+  .action:hover .actionIcon {
+    background: var(--color-accent);
+    color: #fff;
+  }
+}
+
+@media (max-width: $mobile) {
+  .balance {
+    font-size: 34px;
+  }
+}

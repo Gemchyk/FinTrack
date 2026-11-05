@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as *;
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -17,6 +19,7 @@
   .tabs {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     justify-content: center;
 
@@ -53,8 +56,10 @@
       font-weight: 600;
       font-family: inherit;
       appearance: none;
-      &:hover {
-        background-color: var(--color-accent-hover);
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--color-accent-hover);
+        }
       }
     }
 
@@ -66,8 +71,10 @@
   }
 }
 
+// The full width of the page instead of a fixed 1200px, which slid under the sidebar at 1280px
 .table {
-  min-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
   min-height: 400px;
   background-color: var(--color-bg-light);
   border-radius: 16px;
@@ -121,8 +128,10 @@
         cursor: pointer;
         transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 
-        &:hover {
-          background-color: var(--color-accent-hover);
+        @media (hover: hover) {
+          &:hover {
+            background-color: var(--color-accent-hover);
+          }
         }
       }
     }
@@ -154,4 +163,42 @@
 .error {
   margin: 0;
   color: #e53935;
+}
+
+// On phones every row is a card: title and amount, then category and date, then the buttons.
+// The type column is hidden: the sign of the amount already tells income from expense
+@media (max-width: $mobile) {
+  .wrapper .tabs {
+    gap: 4px 8px;
+  }
+
+  .table {
+    min-height: 0;
+    padding: 0 16px;
+
+    .header {
+      display: none;
+    }
+
+    .row {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        "title amount"
+        "category date"
+        "actions actions";
+      gap: 4px 12px;
+      padding: 12px 0;
+
+      > :nth-child(1) { grid-area: title; }
+      > :nth-child(2) { grid-area: category; }
+      > :nth-child(3) { grid-area: date; justify-self: end; }
+      > :nth-child(4) { display: none; }
+      > :nth-child(5) { grid-area: amount; justify-self: end; }
+      > :nth-child(6) { grid-area: actions; margin-top: 4px; }
+
+      .actions button {
+        flex: 1;
+      }
+    }
+  }
 }

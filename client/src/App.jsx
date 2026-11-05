@@ -15,6 +15,7 @@ import Overview from './pages/Overview';
 import Balances from './pages/Balances';
 import Transactions from './pages/Transactions';
 import Expenses from './pages/Expenses';
+import Statistics from './pages/Statistics';
 import Profile from './pages/Profile';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
               <Route path="/Balances" element={<Balances />} />
               <Route path="/Transactions" element={<Transactions />} />
               <Route path="/Expenses" element={<Expenses />} />
+              <Route path="/Statistics" element={<Statistics />} />
               <Route path="/Profile" element={<Profile />} />
             </Route>
           </Route>

@@ -46,7 +46,8 @@ const GoalsChart = () => {
     .map((d, index) => ({ ...d, color: COLORS[index % COLORS.length] }));
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
+    // Wraps on the narrowest phones: the legend goes above the 200px pie instead of pushing the page wider
+    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
       <div style={{ marginRight: '20px' }}>
         {chartData.length === 0 ? (
           <span style={{ color: 'gray', fontSize: 14 }}>{t('No spendings yet')}</span>

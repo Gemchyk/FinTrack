@@ -9,8 +9,6 @@
     "Settings": "Settings",
     "Spendings": "Spendings",
 
-    "All Accounts": "All Accounts",
-    "Account Type": "Account Type",
     "Credit Card": "Credit Card",
 
     "Spending by category this month": "Spending by category this month",
@@ -40,7 +38,6 @@
     "Confirm": "Confirm",
     "Add": "Add",
     "Edit": "Edit",
-    "Account Number": "Account Number",
     "Total Amount": "Total Amount",
     "Add Balance": "Add Balance",
     "Actual Exchange Rate": "Actual Exchange Rate",
@@ -59,8 +56,6 @@
     "Other": "Other",
     "Login-btn": "Login",
     "Password": "Password",
-    "Total Balance": "Total Balance",
-    "This month": "This month",
     "New Expense": "New Expense",
     "Edit Expense": "Edit Expense",
     "Cancel": "Cancel",
@@ -97,6 +92,13 @@
     "New password": "New password",
     "Sign up": "Sign up",
     "Log out": "Log out",
+    "overview": {
+      "income": "Income",
+      "expense": "Expense",
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "allTransactions": "All transactions"
+    },
     "auth": {
       "toSignup": "Create an account",
       "toForgot": "Forgot your password?",

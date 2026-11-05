@@ -37,8 +37,8 @@ export default function TransactionModalForm({ transaction, onClose }: Props) {
   };
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.modal}>
+    <div className="modal-overlay">
+      <div className={styles.modal} role="dialog" aria-modal="true">
         <h3>{t('Edit')} {t('Transaction')}</h3>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label>

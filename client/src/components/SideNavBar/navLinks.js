@@ -4,4 +4,5 @@ export const navLinks = [
   { to: '/Balances', icon: '💰', label: 'Balances' },
   { to: '/Transactions', icon: '🔄', label: 'Transactions' },
   { to: '/Expenses', icon: '💸', label: 'Expenses' },
+  { to: '/Statistics', icon: '📈', label: 'Statistics' },
 ];

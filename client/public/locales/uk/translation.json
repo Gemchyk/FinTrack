@@ -9,8 +9,6 @@
     "Settings": "Налаштування",
     "Spendings": "Витрати",
 
-    "All Accounts": "Всі рахунки",
-    "Account Type": "Тип рахунку",
     "Credit Card": "Кредитна карта",
 
     "Spending by category this month": "Витрати за категоріями цього місяця",
@@ -39,7 +37,6 @@
     "Confirm": "Підтвердити",
     "Add": "Додати",
     "Edit": "Редагувати",
-    "Account Number": "Номер Картки",
     "Total Amount": "Загальний баланс",
     "Add Balance": "Додати",
 
@@ -57,8 +54,6 @@
     "Other": "Інше",
     "Login-btn": "Увійти",
     "Password": "Пароль",
-    "Total Balance": "Загальний баланс",
-    "This month": "Цього місяця",
     "New Expense": "Нова витрата",
     "Edit Expense": "Редагувати витрату",
     "Cancel": "Скасувати",
@@ -96,6 +91,13 @@
     "New password": "Новий пароль",
     "Sign up": "Зареєструватися",
     "Log out": "Вийти",
+    "overview": {
+      "income": "Дохід",
+      "expense": "Витрата",
+      "today": "Сьогодні",
+      "yesterday": "Вчора",
+      "allTransactions": "Усі транзакції"
+    },
     "auth": {
       "toSignup": "Створити акаунт",
       "toForgot": "Забули пароль?",

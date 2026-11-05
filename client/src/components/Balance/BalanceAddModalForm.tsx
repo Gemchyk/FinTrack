@@ -26,8 +26,8 @@ export default function BalanceAddModalForm({ onClose }: { onClose: () => void }
   };
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.modal}>
+    <div className="modal-overlay">
+      <div className={styles.modal} role="dialog" aria-modal="true">
         <h3>{t('Add Balance')}</h3>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label>

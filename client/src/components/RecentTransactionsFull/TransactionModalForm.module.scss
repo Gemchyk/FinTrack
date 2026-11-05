@@ -1,33 +1,24 @@
-.overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 11;
-  
-    .modal {
-      background: var(--color-bg-light);
-      padding: 30px;
-      border-radius: 16px;
-      min-width: 320px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-  
-      h3 {
-        margin: 0;
-        color: var(--color-text-secondary);
-      }
-    }
+// The backdrop and the bottom sheet on phones come from .modal-overlay in index.css
+.modal {
+  background: var(--color-bg-light);
+  padding: 30px;
+  border-radius: 16px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  h3 {
+    margin: 0;
+    color: var(--color-text-secondary);
   }
-  
+}
+
   .form {
     display: flex;
     flex-direction: column;
     gap: 12px;
-  
+
     label {
       display: flex;
       flex-direction: column;
@@ -36,7 +27,7 @@
       font-size: 16px;
       font-weight: 600;
     }
-  
+
     input,
     select {
       padding: 8px;
@@ -46,18 +37,18 @@
       color: var(--color-text-primary);
       font-size: 16px;
     }
-  
+
     .error {
       font-size: 12px;
       color: #e74c3c; // оставляем фиксированный цвет для ошибок
     }
-  
+
     .actions {
       display: flex;
       justify-content: center;
       gap: 16px;
       margin-top: 10px;
-  
+
       button {
         padding: 12px 24px;
         border: none;
@@ -65,16 +56,17 @@
         background: var(--color-accent);
         color: white;
         transition: opacity 0.3s;
-  
-        &:hover {
-          opacity: 0.9;
+
+        @media (hover: hover) {
+          &:hover {
+            opacity: 0.9;
+          }
         }
       }
-  
+
       button:last-child {
         background: var(--color-border);
         color: var(--color-text-primary);
       }
     }
   }
-  

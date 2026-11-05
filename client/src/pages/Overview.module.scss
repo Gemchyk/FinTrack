@@ -1,16 +1,8 @@
-
-
-.header{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-  }
-  
-
-.flex{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
+// One column on every screen, as on a phone; on a wide desktop it stays readable instead of stretching
+.overview {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 720px;
+  margin: 0 auto;
 }

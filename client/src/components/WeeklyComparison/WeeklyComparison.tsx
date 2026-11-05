@@ -1,4 +1,4 @@
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from "recharts";
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import "./WeeklyComparison.scss";
 import { useTranslation } from "react-i18next";
 import { useDashboardQuery } from "./dashboardApi";
@@ -18,7 +18,7 @@ const WeeklyComparison = () => {
 
   return (
     <>
-      <div>
+      <div className="weekly-comparison-block">
         <h1 className="title">{t("Statistics")}</h1>
 
         <div className="weekly-comparison">
@@ -29,23 +29,20 @@ const WeeklyComparison = () => {
             </div>
           </div>
 
-          <ResponsiveContainer width={770} height={502}>
-            <BarChart data={data} barSize={30}>
-              <XAxis dataKey="month" tickFormatter={monthLabel} />
-              <YAxis domain={[0, 'auto']} />
-              <Tooltip labelFormatter={monthLabel} formatter={(value) => format(Number(value))} />
-              {data.length > 0 && Array.from({ length: 20 }, (_, i) => (
-                <ReferenceLine
-                  key={i}
-                  y={(i + 1) * 50}
-                  stroke="#888888"
-                  ifOverflow="extendDomain"
-                />
-              ))}
-
-              <Bar dataKey="expense" fill="#299D91" name={t("Expenses")} radius={[5, 5, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+          {/* The chart takes the width of the card and the height set in CSS (lower on phones) */}
+          <div className="weekly-comparison__chart">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={data} barSize={30}>
+                {/* Grid lines follow the axis scale, whatever the amounts */}
+                <CartesianGrid vertical={false} stroke="#888888" strokeOpacity={0.3} />
+                {/* preserveStartEnd skips labels that would overlap on a narrow screen */}
+                <XAxis dataKey="month" tickFormatter={monthLabel} interval="preserveStartEnd" />
+                <YAxis domain={[0, 'auto']} />
+                <Tooltip labelFormatter={monthLabel} formatter={(value) => format(Number(value))} />
+                <Bar dataKey="expense" fill="#299D91" name={t("Expenses")} radius={[5, 5, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       </div>
     </>

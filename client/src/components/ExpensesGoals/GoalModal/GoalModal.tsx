@@ -20,8 +20,8 @@ export default function GoalModal({ category, onClose }: { category: Category; o
     };
 
     return (
-        <div className={styles.modalContainer}>
-            <div className={styles.modal}>
+        <div className="modal-overlay">
+            <div className={styles.modal} role="dialog" aria-modal="true">
                 <h2>{category.goal ? t('Change Goal') : t('New Goal')}</h2>
 
                 <form onSubmit={handleSubmit}>

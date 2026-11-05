@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as *;
+
 .centered-form{
     display: flex;
     flex-direction: column;
@@ -75,4 +77,13 @@
     border: none;
     background: none;
     color: var(--color-accent);
+}
+
+// Tall enough for a finger, like the buttons
+@media (max-width: $mobile) {
+    .form-links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+    }
 }

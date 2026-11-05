@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import './Balance.scss';
-import cardLogo from '../TotalBalance/imgs/cardLogo.png';
 import BalanceAddModalForm from './BalanceAddModalForm';
 import RateCard, { CurrencyRateCards } from './RateCard';
 import { useBalanceQuery } from './balanceApi';
@@ -24,16 +23,6 @@ function BalanceCardAndCourse() {
       <div className="credit-card">
         <div className="credit-card-header">
           <div className="credit-card-text">{t("Credit Card")}</div>
-          <div className="master-card">
-            <div className="master-card-text">{t("Master Card")}</div>
-            <div className="icon">
-              <img src={cardLogo} alt={t("Card logo")} />
-            </div>
-          </div>
-        </div>
-        <div className="account-number">
-          <div className="card-num">3388 4556 8860 8***</div>
-          <div className="acc-num">{t("Account Number")}</div>
         </div>
         <div className="total-amount">
             {isLoading ? (

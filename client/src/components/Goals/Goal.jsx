@@ -12,7 +12,7 @@ function Goal() {
     return (
         <div>
             <h1 className='title'>{t("Spendings")}</h1>
-            <div className='main'>
+            <div className='main goal-card'>
             <div className='goals-main-header'>
                 <h4 className='main-title'>{t("Spending by category this month")}</h4>
             </div>

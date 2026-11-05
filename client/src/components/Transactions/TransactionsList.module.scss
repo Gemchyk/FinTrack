@@ -1,0 +1,104 @@
+.feed {
+  padding: 8px 16px;
+  border-radius: 16px;
+  background: var(--color-bg-light);
+  box-shadow: 0 1px 4px var(--color-box-shadow);
+}
+
+.heading {
+  margin: 8px 0 0;
+  color: var(--color-text-primary);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.day {
+  margin: 16px 0 4px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+// The category icons are 40×56 tiles with their own grey background and the glyph in the middle:
+// shown a little larger and cut to a circle, the tile becomes the circle's fill
+.icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  svg {
+    flex: none;
+    width: 48px;
+    height: auto;
+  }
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  overflow: hidden;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.category {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+// nowrap: a long title next to it must not break "-UAH 215.90" after the minus
+.amount {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.income {
+  color: var(--color-accent);
+}
+
+.empty {
+  padding: 24px 0;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+// Outranks the global a:hover colour
+@media (hover: hover) {
+  .all:hover {
+    color: var(--color-accent-active);
+  }
+}
