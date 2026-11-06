@@ -19,9 +19,22 @@
       margin-bottom: 4px;
     }
 
-    input {
+    input,
+    select {
       padding: 8px;
       font-size: 16px;
+    }
+
+    // Matches the inputs, which get their width and border from `.modal-overlay .modal input` in Balance.scss;
+    // content-box like an input, otherwise the same 90% comes out narrower by the padding
+    select {
+      box-sizing: content-box;
+      width: 90%;
+      margin: 10px 0;
+      border: 1px solid var(--wb-color-gray-dark);
+      border-radius: var(--wb-border-radius);
+      background: var(--wb-color-white);
+      color: var(--wb-color-black);
     }
 
     .text-danger {

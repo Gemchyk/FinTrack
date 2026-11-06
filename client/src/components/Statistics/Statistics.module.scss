@@ -1,0 +1,16 @@
+@use '../../styles/breakpoints' as *;
+
+// The category card next to the twelve-month chart; it wraps on narrow desktops, one column on phones
+.statistics {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+@media (max-width: $mobile) {
+  .statistics {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

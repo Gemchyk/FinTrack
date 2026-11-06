@@ -27,6 +27,21 @@
   justify-content: center;
 }
 
+.brand {
+  color: var(--Primary-color, #299D91);
+  text-align: center;
+  font-family: Poppins;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px; /* 80% */
+  letter-spacing: 3.2px;
+
+  span {
+    font-weight: 800;
+  }
+}
+
 @media (max-width: $mobile) {
   // Bottom padding = tab bar height (56px) + gap + iPhone home indicator
   .content {

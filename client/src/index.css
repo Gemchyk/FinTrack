@@ -20,8 +20,11 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
-a:hover {
-  color: #535bf2;
+/* Hover only where there is a pointer: after a tap on a touch screen it would stay on */
+@media (hover: hover) {
+  a:hover {
+    color: #535bf2;
+  }
 }
 
 body {
@@ -76,15 +79,25 @@ button {
 :where(body.light) button {
   background-color: #f9f9f9;
 }
-button:hover {
-  border-color: #646cff;
+@media (hover: hover) {
+  button:hover {
+    border-color: #646cff;
+  }
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* Shared backdrop of the .modal-overlay/.modal dialogs (Balance, AddExpenseModal, NewCategoryModal) */
+/* 768px = $mobile in styles/_breakpoints.scss. A finger needs about 44px; min-height beats a component's
+   smaller height, and :where leaves any component free to set its own min-height */
+@media (max-width: 768px) {
+  :where(button, select) {
+    min-height: 44px;
+  }
+}
+
+/* Shared backdrop of every dialog: .modal-overlay around a .modal or a [role="dialog"] box */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -101,7 +114,8 @@ button:focus-visible {
     align-items: flex-end;
   }
 
-  .modal-overlay .modal {
+  .modal-overlay .modal,
+  .modal-overlay > [role="dialog"] {
     box-sizing: border-box;
     width: 100%;
     min-width: 0;

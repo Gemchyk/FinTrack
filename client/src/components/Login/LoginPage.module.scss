@@ -1,18 +1,4 @@
-.login-header{
-    color: var(--Primary-color, #299D91);
-    text-align: center;
-    font-family: Poppins;
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 32px; /* 80% */
-    letter-spacing: 3.2px;
-
-    span{
-        font-weight: 800
-    }
-}
-
+@use '../../styles/breakpoints' as *;
 
 .centered-form{
     display: flex;
@@ -21,6 +7,13 @@
     max-width: 400px;
 }
 
+.form-title{
+    margin: 0 0 16px;
+    color: var(--color-text-primary);
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+}
 
 .form-label{
     color: var(--color-text-primary);
@@ -57,4 +50,40 @@
     border-radius: 4px;
     background: var(--Primary-color, #299D91);
     color: white;
+}
+
+.form-message{
+    color: var(--color-text-primary);
+}
+
+.form-error{
+    margin: 8px 0 0;
+    color: #e53935;
+}
+
+// Secondary actions: links to the other forms, "send the link again"
+.form-links{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 16px;
+    margin-top: 16px;
+}
+
+.form-link-btn{
+    align-self: flex-start;
+    min-height: 44px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--color-accent);
+}
+
+// Tall enough for a finger, like the buttons
+@media (max-width: $mobile) {
+    .form-links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+    }
 }

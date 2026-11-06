@@ -1,27 +1,16 @@
 import React from "react"
 import TotalBalance from "../components/TotalBalance/TotalBalance"
-import Goal from "../components/Goals/Goal"
-import WeeklyComparison from "../components/WeeklyComparison/WeeklyComparison"
-import styles from './Overview.module.scss';
 import TransactionsList from "../components/Transactions/TransactionsList"
-import RatesSection from "../components/OverviewCourse/RatesSection"
+import styles from './Overview.module.scss';
 
+// Like the main screen of a banking app: the month's balance and actions on top, the latest operations
+// below. The charts are on /Statistics
 function Overview () {
     return (
-        <>
-           <div className={styles['header']}>
-                <TotalBalance /> 
-                <Goal /> 
-                <RatesSection />
-            </div>  
-
-            <div className={styles['flex']}>
-            <div>
-                <TransactionsList />
-            </div>
-                <WeeklyComparison />
-            </div>
-        </>
+        <div className={styles.overview}>
+            <TotalBalance />
+            <TransactionsList />
+        </div>
     )
 }
 export default Overview

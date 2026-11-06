@@ -9,11 +9,9 @@
     "Settings": "Settings",
     "Spendings": "Spendings",
 
-    "All Accounts": "All Accounts",
-    "Account Type": "Account Type",
     "Credit Card": "Credit Card",
 
-    "Categories Spendings 2025": "Categories Spendings 2025",
+    "Spending by category this month": "Spending by category this month",
     "Add new category": "Add new category",
     "Name category": "Name  of category",
     "New category": "New category",
@@ -40,7 +38,6 @@
     "Confirm": "Confirm",
     "Add": "Add",
     "Edit": "Edit",
-    "Account Number": "Account Number",
     "Total Amount": "Total Amount",
     "Add Balance": "Add Balance",
     "Actual Exchange Rate": "Actual Exchange Rate",
@@ -57,25 +54,12 @@
     "Shopping": "Shopping",
     "Health": "Health",
     "Other": "Other",
-    "Enter your login": "Enter your login",
-    "Login": "Login",
     "Login-btn": "Login",
     "Password": "Password",
-    "Total Balance": "Total Balance",
-    "This month": "This month",
     "New Expense": "New Expense",
     "Edit Expense": "Edit Expense",
     "Cancel": "Cancel",
     "Ok": "Ok",
-    "categories": {
-      "food": "Food",
-      "shopping": "Shopping",
-      "fun": "Fun",
-      "groceries": "Groceries",
-      "other": "Other",
-      "health": "Health",
-      "transport": "Transport"
-    },
 
     "All": "All",
     "Revenue": "Revenue",
@@ -99,5 +83,65 @@
     "No transactions found": "No transactions found",
     "Select": "Select",
     "Loading...": "Loading...",
-    "Profile": "Profile"
+    "Profile": "Profile",
+    "Without category": "Without category",
+    "No spendings yet": "No spendings yet",
+
+    "Email": "Email",
+    "Currency": "Currency",
+    "New password": "New password",
+    "Sign up": "Sign up",
+    "Log out": "Log out",
+    "overview": {
+      "income": "Income",
+      "expense": "Expense",
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "allTransactions": "All transactions"
+    },
+    "auth": {
+      "toSignup": "Create an account",
+      "toForgot": "Forgot your password?",
+      "toSignin": "Back to sign in",
+      "wrongCredentials": "Wrong email or password",
+      "notVerified": "Confirm your email first: open the link from our email.",
+      "resend": "Send the link again",
+      "resent": "We sent a new link. Check your inbox.",
+      "signupTitle": "Create an account",
+      "passwordHint": "At least 8 characters",
+      "passwordTooLong": "The password is too long: at most 72 bytes, which is 36 Cyrillic letters",
+      "invalidEmail": "Check the email address",
+      "emailTaken": "This email is already registered",
+      "checkEmailTitle": "Check your email",
+      "checkEmail": "We sent a confirmation link to {{email}}. Open it to finish signing up: the link works for one hour.",
+      "forgotTitle": "Reset the password",
+      "forgotHint": "Enter the email you signed up with, and we will send a link to set a new password.",
+      "sendLink": "Send the link",
+      "resetSent": "If an account with this email exists, we sent a link to it. The link works for one hour.",
+      "resetTitle": "Set a new password",
+      "savePassword": "Save the password",
+      "passwordChanged": "The password is changed, and every other session is signed out. Sign in with the new password.",
+      "invalidLink": "The link is invalid or expired.",
+      "newLink": "Request a new link",
+      "verifyTitle": "Email confirmation",
+      "verifying": "Confirming your email… The first request after a pause can take up to a minute.",
+      "emailVerified": "Your email is confirmed. Sign in to start; if FinTrack is installed on your phone, sign in there.",
+      "verifyFailed": "The link is invalid or expired. Sign in, and we will offer to send a new one."
+    },
+    "profile": {
+      "currencyConfirm": "Change the currency to {{currency}}? Amounts are not converted: 1000 stays 1000, only the currency changes."
+    },
+    "category": {
+      "deleteConfirm": "Delete the category {{name}}? Its expenses stay, without a category.",
+      "exists": "A category with this name already exists"
+    },
+    "rates": {
+      "failed": "Could not load the rate"
+    },
+    "errors": {
+      "failed": "Something went wrong. Try again.",
+      "offline": "The server does not answer. Check the connection and try again.",
+      "tooMany": "Too many attempts. Try again later.",
+      "invalid": "Check the values in the form"
+    }
   }

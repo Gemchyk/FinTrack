@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as *;
+
 .searchInput{
     // position: absolute;
     // top: 100px;
@@ -13,4 +15,27 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
+}
+
+// Search with Clear on one line, "Add new category" under it
+@media (max-width: $mobile) {
+    .Expense_head {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .searchInput input {
+        flex: 1;
+        min-width: 0;
+        height: 44px;
+        box-sizing: border-box;
+    }
+
+    .Expense_head button {
+        width: 100%;
+    }
+
+    .searchInput button {
+        width: auto;
+    }
 }
