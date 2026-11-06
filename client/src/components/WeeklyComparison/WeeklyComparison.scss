@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as *;
+
 :root {
   --color-white: #fff;
   --color-black: #000;
@@ -15,12 +17,23 @@
   --box-shadow: 0 20px 25px 0 rgba(0, 0, 0, 0.7);
 }
 
+// Takes the rest of the Overview row; min-width 0 lets the chart shrink with it
+.weekly-comparison-block {
+  flex: 1 1 400px;
+  min-width: 0;
+  max-width: 818px;
+}
+
 .weekly-comparison {
   max-width: 770px;
   background: var(--color-white);
   border-radius: var(--radius);
   padding: 16px 24px 40px 24px;
   box-shadow: var(--box-shadow);
+}
+
+.weekly-comparison__chart {
+  height: 502px;
 }
 
 .weekly-comparison__header {
@@ -66,4 +79,19 @@
 
 .weekly-comparison__legend .legend-item.last-week::before {
   background-color: var(--color-gray);
+}
+
+@media (max-width: $mobile) {
+  .weekly-comparison-block {
+    flex: none;
+    max-width: none;
+  }
+
+  .weekly-comparison {
+    padding: 16px 12px 24px;
+  }
+
+  .weekly-comparison__chart {
+    height: 300px;
+  }
 }

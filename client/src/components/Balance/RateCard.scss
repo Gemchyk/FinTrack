@@ -23,9 +23,12 @@
     font-size: 14px;
   }
 
-  &:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
+  // Only with a pointer: on a touch screen the lifted card would stay lifted after a tap
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+    }
   }
 }

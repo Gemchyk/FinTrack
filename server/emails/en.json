@@ -1,0 +1,15 @@
+{
+  "linkFallback": "If the button does not open, copy this link into the browser:",
+  "verify": {
+    "subject": "Confirm your email for FinTrack",
+    "intro": "Open the link to confirm your email and finish signing up.",
+    "button": "Confirm email",
+    "outro": "The link works for one hour. If you did not sign up for FinTrack, ignore this email."
+  },
+  "reset": {
+    "subject": "Reset your FinTrack password",
+    "intro": "Open the link to set a new password.",
+    "button": "Set a new password",
+    "outro": "The link works for one hour. If you did not ask to reset the password, ignore this email: the password stays the same."
+  }
+}

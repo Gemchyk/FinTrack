@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as *;
+
 :root {
     --goal-border-color: #F3F3F3;
     --goal-text-secondary: #525256;
@@ -5,14 +7,14 @@
     --goal-box-shadow: rgba(76, 103, 100, 0.1);
     --goal-font-family: 'Inter', sans-serif;
   }
-  
+
   .dark {
     --goal-border-color: #444;
     --goal-text-secondary: #bbb;
     --goal-bg: #1a1919;
     --goal-box-shadow: rgba(0, 0, 0, 0.7);
   }
-  
+
   .Goal {
     width: 90%;
     padding: 8px 0 20px 0;
@@ -21,7 +23,7 @@
     align-items: center;
     border-bottom: 1px solid var(--goal-border-color);
   }
-  
+
   .main {
     border-radius: 8px;
     padding: 0 24px;
@@ -36,13 +38,23 @@
     width: 98%;
     max-width: 392px;
     height: 64px;
-    border-bottom: 1px solid var(--cb-text-secondary);
+    border-bottom: 1px solid var(--color-text-secondary);
     display: flex;
     justify-content: center;
     align-items: flex-end;
     text-align: center;
   }
-  
+
+  .goals-main-header .main-title {
+    font-family: Inter, sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 145%;
+    text-transform: capitalize;
+    color: var(--color-text-primary);
+    margin-bottom: 10px;
+  }
+
   .goals-details-div {
     display: flex;
     height: 54.4%;
@@ -50,14 +62,14 @@
     justify-content: space-around;
     gap: 16px;
   }
-  
+
   .goals-flex {
     display: flex;
     align-items: flex-start;
     gap: 4px;
     margin-top: 10px;
   }
-  
+
   .goals-mini-title {
     text-align: center;
     color: var(--goal-text-secondary);
@@ -67,4 +79,17 @@
     line-height: 24px;
     text-transform: capitalize;
   }
-  
+
+// Fills the column on phones; 352px plus the padding is wider than a 360px screen
+@media (max-width: $mobile) {
+  .main {
+    width: auto;
+  }
+
+  // On the narrowest phones the legend goes above the pie, so the card grows instead of a fixed 280px
+  .goal-card {
+    height: auto;
+    min-height: 280px;
+    padding-bottom: 16px;
+  }
+}

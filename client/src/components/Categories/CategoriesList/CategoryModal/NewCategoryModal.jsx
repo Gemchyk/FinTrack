@@ -1,34 +1,27 @@
 import { useState, useContext } from "react";
-import { useDispatch } from "react-redux";
-import { addCategory } from "../../categoriesSlice";
-import { nanoid } from "@reduxjs/toolkit";
 import { useTranslation } from "react-i18next";
 import CategorySelect, {options} from "../../../SelectButton/CategorySelect";
 import { ThemeContext } from "../../../../context/ThemeContext";
+import { useAddCategoryMutation } from "../../categoriesApi";
+import { errorKey } from "../../../../store/api";
 
 
 
 const NewCategoryModal = ({ onClose }) => {
-  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [iconName, setIconName] = useState("Housing");
   const { t } = useTranslation();
   const { theme } = useContext(ThemeContext);
   const  filteredOptions = options.filter(i => i.value != 'all');
+  const [addCategory, { isLoading, error }] = useAddCategoryMutation();
+  const errorText = errorKey(error, { 409: "category.exists" });
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const finalName = iconName === "Other" ? name.trim() : iconName;
     if (!finalName) return;
 
-    dispatch(
-      addCategory({
-        id: nanoid(),
-        name: finalName,
-        iconName,
-      })
-    );
-
-    onClose();
+    const result = await addCategory({ name: finalName, iconName, goal: null });
+    if (result.data) onClose();
   };
 
   return (
@@ -45,12 +38,14 @@ const NewCategoryModal = ({ onClose }) => {
             type="text"
             placeholder={t("Name category")}
             value={name}
+            maxLength={50}
             onChange={(e) => setName(e.target.value)}
           />
         )}
 
+        {errorText && <p style={{ color: '#e53935' }} role="alert">{t(errorText)}</p>}
         <div className="modal-buttons">
-          <button onClick={handleSubmit}>{t("Add")}</button>
+          <button onClick={handleSubmit} disabled={isLoading}>{t("Add")}</button>
           <button onClick={onClose}>{t("Cancel")}</button>
         </div>
       </div>

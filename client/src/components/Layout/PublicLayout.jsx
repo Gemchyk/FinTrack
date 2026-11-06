@@ -10,6 +10,7 @@ function PublicLayout() {
         <PreferenceToggles />
       </div>
       <div className={styles.publicContent}>
+        <h1 className={styles.brand}><span>FIN</span>track<span>.IO</span></h1>
         <Outlet />
       </div>
     </div>

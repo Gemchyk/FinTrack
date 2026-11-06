@@ -1,4 +1,7 @@
+import type { Lang } from '../shared/api-types.ts';
+
 const CURRENCIES = new Set(Intl.supportedValuesOf('currency'));
+const LANGS: readonly string[] = ['en', 'uk'];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // numeric(14,4) in the database holds at most 10 integer digits
@@ -22,6 +25,10 @@ export function isDate(value: unknown): value is string {
 
 export function isCurrency(value: unknown): value is string {
   return typeof value === 'string' && CURRENCIES.has(value);
+}
+
+export function isLang(value: unknown): value is Lang {
+  return typeof value === 'string' && LANGS.includes(value);
 }
 
 export function fractionDigits(currency: string): number {

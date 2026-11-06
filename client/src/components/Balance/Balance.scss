@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as *;
+
 :root {
   --wb-color-black: #000000;
   --wb-color-gray-light: #878787;
@@ -20,7 +22,8 @@
 }
 
 .wrapper-balances {
-  width: 1104px;
+  width: 100%;
+  max-width: 1104px;
   color: var(--wb-color-black);
   display: flex;
   flex-direction: column;
@@ -37,7 +40,6 @@
 
 .wrapper-balances .credit-card {
   width: 352px;
-  height: 288px;
   display: flex;
   flex-direction: column;
   background-color: var(--wb-color-white);
@@ -61,45 +63,6 @@
   width: 90px;
   font-size: 16px;
   color: var(--wb-color-gray-light);
-}
-
-.wrapper-balances .credit-card-header .master-card {
-  display: flex;
-  justify-content: space-between;
-  height: 32px;
-  width: 123px;
-}
-
-.wrapper-balances .credit-card-header .master-card-text {
-  height: 32px;
-  width: 71px;
-  font-weight: 500;
-  font-size: 12px;
-  color: var(--wb-color-gray-medium);
-  margin-top: 4px;
-}
-
-.wrapper-balances .credit-card-header .icon {
-  width: 48px;
-  height: 32px;
-  display: block;
-  object-fit: contain;
-}
-
-.wrapper-balances .account-number {
-  height: 52px;
-}
-
-.wrapper-balances .account-number .card-num {
-  font-weight: 600;
-  font-size: 20px;
-  color: var(--wb-color-black);
-}
-
-.wrapper-balances .account-number .acc-num {
-  font-weight: 400;
-  font-size: 14px;
-  color: var(--wb-color-gray-muted);
 }
 
 .wrapper-balances .text-danger {
@@ -150,12 +113,31 @@
   justify-content: space-between;
 }
 
+// Five rate cards are wider than most screens: they wrap instead of overflowing
 .courseWrapper {
   display: flex;
-  justify-content: space-between;
-
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
 }
 
 .exchangeRate {
  text-align: center;
+}
+
+@media (max-width: $mobile) {
+  // 352px plus the padding is wider than a 360px screen
+  .wrapper-balances .credit-card {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  // Two cards per row, the text wraps inside
+  .courseWrapper .courseCard {
+    flex: 1 1 120px;
+    height: auto;
+    min-height: 50px;
+    text-align: center;
+  }
 }

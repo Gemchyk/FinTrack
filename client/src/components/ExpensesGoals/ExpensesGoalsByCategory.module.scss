@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as *;
+
 .expensesGoals {
   display: flex;
   flex-direction: column;
@@ -92,14 +94,18 @@
       white-space: nowrap;
       transition: background-color 0.3s;
 
-      &:hover {
-        background-color: var(--color-accent-hover);
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--color-accent-hover);
+        }
       }
     }
   }
 }
 
+// border-box: width 100% plus the padding stuck out of the card, which cut off its right edge
 .dropdown {
+  box-sizing: border-box;
   margin-top: 12px;
   width: 100%;
   background-color: var(--color-bg-light);
@@ -146,8 +152,10 @@
     cursor: pointer;
     transition: background-color 0.3s;
 
-    &:hover {
-      background-color: var(--color-accent-hover);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-accent-hover);
+      }
     }
   }
 }
@@ -191,10 +199,62 @@
       cursor: pointer;
       transition: background-color 0.3s;
 
-      &:hover {
-        background-color: rgba(41, 157, 145, 0.052);
-        border-color: var(--color-accent);
+      @media (hover: hover) {
+        &:hover {
+          background-color: rgba(41, 157, 145, 0.052);
+          border-color: var(--color-accent);
+        }
       }
+    }
+  }
+}
+
+.error {
+  margin: 0;
+  color: #e53935;
+}
+
+@media (max-width: $mobile) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 0 16px;
+
+    // Icon and name with the amount on the first line, the three buttons below
+    .topRow {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 16px 0 12px;
+      gap: 12px;
+
+      .cardText {
+        flex: 1 1 calc(100% - 56px);
+        min-width: 0;
+      }
+
+      .adjustBtn {
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  // The text takes the whole line, Edit and Remove go under it
+  .expenseItem {
+    flex-wrap: wrap;
+    gap: 8px;
+
+    span {
+      flex-basis: 100%;
+    }
+
+    .btnSmall {
+      flex: 1;
+      font-size: 14px;
     }
   }
 }

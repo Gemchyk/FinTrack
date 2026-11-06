@@ -1,8 +1,8 @@
 import type { Response } from 'express';
+import type { Me } from '../shared/api-types.ts';
 
-export interface AuthUser {
+export interface AuthUser extends Me {
   id: string;
-  currency: string;
 }
 
 // Returns void so handlers can `return fail(...)`: Express 5 types do not allow returning the Response

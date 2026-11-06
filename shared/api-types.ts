@@ -1,6 +1,34 @@
 // JSON shapes the server sends and accepts. Both packages import this file with `import type` only,
 // so it never reaches the runtime of either.
 
+export type Lang = 'en' | 'uk';
+
+export interface SignupInput {
+  email: string;
+  password: string;
+  currency: string;
+  lang: Lang;
+}
+
+// POST /signin: 401 for a wrong email or password, 403 while the email is not verified
+export interface SigninInput {
+  email: string;
+  password: string;
+}
+
+export interface SigninResponse {
+  token: string;
+}
+
+// GET /me; PATCH /me takes currency and/or lang and answers with the whole shape
+export interface Me {
+  email: string;
+  currency: string;
+  lang: Lang;
+}
+
+export type MeUpdate = Partial<Pick<Me, 'currency' | 'lang'>>;
+
 export type TransactionType = 'Income' | 'Expense';
 
 export interface Transaction {
