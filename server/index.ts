@@ -20,6 +20,21 @@ app.get('/', (_req, res) => {
   res.send('Сервер работает!');
 });
 
+// TEMPORARY, remove once 'trust proxy' is fixed: shows how the host's proxy forwards the client address.
+// A forged X-Forwarded-For gave the rate limiter a fresh counter on Render, so req.ip is not the real client.
+// It only echoes the caller's own request
+app.get('/ip', (req, res) => {
+  res.json({
+    ip: req.ip,
+    ips: req.ips,
+    remoteAddress: req.socket.remoteAddress,
+    xForwardedFor: req.headers['x-forwarded-for'] ?? null,
+    cfConnectingIp: req.headers['cf-connecting-ip'] ?? null,
+    trueClientIp: req.headers['true-client-ip'] ?? null,
+    xRealIp: req.headers['x-real-ip'] ?? null,
+  });
+});
+
 app.use(authRouter);
 app.use(spendingRouter);
 
