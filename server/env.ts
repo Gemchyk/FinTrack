@@ -12,7 +12,13 @@ try {
 const MAIL_TO_CONSOLE = process.env.MAIL_TO_CONSOLE === '1';
 
 // No fallbacks: a secret known from the source would let anyone forge a token
-const REQUIRED = ['SECRET_KEY', 'DATABASE_URL', 'CLIENT_URL', ...(MAIL_TO_CONSOLE ? [] : ['RESEND_API_KEY', 'MAIL_FROM'])];
+const REQUIRED = [
+  'SECRET_KEY',
+  'DATABASE_URL',
+  'CLIENT_URL',
+  'TRUST_PROXY_HOPS',
+  ...(MAIL_TO_CONSOLE ? [] : ['RESEND_API_KEY', 'MAIL_FROM']),
+];
 const missing = REQUIRED.filter((name) => !process.env[name]);
 if (missing.length) throw new Error(`Missing environment variables: ${missing.join(', ')}`);
 
@@ -22,11 +28,18 @@ if (!URL.canParse(CLIENT_URL) || new URL(CLIENT_URL).origin !== CLIENT_URL) {
   throw new Error(`CLIENT_URL must be an origin such as https://fintrack.vercel.app, got: ${CLIENT_URL}`);
 }
 
+// No default: the count differs between hosts, and a wrong one silently breaks the rate limits
+const TRUST_PROXY_HOPS = process.env.TRUST_PROXY_HOPS as string;
+if (!/^\d+$/.test(TRUST_PROXY_HOPS)) {
+  throw new Error(`TRUST_PROXY_HOPS must be a whole number, 0 without a proxy, got: ${TRUST_PROXY_HOPS}`);
+}
+
 export const env = {
   SECRET_KEY: process.env.SECRET_KEY as string,
   DATABASE_URL: process.env.DATABASE_URL as string,
   PORT: Number(process.env.PORT ?? 5050),
   CLIENT_URL,
+  TRUST_PROXY_HOPS: Number(TRUST_PROXY_HOPS),
   MAIL_TO_CONSOLE,
   RESEND_API_KEY: process.env.RESEND_API_KEY ?? '',
   MAIL_FROM: process.env.MAIL_FROM ?? '',

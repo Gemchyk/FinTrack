@@ -10,9 +10,9 @@ import { fail } from './http.ts';
 
 const app = express();
 
-// Render/Railway put one proxy in front of the app. Without this req.ip is the proxy's address and
-// the rate limiter would count every user as the same client
-app.set('trust proxy', 1);
+// Express takes req.ip from X-Forwarded-For past this many proxies, and the rate limiter counts attempts per
+// req.ip. How to count them for a host: TRUST_PROXY_HOPS in .env.example
+app.set('trust proxy', env.TRUST_PROXY_HOPS);
 app.use(cors({ origin: env.CLIENT_URL }));
 app.use(express.json());
 
