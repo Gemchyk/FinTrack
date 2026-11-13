@@ -69,3 +69,11 @@
     line-height: 1;
   }
 }
+
+// A portrait A4 page is narrower than $mobile, so the bars above would print without this
+@media print {
+  .topBar,
+  .tabBar {
+    display: none;
+  }
+}

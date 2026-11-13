@@ -11,7 +11,6 @@
 
     "Credit Card": "Кредитна карта",
 
-    "Spending by category this month": "Витрати за категоріями цього місяця",
     "Add new category": "Додати нову категорію",
     "Name category": "Назва категорії",
     "New category": "Нова категорія",
@@ -97,6 +96,14 @@
       "today": "Сьогодні",
       "yesterday": "Вчора",
       "allTransactions": "Усі транзакції"
+    },
+    "report": {
+      "month": "Місяць",
+      "goal": "Ціль",
+      "spent": "Витрачено",
+      "balance": "Залишок",
+      "csv": "Завантажити CSV",
+      "print": "Друк / PDF"
     },
     "auth": {
       "toSignup": "Створити акаунт",

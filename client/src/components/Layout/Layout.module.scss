@@ -59,3 +59,11 @@
     position: static;
   }
 }
+
+// Neither the sidebar nor the tab bar is printed, so the page takes the paper from edge to edge
+@media print {
+  .content {
+    margin-left: 0;
+    padding: 0;
+  }
+}

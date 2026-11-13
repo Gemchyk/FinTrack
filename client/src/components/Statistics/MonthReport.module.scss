@@ -1,0 +1,214 @@
+@use '../../styles/breakpoints' as *;
+
+.report {
+  box-sizing: border-box;
+  max-width: 818px;
+  padding: 16px 24px 24px;
+  border-radius: 16px;
+  background: var(--color-bg-light);
+  box-shadow: 0 1px 4px var(--color-box-shadow);
+  color: var(--color-text-primary);
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+// Intl writes "листопад 2026 р." in lower case
+.month {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.button {
+  padding: 6px 12px;
+  border: 1px solid var(--color-accent);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-accent);
+  font-weight: 600;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+@media (hover: hover) {
+  // Outranks the global button:hover border colour
+  .button:not(:disabled):hover {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent-hover);
+  }
+}
+
+.error {
+  margin: 16px 0 0;
+  color: #e53935;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 32px;
+}
+
+.totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  margin: 16px 0;
+
+  dt {
+    color: var(--color-text-secondary);
+    font-size: 13px;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+}
+
+.income {
+  color: var(--color-accent);
+}
+
+.negative {
+  color: #e53935;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  th {
+    color: var(--color-text-secondary);
+    font-weight: 600;
+  }
+
+  // Amounts line up by their last digit
+  th + th,
+  .goal,
+  .spent {
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .goal {
+    color: var(--color-text-secondary);
+  }
+
+  .spent {
+    font-weight: 600;
+  }
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cardLabel {
+  display: none;
+}
+
+// On phones every row is a card: the category and what was spent, then the goal. Screen only: an A4 page
+// is narrower than $mobile and would print the cards instead of the table
+@media screen and (max-width: $mobile) {
+  .report {
+    padding: 16px;
+  }
+
+  .table {
+    thead {
+      display: none;
+    }
+
+    tr {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        "name spent"
+        "goal goal";
+      gap: 4px 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    td {
+      display: block;
+      padding: 0;
+      border: none;
+    }
+
+    td:first-child {
+      grid-area: name;
+    }
+
+    .goal {
+      grid-area: goal;
+      text-align: left;
+    }
+
+    .spent {
+      grid-area: spent;
+      align-self: center;
+    }
+  }
+
+  .cardLabel {
+    display: inline;
+  }
+}
+
+// Paper is white whatever the theme: the dark theme's light text would vanish on it
+@media print {
+  .report {
+    --color-bg-light: #fff;
+    --color-text-primary: #000;
+    --color-text-secondary: #555;
+    --color-border: #ccc;
+    --color-accent: #299d91;
+    max-width: none;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .buttons {
+    display: none;
+  }
+}

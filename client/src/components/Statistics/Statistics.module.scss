@@ -1,7 +1,32 @@
 @use '../../styles/breakpoints' as *;
 
-// The category card next to the twelve-month chart; it wraps on narrow desktops, one column on phones
 .statistics {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.picker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.monthInput {
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg-light);
+  color: var(--color-text-primary);
+  font-family: inherit;
+}
+
+// The category card next to the twelve-month chart; it wraps on narrow desktops, one column on phones
+.charts {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -9,8 +34,16 @@
 }
 
 @media (max-width: $mobile) {
-  .statistics {
+  .charts {
     flex-direction: column;
     align-items: stretch;
+  }
+}
+
+// The printout is the report alone
+@media print {
+  .picker,
+  .charts {
+    display: none;
   }
 }

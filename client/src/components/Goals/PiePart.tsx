@@ -1,7 +1,6 @@
 import { PieChart, Pie, Cell } from 'recharts';
 import { useTranslation } from 'react-i18next';
 import { categoryName, useReportQuery } from '../Categories/categoriesApi';
-import { currentMonth } from '../../dates';
 
 // By position, so any category, the user's own included, gets a colour
 const COLORS = ['#1E2A38', '#00C49F', '#4A5A6A', '#738FA7', '#BFA2DB', '#3EDBB3'];
@@ -34,9 +33,10 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
-const GoalsChart = () => {
+const GoalsChart = ({ month }: { month: string }) => {
   const {t} = useTranslation();
-  const report = useReportQuery(currentMonth()).data;
+  // currentData: while another month loads, data would still draw the previous one
+  const report = useReportQuery(month).currentData;
   const chartData = [
     ...(report?.categories ?? []).map((category) => ({ name: categoryName(t, category.name), value: category.spent })),
     // Expenses whose category was deleted still belong to the month
@@ -49,7 +49,7 @@ const GoalsChart = () => {
     // Wraps on the narrowest phones: the legend goes above the 200px pie instead of pushing the page wider
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
       <div style={{ marginRight: '20px' }}>
-        {chartData.length === 0 ? (
+        {report && chartData.length === 0 ? (
           <span style={{ color: 'gray', fontSize: 14 }}>{t('No spendings yet')}</span>
         ) : (
           chartData.map((entry, index) => (

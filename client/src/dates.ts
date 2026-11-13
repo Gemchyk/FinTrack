@@ -20,3 +20,9 @@ export function yesterday(): string {
 export function currentMonth(): string {
   return today().slice(0, 7);
 }
+
+// The same rule as parseMonth on the server. Desktop Firefox and Safari show <input type="month"> as a
+// plain text field, so a half-typed value reaches this check
+export function isMonth(value: string): boolean {
+  return /^\d{4}-(0[1-9]|1[0-2])$/.test(value) && !value.startsWith('0000');
+}

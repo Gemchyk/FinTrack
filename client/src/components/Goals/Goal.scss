@@ -33,6 +33,13 @@
     background: var(--goal-bg);
   }
 
+  // A long category name in the legend pushes the pie below it, so the card grows instead of a fixed 280px
+  .goal-card {
+    height: auto;
+    min-height: 280px;
+    padding-bottom: 16px;
+  }
+
 
   .goals-main-header {
     width: 98%;
@@ -84,12 +91,5 @@
 @media (max-width: $mobile) {
   .main {
     width: auto;
-  }
-
-  // On the narrowest phones the legend goes above the pie, so the card grows instead of a fixed 280px
-  .goal-card {
-    height: auto;
-    min-height: 280px;
-    padding-bottom: 16px;
   }
 }

@@ -11,7 +11,6 @@
 
     "Credit Card": "Credit Card",
 
-    "Spending by category this month": "Spending by category this month",
     "Add new category": "Add new category",
     "Name category": "Name  of category",
     "New category": "New category",
@@ -98,6 +97,14 @@
       "today": "Today",
       "yesterday": "Yesterday",
       "allTransactions": "All transactions"
+    },
+    "report": {
+      "month": "Month",
+      "goal": "Goal",
+      "spent": "Spent",
+      "balance": "Balance",
+      "csv": "Download CSV",
+      "print": "Print / PDF"
     },
     "auth": {
       "toSignup": "Create an account",

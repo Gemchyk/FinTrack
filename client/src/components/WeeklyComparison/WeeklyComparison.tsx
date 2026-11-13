@@ -2,19 +2,18 @@ import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContaine
 import "./WeeklyComparison.scss";
 import { useTranslation } from "react-i18next";
 import { useDashboardQuery } from "./dashboardApi";
-import { currentMonth } from "../../dates";
 import { useMoney } from "../../money";
 
-const WeeklyComparison = () => {
+const WeeklyComparison = ({ month }: { month: string }) => {
   const { t, i18n } = useTranslation();
   const { format } = useMoney();
-  // Twelve months ending with this one, so the request is made once per month and never repeats on empty data
-  const { data = [] } = useDashboardQuery(currentMonth());
+  // Twelve months ending with the chosen one; currentData, so a new month never shows the previous bars
+  const { currentData = [] } = useDashboardQuery(month);
 
   // With the year: the twelve months cross a new year, and two "Jan" bars would be ambiguous
   const monthFormat = new Intl.DateTimeFormat(i18n.resolvedLanguage, { month: "short", year: "2-digit" });
-  const monthLabel = (month: string) =>
-    monthFormat.format(new Date(Number(month.slice(0, 4)), Number(month.slice(5, 7)) - 1));
+  const monthLabel = (bar: string) =>
+    monthFormat.format(new Date(Number(bar.slice(0, 4)), Number(bar.slice(5, 7)) - 1));
 
   return (
     <>
@@ -32,7 +31,7 @@ const WeeklyComparison = () => {
           {/* The chart takes the width of the card and the height set in CSS (lower on phones) */}
           <div className="weekly-comparison__chart">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data} barSize={30}>
+              <BarChart data={currentData} barSize={30}>
                 {/* Grid lines follow the axis scale, whatever the amounts */}
                 <CartesianGrid vertical={false} stroke="#888888" strokeOpacity={0.3} />
                 {/* preserveStartEnd skips labels that would overlap on a narrow screen */}
