@@ -5,6 +5,14 @@
   max-width: 400px;
 }
 
+.name {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 20px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
 .email {
   margin: 0;
   color: var(--color-text-primary);
@@ -33,7 +41,8 @@
   color: #e53935;
 }
 
-.logout {
+.logout,
+.save {
   align-self: flex-start;
   min-height: 44px;
   color: var(--color-text-primary);

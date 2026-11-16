@@ -4,6 +4,7 @@
 export type Lang = 'en' | 'uk';
 
 export interface SignupInput {
+  name: string;
   email: string;
   password: string;
   currency: string;
@@ -20,14 +21,16 @@ export interface SigninResponse {
   token: string;
 }
 
-// GET /me; PATCH /me takes currency and/or lang and answers with the whole shape
+// GET /me; PATCH /me takes name, currency and/or lang and answers with the whole shape
 export interface Me {
+  // null for an account created before signup asked for a name
+  name: string | null;
   email: string;
   currency: string;
   lang: Lang;
 }
 
-export type MeUpdate = Partial<Pick<Me, 'currency' | 'lang'>>;
+export type MeUpdate = Partial<Pick<Me, 'currency' | 'lang'> & { name: string }>;
 
 export type TransactionType = 'Income' | 'Expense';
 

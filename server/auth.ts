@@ -12,9 +12,10 @@ import { asRecord, currentUser, fail } from './http.ts';
 import type { AuthUser } from './http.ts';
 import { linkMail, sendMail } from './mail.ts';
 import type { LinkPurpose } from './mail.ts';
-import { isCurrency, isEmail, isLang, isPassword } from './validate.ts';
+import { cleanText, isCurrency, isEmail, isLang, isPassword } from './validate.ts';
 
 const BCRYPT_ROUNDS = 10;
+const NAME_MAX = 50;
 const INVALID_PASSWORD = 'Password must be 8 to 72 bytes long';
 const INVALID_LINK = 'The link is invalid or expired';
 
@@ -91,9 +92,11 @@ function logMailError(err: unknown): void {
 }
 
 authRouter.post('/signup', authLimiter, mailLimiter, async (req, res) => {
-  const { email, password, currency, lang } = asRecord(req.body);
+  const { name, email, password, currency, lang } = asRecord(req.body);
+  const cleanName = cleanText(name, NAME_MAX);
   const normalizedEmail = normalizeEmail(email);
 
+  if (!cleanName) return fail(res, 400, 'Invalid name');
   if (!isEmail(normalizedEmail)) return fail(res, 400, 'Invalid email');
   if (!isPassword(password)) return fail(res, 400, INVALID_PASSWORD);
   if (!isCurrency(currency)) return fail(res, 400, 'Invalid currency');
@@ -103,8 +106,8 @@ authRouter.post('/signup', authLimiter, mailLimiter, async (req, res) => {
   try {
     await withTransaction(async (client) => {
       const { rows } = await client.query<{ id: string }>(
-        'INSERT INTO users (email, password_hash, currency, lang) VALUES ($1, $2, $3, $4) RETURNING id',
-        [normalizedEmail, passwordHash, currency, lang],
+        'INSERT INTO users (name, email, password_hash, currency, lang) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+        [cleanName, normalizedEmail, passwordHash, currency, lang],
       );
       await client.query(
         `INSERT INTO categories (user_id, name, icon_name)
@@ -213,7 +216,7 @@ export async function requireAuth(req: Request, res: Response, next: NextFunctio
 
   // The version check makes tokens issued before a password reset stop working right away
   const { rows } = await pool.query<AuthUser>(
-    'SELECT id, email, currency, lang FROM users WHERE id = $1 AND token_version = $2',
+    'SELECT id, name, email, currency, lang FROM users WHERE id = $1 AND token_version = $2',
     [claims.userId, claims.tokenVersion],
   );
   if (!rows[0]) return fail(res, 401, 'Unauthorized');
@@ -224,22 +227,24 @@ export async function requireAuth(req: Request, res: Response, next: NextFunctio
 
 // Currency and language come from here, not from the JWT: a token would keep the old values for two hours
 authRouter.get('/me', requireAuth, (_req, res) => {
-  const { email, currency, lang } = currentUser(res);
-  const body: Me = { email, currency, lang };
+  const { name, email, currency, lang } = currentUser(res);
+  const body: Me = { name, email, currency, lang };
   res.json(body);
 });
 
 // Amounts are not converted when the currency changes; the client asks for confirmation first
 authRouter.patch('/me', requireAuth, async (req, res) => {
-  const { currency, lang } = asRecord(req.body);
+  const { name, currency, lang } = asRecord(req.body);
+  const cleanName = name === undefined ? null : cleanText(name, NAME_MAX);
+  if (name !== undefined && !cleanName) return fail(res, 400, 'Invalid name');
   if (currency !== undefined && !isCurrency(currency)) return fail(res, 400, 'Invalid currency');
   if (lang !== undefined && !isLang(lang)) return fail(res, 400, 'Invalid language');
 
   const { rows } = await pool.query<Me>(
-    `UPDATE users SET currency = COALESCE($2, currency), lang = COALESCE($3, lang)
+    `UPDATE users SET currency = COALESCE($2, currency), lang = COALESCE($3, lang), name = COALESCE($4, name)
       WHERE id = $1
-     RETURNING email, currency, lang`,
-    [currentUser(res).id, currency ?? null, lang ?? null],
+     RETURNING name, email, currency, lang`,
+    [currentUser(res).id, currency ?? null, lang ?? null, cleanName],
   );
   res.json(rows[0]);
 });

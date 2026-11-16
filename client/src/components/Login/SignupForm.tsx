@@ -25,6 +25,7 @@ function SignupForm() {
     // Emails go out in this language; the toggle on the profile page changes it later
     const lang: Lang = i18n.resolvedLanguage === 'uk' ? 'uk' : 'en';
     const values = {
+      name: String(form.get('name')),
       email: String(form.get('email')),
       password: String(form.get('password')),
       currency: String(form.get('currency')),
@@ -50,6 +51,20 @@ function SignupForm() {
   return (
     <form className={styles['centered-form']} onSubmit={handleSubmit}>
       <h2 className={styles['form-title']}>{t('auth.signupTitle')}</h2>
+      <div>
+        <label className={styles['form-label']} htmlFor="name">{t("Your name")}</label><br />
+        {/* The pattern refuses a name of spaces only, which the server would answer with 400 */}
+        <input
+          className={styles['form-input']}
+          id="name"
+          name="name"
+          type="text"
+          autoComplete="name"
+          maxLength={50}
+          pattern=".*\S.*"
+          required
+        />
+      </div>
       <div>
         <label className={styles['form-label']} htmlFor="email">{t("Email")}</label><br />
         <input
