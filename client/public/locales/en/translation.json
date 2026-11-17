@@ -137,7 +137,8 @@
       "verifyFailed": "The link is invalid or expired. Sign in, and we will offer to send a new one."
     },
     "profile": {
-      "currencyConfirm": "Change the currency to {{currency}}? Amounts are not converted: 1000 stays 1000, only the currency changes."
+      "currencyConfirm": "Change the currency to {{currency}}? Amounts are not converted: 1000 stays 1000, only the currency changes.",
+      "monthlyReport": "Email me the report for the past month"
     },
     "category": {
       "deleteConfirm": "Delete the category {{name}}? Its expenses stay, without a category.",

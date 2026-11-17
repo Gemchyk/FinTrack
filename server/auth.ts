@@ -216,7 +216,8 @@ export async function requireAuth(req: Request, res: Response, next: NextFunctio
 
   // The version check makes tokens issued before a password reset stop working right away
   const { rows } = await pool.query<AuthUser>(
-    'SELECT id, name, email, currency, lang FROM users WHERE id = $1 AND token_version = $2',
+    `SELECT id, name, email, currency, lang, monthly_report AS "monthlyReport"
+       FROM users WHERE id = $1 AND token_version = $2`,
     [claims.userId, claims.tokenVersion],
   );
   if (!rows[0]) return fail(res, 401, 'Unauthorized');
@@ -227,24 +228,28 @@ export async function requireAuth(req: Request, res: Response, next: NextFunctio
 
 // Currency and language come from here, not from the JWT: a token would keep the old values for two hours
 authRouter.get('/me', requireAuth, (_req, res) => {
-  const { name, email, currency, lang } = currentUser(res);
-  const body: Me = { name, email, currency, lang };
+  const { name, email, currency, lang, monthlyReport } = currentUser(res);
+  const body: Me = { name, email, currency, lang, monthlyReport };
   res.json(body);
 });
 
 // Amounts are not converted when the currency changes; the client asks for confirmation first
 authRouter.patch('/me', requireAuth, async (req, res) => {
-  const { name, currency, lang } = asRecord(req.body);
+  const { name, currency, lang, monthlyReport } = asRecord(req.body);
   const cleanName = name === undefined ? null : cleanText(name, NAME_MAX);
   if (name !== undefined && !cleanName) return fail(res, 400, 'Invalid name');
   if (currency !== undefined && !isCurrency(currency)) return fail(res, 400, 'Invalid currency');
   if (lang !== undefined && !isLang(lang)) return fail(res, 400, 'Invalid language');
+  if (monthlyReport !== undefined && typeof monthlyReport !== 'boolean') {
+    return fail(res, 400, 'Invalid monthly report setting');
+  }
 
   const { rows } = await pool.query<Me>(
-    `UPDATE users SET currency = COALESCE($2, currency), lang = COALESCE($3, lang), name = COALESCE($4, name)
+    `UPDATE users SET currency = COALESCE($2, currency), lang = COALESCE($3, lang), name = COALESCE($4, name),
+                      monthly_report = COALESCE($5, monthly_report)
       WHERE id = $1
-     RETURNING name, email, currency, lang`,
-    [currentUser(res).id, currency ?? null, lang ?? null, cleanName],
+     RETURNING name, email, currency, lang, monthly_report AS "monthlyReport"`,
+    [currentUser(res).id, currency ?? null, lang ?? null, cleanName, monthlyReport ?? null],
   );
   res.json(rows[0]);
 });

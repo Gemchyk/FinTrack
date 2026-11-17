@@ -272,14 +272,10 @@ spendingRouter.get('/balance', async (req, res) => {
   res.json(body);
 });
 
-spendingRouter.get('/report', async (req, res) => {
-  const user = currentUser(res);
-  const month = queryValue(req.query.month);
-  const range = parseMonth(month);
-  if (month === undefined || !range) return fail(res, 400, 'Invalid month');
-
+// The month's totals and every category with its goal and spending: the report page and the monthly email
+export async function monthReport(userId: string, month: string, range: [string, string]): Promise<Report> {
   const [totals, { rows: categories }] = await Promise.all([
-    monthTotals(user.id, range),
+    monthTotals(userId, range),
     // Expenses only: an income has no category, and counting it here would inflate the spending
     pool.query<ReportCategory>(
       `SELECT c.id, c.name, c.icon_name AS "iconName", c.goal, COALESCE(SUM(t.amount), 0) AS spent
@@ -289,11 +285,18 @@ spendingRouter.get('/report', async (req, res) => {
         WHERE c.user_id = $1
         GROUP BY c.id
         ORDER BY c.name COLLATE "und-x-icu"`,
-      [user.id, range[0], range[1]],
+      [userId, range[0], range[1]],
     ),
   ]);
-  const body: Report = { month, ...totals, categories };
-  res.json(body);
+  return { month, ...totals, categories };
+}
+
+spendingRouter.get('/report', async (req, res) => {
+  const month = queryValue(req.query.month);
+  const range = parseMonth(month);
+  if (month === undefined || !range) return fail(res, 400, 'Invalid month');
+
+  res.json(await monthReport(currentUser(res).id, month, range));
 });
 
 // Expenses of the 12 months ending with the given one

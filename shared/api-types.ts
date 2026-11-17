@@ -21,16 +21,18 @@ export interface SigninResponse {
   token: string;
 }
 
-// GET /me; PATCH /me takes name, currency and/or lang and answers with the whole shape
+// GET /me; PATCH /me takes name, currency, lang and/or monthlyReport and answers with the whole shape
 export interface Me {
   // null for an account created before signup asked for a name
   name: string | null;
   email: string;
   currency: string;
   lang: Lang;
+  // The email with the past month's report, sent in the first days of each month
+  monthlyReport: boolean;
 }
 
-export type MeUpdate = Partial<Pick<Me, 'currency' | 'lang'> & { name: string }>;
+export type MeUpdate = Partial<Pick<Me, 'currency' | 'lang' | 'monthlyReport'> & { name: string }>;
 
 export type TransactionType = 'Income' | 'Expense';
 

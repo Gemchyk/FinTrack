@@ -17,6 +17,7 @@ const REQUIRED = [
   'DATABASE_URL',
   'CLIENT_URL',
   'TRUST_PROXY_HOPS',
+  'CRON_SECRET',
   ...(MAIL_TO_CONSOLE ? [] : ['RESEND_API_KEY', 'MAIL_FROM']),
 ];
 const missing = REQUIRED.filter((name) => !process.env[name]);
@@ -40,6 +41,7 @@ export const env = {
   PORT: Number(process.env.PORT ?? 5050),
   CLIENT_URL,
   TRUST_PROXY_HOPS: Number(TRUST_PROXY_HOPS),
+  CRON_SECRET: process.env.CRON_SECRET as string,
   MAIL_TO_CONSOLE,
   RESEND_API_KEY: process.env.RESEND_API_KEY ?? '',
   MAIL_FROM: process.env.MAIL_FROM ?? '',

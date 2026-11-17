@@ -5,6 +5,7 @@ import type { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import { migrate } from './db.ts';
 import { authRouter } from './auth.ts';
+import { jobsRouter } from './jobs.ts';
 import { spendingRouter } from './spending.ts';
 import { fail } from './http.ts';
 
@@ -21,6 +22,8 @@ app.get('/', (_req, res) => {
 });
 
 app.use(authRouter);
+// Before spendingRouter: its requireAuth answers 401 to every request that reaches it
+app.use(jobsRouter);
 app.use(spendingRouter);
 
 // Express 5 forwards errors thrown in async handlers here

@@ -61,6 +61,15 @@ function ProfileSettings() {
               disabled={isSaving}
             />
           </label>
+          <label className={styles.check}>
+            <input
+              type="checkbox"
+              checked={me.monthlyReport}
+              onChange={(e) => updateMe({ monthlyReport: e.target.checked })}
+              disabled={isSaving}
+            />
+            {t('profile.monthlyReport')}
+          </label>
         </>
       )}
       {!me && !loadError && <Loader />}

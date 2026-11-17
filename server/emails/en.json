@@ -11,5 +11,20 @@
     "intro": "Open the link to set a new password.",
     "button": "Set a new password",
     "outro": "The link works for one hour. If you did not ask to reset the password, ignore this email: the password stays the same."
-  }
+  },
+  "report": {
+    "subject": "Your FinTrack report for",
+    "hello": "Hi",
+    "income": "Income",
+    "expenses": "Expenses",
+    "balance": "Balance",
+    "category": "Category",
+    "goal": "Goal",
+    "spent": "Spent",
+    "withoutCategory": "Without category",
+    "button": "Open FinTrack",
+    "outro": "This email comes once a month when the month has entries. To stop it, turn it off in your",
+    "profile": "profile"
+  },
+  "categories": {}
 }

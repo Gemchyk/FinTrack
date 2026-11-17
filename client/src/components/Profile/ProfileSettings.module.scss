@@ -36,6 +36,23 @@
   color: var(--color-text-primary);
 }
 
+// The whole row is the tap target, at least 44px tall like the buttons
+.check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+
+  input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    flex-shrink: 0;
+  }
+}
+
 .error {
   margin: 0;
   color: #e53935;
